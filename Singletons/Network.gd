@@ -3,23 +3,22 @@ extends Node
 const PORT = 8543
 const MAX_PLAYERS = 6
 
-const mainMenuPath:String = "res://Screens/MainMenu/MainMenu.tscn"
+const mainMenuPath:String = "res://Screens/Menu/Menu.tscn"
 
 onready var localIP = getLocalIP()
 
 var info = {
 	
 	"name":"EpicDude54",
-	"character":"none",
 	
 }
 
 
 var players:Dictionary = {}
 
-signal playersUpdated()
-signal peerInfoRecieved(id)
-signal playerInfoUpdated(id)
+signal playerJoined(id)
+signal playerLeft()
+signal recievedPlayerInfo()
 
 var upnp:UPNP = UPNP.new()
 var upnpActive = false
@@ -50,37 +49,17 @@ func hostGame():
 func peer_connected(id:int):
 	
 	players[id] = {}
+	yield(self, "playerJoined")
+	rpc_id(id, "setPlayerInfo", players)
 	
 	pass
 	
-master func sendInfo(id:int, i:Dictionary):
-	
-	players[id] = i
-	rpc_id(id, "updatePlayers", players)
-	rpc("updateInfo", id, i)
-	emit_signal("peerInfoRecieved", id)
-	
-	pass
-	
-remotesync func updateInfo(id:int, i:Dictionary):
-	
-	players[id] = i
-	emit_signal("playerInfoUpdated", id)
-	
-	pass
 	
 func peer_disconnected(id:int):
 	
-	players.erase(id)
-	rpc("updatePlayers", players)
-	
 	pass
 	
-remotesync func updatePlayers(new:Dictionary):
-	players = new
-	emit_signal("playersUpdated")
-	
-	
+
 func joinGame(address:String):
 	
 	var peer = NetworkedMultiplayerENet.new()
@@ -88,14 +67,14 @@ func joinGame(address:String):
 	if not err == OK:
 		return err
 	get_tree().network_peer = peer
+	
 
 	return OK
 	
 	
 func connected_to_server():
 	
-	rpc("sendInfo", get_tree().get_network_unique_id(), info)
-	
+	rpc("playerConnected", get_tree().get_network_unique_id(), info)
 	
 	pass
 	
@@ -109,6 +88,23 @@ func server_disconnected():
 	Manager.changeScene(mainMenuPath)
 	
 	pass
+	
+remotesync func setPlayerInfo(i:Dictionary):
+	
+	players = i
+	emit_signal("recievedPlayerInfo")
+	
+	pass
+	
+remotesync func playerConnected(id:int, info:Dictionary):
+	players[id] = info
+	emit_signal("playerJoined", id)
+	pass
+	
+remotesync func playerDisconnected(id:int):
+	players.erase(id)
+	emit_signal("playerLeft", id)
+	pass
 
 func leaveGame():
 	
@@ -118,6 +114,10 @@ func leaveGame():
 	Manager.changeScene(mainMenuPath)
 	get_tree().paused = false
 	
+	pass
+	
+remotesync func kick(message:String=""):
+	leaveGame()
 	pass
 	
 func cleanup():

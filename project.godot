@@ -27,11 +27,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Bad Stars 2"
+run/main_scene="res://Screens/Splashscreen/Splashscreen.tscn"
 config/icon="res://Misc/icon.png"
 
 [autoload]
 
+Manager="*res://Singletons/Manager/Manager.tscn"
+Network="*res://Singletons/Network.gd"
 Globals="*res://Singletons/Globals.gd"
+CharacterInfo="*res://Singletons/CharacterInfo.gd"
 
 [debug]
 

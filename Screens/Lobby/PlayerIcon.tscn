@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/Lobby/PlayerIcon.gd" type="Script" id=1]
+[ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 5
+outline_color = Color( 0.0666667, 0.0627451, 0.0627451, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 2 )
+
+[node name="PlayerIcon" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+unreadyColour = Color( 1, 0.14902, 0.14902, 1 )
+readyColour = Color( 0.172549, 1, 0.054902, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 92.0
+margin_bottom = 27.0
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+margin_right = 85.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 1 )
+text = "EpicDude55"
+align = 1
+
+[node name="Character" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 85.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 2 )
+text = "None"
+align = 1
+
+[node name="Kick" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 48.0
+margin_right = 85.0
+margin_bottom = 68.0
+text = "Kick"

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Singletons/Manager/Manager.gd" type="Script" id=1]
+
+[node name="Manager" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="Scene" type="Node" parent="."]
+pause_mode = 1
+
+[node name="Loose" type="Node" parent="."]
+pause_mode = 1

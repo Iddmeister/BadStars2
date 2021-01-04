@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Screens/Splashscreen/Splashscreen.gd" type="Script" id=1]
+
+[node name="Splashscreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Bruh" type="Label" parent="CenterContainer"]
+margin_left = 497.0
+margin_top = 293.0
+margin_right = 527.0
+margin_bottom = 307.0
+text = "Bruh"
