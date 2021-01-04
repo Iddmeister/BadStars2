@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game/Parent/Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Effects/Speed/Speed.gd" type="Script" id=2]
+[ext_resource path="res://Game/Effects/Speed/UpArrow.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.613924, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 3.94
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 90.0
+flatness = 1.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.5
+scale_curve = SubResource( 3 )
+color = Color( 0, 0.670588, 1, 1 )
+
+[node name="Speed" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Particles" type="Particles2D" parent="." index="0"]
+amount = 5
+speed_scale = 2.0
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )

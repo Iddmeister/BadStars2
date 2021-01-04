@@ -1,29 +1,37 @@
 extends KinematicBody2D
 
+class_name Character
+
 export var maxHealth:int = 100
 onready var health = maxHealth
-export var healthRegen:float = 0
-export var moveSpeed:float = 200
+export var maxMoveSpeed:float = 200
+onready var moveSpeed = maxMoveSpeed
 export var acceleration:float = 0.5
 export var deceleration:float = 0.5
+
+var loaded:bool = false
 
 var moveVelocity:Vector2
 var addedVelocity:Vector2
 
-var effects:Dictionary = {
-	
-	"moveSpeedUp":0,
-	"moveSpeedDown":0,
-	"healthRegen":1,
-	"poison":0,
-	
-}
+var activeEffects = {}
 
-var activeEffects = []
+onready var camera:Camera2D = $Space/Camera
+
+func initialize(id:int):
+	
+	set_network_master(id)
+	
+	if is_network_master():
+		camera.current = true
+	
 
 func _physics_process(delta):
 	
-	movement(delta)
+	if loaded:
+	
+		movement(delta)
+		updateEffects(delta)
 
 func getMoveDirection() -> Vector2:
 	
@@ -39,6 +47,14 @@ func getMoveDirection() -> Vector2:
 		dir.y += 1
 		
 	return dir.normalized()
+	
+func getTime():
+	return String(OS.get_system_time_msecs())
+	pass
+	
+func getTimeInt():
+	return OS.get_system_time_msecs()
+	pass
 
 func movement(delta:float):
 	
@@ -48,35 +64,31 @@ func movement(delta:float):
 	
 	addedVelocity = addedVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
 	
-	moveVelocity += moveVelocity*effects.moveSpeedUp
-	moveVelocity -= moveVelocity*effects.moveSpeedDown
-	
 	move_and_slide(moveVelocity+addedVelocity)
 
 func updateEffects(delta:float):
 	
-	for effect in activeEffects:
+	for id in activeEffects.keys():
+		
+		var effect = activeEffects[id]
 		
 		if not effect.time == -1:
 			effect.time -= delta
 			if effect.time <= 0:
-				removeEffect(effect.name)
+				removeEffect(id)
 	
-func applyEffect():
-	
-	pass
 
-remotesync func addEffect(effect:Dictionary):
+remotesync func addEffect(id:String, type:String, time:float, info:Dictionary={}):
 	
-	activeEffects.append(effect)
+	var effect = Globals.effects[type].instance()
+	$Effects.add_child(effect)
+	effect.start(info, self)
+
+	activeEffects[id] = {"time":time, "type":type, "info":info, "effect":effect}
 	
-	if Globals.effectGraphics.has(effect.name):
-		var e = Globals[effect.name].instance()
-		e.name = effect.name
-		$Graphics/EffectGraphics.add_child(e)
 	
-	pass
+remotesync func removeEffect(id:String):
 	
-remotesync func removeEffect(effect:String):
+	activeEffects[id].effect.end(activeEffects[id].info, self)
 	
-	pass
+	activeEffects.erase(id)
