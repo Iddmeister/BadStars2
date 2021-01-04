@@ -8,3 +8,5 @@ var effects:Dictionary = {
 	
 }
 
+var currentGameInfo = {}
+

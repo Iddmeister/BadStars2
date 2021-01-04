@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Parent/Game.gd" type="Script" id=1]
+[ext_resource path="res://Misc/icon.png" type="Texture" id=2]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="1" type="Position2D" parent="SpawnPoints" groups=[
+"SpawnPoint",
+]]
+
+[node name="2" type="Position2D" parent="SpawnPoints" groups=[
+"SpawnPoint",
+]]
+
+[node name="3" type="Position2D" parent="SpawnPoints" groups=[
+"SpawnPoint",
+]]
+
+[node name="4" type="Position2D" parent="SpawnPoints" groups=[
+"SpawnPoint",
+]]
+
+[node name="5" type="Position2D" parent="SpawnPoints" groups=[
+"SpawnPoint",
+]]
+
+[node name="Players" type="Node" parent="."]
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 112.354, 105.474 )
+texture = ExtResource( 2 )
+
+[node name="icon2" type="Sprite" parent="."]
+position = Vector2( -202.668, -86.7427 )
+texture = ExtResource( 2 )
+
+[node name="icon3" type="Sprite" parent="."]
+position = Vector2( -181.311, 260.316 )
+texture = ExtResource( 2 )
+
+[node name="icon4" type="Sprite" parent="."]
+position = Vector2( 341.946, -129.458 )
+texture = ExtResource( 2 )

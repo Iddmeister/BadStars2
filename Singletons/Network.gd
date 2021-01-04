@@ -48,15 +48,29 @@ func hostGame():
 	
 func peer_connected(id:int):
 	
-	players[id] = {}
-	yield(self, "playerJoined")
-	rpc_id(id, "setPlayerInfo", players)
+	if is_network_master():
+	
+		rpc_id(id, "sendPlayerInfo", players)
+	
+remote func sendPlayerInfo( p:Dictionary):
+	
+	players = p
+	emit_signal("recievedPlayerInfo")
+	rpc("addPlayer", get_tree().get_network_unique_id(), info)
+	
+remotesync func addPlayer(id:int, i:Dictionary):
+	
+	players[id] = i
+	emit_signal("playerJoined", id)
 	
 	pass
 	
+remotesync func removePlayer(id:int):
+	players.erase(id)
+	emit_signal("playerLeft", id)
 	
 func peer_disconnected(id:int):
-	
+	rpc("removePlayer", id)
 	pass
 	
 
@@ -67,14 +81,11 @@ func joinGame(address:String):
 	if not err == OK:
 		return err
 	get_tree().network_peer = peer
-	
 
 	return OK
 	
 	
 func connected_to_server():
-	
-	rpc("playerConnected", get_tree().get_network_unique_id(), info)
 	
 	pass
 	
@@ -89,22 +100,6 @@ func server_disconnected():
 	
 	pass
 	
-remotesync func setPlayerInfo(i:Dictionary):
-	
-	players = i
-	emit_signal("recievedPlayerInfo")
-	
-	pass
-	
-remotesync func playerConnected(id:int, info:Dictionary):
-	players[id] = info
-	emit_signal("playerJoined", id)
-	pass
-	
-remotesync func playerDisconnected(id:int):
-	players.erase(id)
-	emit_signal("playerLeft", id)
-	pass
 
 func leaveGame():
 	

@@ -15,7 +15,7 @@ var characters:Dictionary = {
 		"ability1":"Shoots bullets in 3 directions",
 		"ability2":"Shoots a Big Laser",
 		
-	}},
+	}, "scene":"res://Game/Parent/Character.tscn"},
 #	"Frozone":{"icon":"res://Misc/Frozone.png"},
 #	"Karl Marx":{"icon":"res://Misc/KarlMarx.png"},
 #	"Will Smith":{"icon":"res://Misc/WillSmith.png"}

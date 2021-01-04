@@ -10,6 +10,9 @@ export var acceleration:float = 0.5
 export var deceleration:float = 0.5
 
 var loaded:bool = false
+var dead:bool = false
+
+signal died()
 
 var moveVelocity:Vector2
 var addedVelocity:Vector2
@@ -18,19 +21,54 @@ var activeEffects = {}
 
 onready var camera:Camera2D = $Space/Camera
 
-func initialize(id:int):
+## Puppet Variables
+
+var timeSinceUpdate:float = 0
+var masterPos:Vector2
+var syncSpeed:float = 0.6
+
+signal lagging()
+
+func _ready():
+	
+	updateHealth()
+
+func initialize(id:int, allies:Array=[]):
 	
 	set_network_master(id)
 	
 	if is_network_master():
 		camera.current = true
+		$UI/Main.show()
+	else:
+		$UI/Main.hide()
+		
+	if is_network_master():
+		set_collision_layer_bit(0, true)
+	elif get_tree().get_network_unique_id() in allies:
+		set_collision_layer_bit(0, true)
+	else:
+		set_collision_layer_bit(1, true)
+		
+# warning-ignore:function_conflicts_variable
+func loaded():
+	loaded = true
+
+func _process(delta):
 	
+	if loaded:
+		
+		if is_network_master() and not dead:
+			actions(delta)
 
 func _physics_process(delta):
 	
 	if loaded:
-	
-		movement(delta)
+		if is_network_master() and not dead:
+			movement(delta)
+		elif not dead:
+			syncState(delta)
+				
 		updateEffects(delta)
 
 func getMoveDirection() -> Vector2:
@@ -65,6 +103,8 @@ func movement(delta:float):
 	addedVelocity = addedVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
 	
 	move_and_slide(moveVelocity+addedVelocity)
+	
+	rpc_unreliable("updateState", global_position)
 
 func updateEffects(delta:float):
 	
@@ -92,3 +132,56 @@ remotesync func removeEffect(id:String):
 	activeEffects[id].effect.end(activeEffects[id].info, self)
 	
 	activeEffects.erase(id)
+	
+remotesync func clearEffects():
+	
+	for effect in activeEffects.keys():
+		removeEffect(effect)
+	
+	pass
+	
+func syncState(delta:float):
+	global_position = global_position.linear_interpolate(masterPos, syncSpeed*delta*60)
+	timeSinceUpdate += delta
+	if timeSinceUpdate >= 3:
+		emit_signal("lagging")
+	pass
+	
+puppet func updateState(pos:Vector2):
+	masterPos = pos
+	timeSinceUpdate = 0
+	pass
+	
+	
+remotesync func hit(damage:int, id:int):
+	
+	health = max(health-damage, 0)
+	
+	if health <= 0:
+		die(id)
+		
+	updateHealth()
+	
+	pass
+	
+func die(id:int):
+	dead = true
+	clearEffects()
+	pass
+	
+remotesync func heal(amount:int, id:int):
+	
+	health = min(maxHealth, health+amount)
+	
+	updateHealth()
+	
+func updateHealth():
+	$UI/Main/CenterContainer/Health.value = (float(health)/float(maxHealth))*100
+	$UI/Main/CenterContainer/Health/Num.text = String(health)
+	pass
+	
+func actions(delta:float):
+	
+	## Attacks and Abilities
+	
+	pass

@@ -5,6 +5,15 @@ onready var loose = $Loose
 
 signal sceneLoaded()
 
+var tempData:Dictionary
+
+func sendData(data:Dictionary):
+	tempData = data
+	pass
+	
+func recieveData() -> Dictionary:
+	return tempData
+
 func changeScene(path:String):
 	
 	get_tree().paused = true
@@ -24,6 +33,10 @@ func clear():
 		
 	for child in loose.get_children():
 		child.free()
+	
+	pass
+	
+func getUniqueID():
 	
 	pass
 

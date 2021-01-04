@@ -3,7 +3,7 @@ extends Camera2D
 var currentImportance:int = 0
 
 var moving:bool = false
-onready var followPlayer:bool = false
+onready var followPlayer:bool = true
 
 func _physics_process(delta):
 	if followPlayer:

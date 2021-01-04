@@ -50,3 +50,4 @@ margin_top = 48.0
 margin_right = 85.0
 margin_bottom = 68.0
 text = "Kick"
+[connection signal="pressed" from="VBoxContainer/Kick" to="." method="_on_Kick_pressed"]
