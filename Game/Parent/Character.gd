@@ -25,7 +25,7 @@ onready var camera:Camera2D = $Space/Camera
 
 var timeSinceUpdate:float = 0
 var masterPos:Vector2
-var syncSpeed:float = 0.6
+var syncSpeed:float = 0.5
 
 signal lagging()
 
@@ -55,11 +55,13 @@ func loaded():
 	loaded = true
 
 func _process(delta):
-	
 	if loaded:
 		
 		if is_network_master() and not dead:
 			actions(delta)
+			masterAnimations(delta)
+		elif not dead:
+			puppetAnimations(delta)
 
 func _physics_process(delta):
 	
@@ -183,5 +185,14 @@ func updateHealth():
 func actions(delta:float):
 	
 	## Attacks and Abilities
+	
+	pass
+	
+func masterAnimations(delta:float):
+	
+	pass
+	
+		
+func puppetAnimations(delta:float):
 	
 	pass

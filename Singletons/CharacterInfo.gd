@@ -7,7 +7,7 @@ extends Node
 var characters:Dictionary = {
 	
 	
-	"Clot":{"icon":"res://Misc/Clot.png", "info":{
+	"Clot":{"icon":"res://Game/Characters/Clot/Clot.png", "info":{
 		
 		"description":"Still Has Red Hair",
 		"attack1":"Shoots 3 Bullets in a line",
@@ -15,7 +15,7 @@ var characters:Dictionary = {
 		"ability1":"Shoots bullets in 3 directions",
 		"ability2":"Shoots a Big Laser",
 		
-	}, "scene":"res://Game/Parent/Character.tscn"},
+	}, "scene":"res://Game/Characters/Clot/Clot.tscn"},
 #	"Frozone":{"icon":"res://Misc/Frozone.png"},
 #	"Karl Marx":{"icon":"res://Misc/KarlMarx.png"},
 #	"Will Smith":{"icon":"res://Misc/WillSmith.png"}

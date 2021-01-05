@@ -1,4 +1,4 @@
-extends Projectile
+extends SimpleProjectile
 
 class_name StraightProjectile
 

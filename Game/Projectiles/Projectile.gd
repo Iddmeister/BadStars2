@@ -18,12 +18,11 @@ func move(delta:float):
 	
 	pass
 	
-func destroy():
+remotesync func destroy():
 	queue_free()
 
 func collided(body):
 	pass
 
 func _on_Projectile_body_entered(body):
-	if is_network_master():
-		collided(body)
+	collided(body)

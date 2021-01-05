@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Clot.png-cd2fd80bd5decc0009644fd2acffc04c.stex"
+path="res://.import/Clot.png-14d310159ea6fe75fc0fdc818519e3fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Misc/Clot.png"
-dest_files=[ "res://.import/Clot.png-cd2fd80bd5decc0009644fd2acffc04c.stex" ]
+source_file="res://Game/Characters/Clot/Clot.png"
+dest_files=[ "res://.import/Clot.png-14d310159ea6fe75fc0fdc818519e3fe.stex" ]
 
 [params]
 

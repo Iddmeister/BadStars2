@@ -36,7 +36,9 @@ func clear():
 	
 	pass
 	
-func getUniqueID():
+func generateUniqueID():
+	
+	return "id"+String(OS.get_system_time_msecs()+rand_range(-100, 100))
 	
 	pass
 
