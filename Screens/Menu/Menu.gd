@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready():
+	$Play/VBoxContainer/Name.text = Network.info.name
 	pass
 
 
@@ -24,3 +25,9 @@ func _on_Join_pressed():
 	if err == OK:
 		yield(Network, "recievedPlayerInfo")
 		Manager.changeScene("res://Screens/Lobby/Lobby.tscn")
+
+
+func _on_Name_text_changed(new_text):
+	Network.info.name = new_text
+	Data.data.username = new_text
+	Data.saveData()

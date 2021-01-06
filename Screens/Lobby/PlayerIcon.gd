@@ -17,6 +17,9 @@ func _ready():
 		
 	pass
 	
+func setName(n:String):
+	$VBoxContainer/Name.text = n
+	
 func setCharacter(c:String):
 	$VBoxContainer/Character.text = c
 

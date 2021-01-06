@@ -60,8 +60,8 @@ icon = ExtResource( 4 )
 position = Vector2( 0, 50 )
 
 [node name="Name" parent="Tag/VBoxContainer" index="0"]
-margin_left = 7.0
-margin_right = 92.0
+margin_left = 0.0
+margin_right = 109.0
 
 [node name="Health" parent="Tag/VBoxContainer" index="1"]
-margin_right = 100.0
+margin_right = 110.0

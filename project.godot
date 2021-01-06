@@ -50,6 +50,7 @@ config/icon="res://Misc/icon.png"
 
 [autoload]
 
+Data="*res://Singletons/Data.gd"
 Manager="*res://Singletons/Manager/Manager.tscn"
 Network="*res://Singletons/Network.gd"
 Globals="*res://Singletons/Globals.gd"

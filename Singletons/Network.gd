@@ -155,6 +155,7 @@ func activateUPNP():
 func deactivateUPNP():
 	
 	upnp.delete_port_mapping(PORT)
+	upnp.clear_devices()
 	upnp = UPNP.new()
 	upnpActive = false
 	

@@ -10,6 +10,10 @@ func _ready():
 	addAllPlayers()
 	Network.connect("playerJoined", self, "addNewPlayer")
 	Network.connect("playerLeft", self, "removePlayer")
+	
+	if not is_network_master():
+		$Main/Options/VBoxContainer/IPStuff.hide()
+	
 	pass
 	
 func addAllPlayers():
@@ -19,12 +23,14 @@ func addAllPlayers():
 		var p = PlayerIcon.instance()
 		p.name = String(player)
 		$Main/Players.add_child(p)
+		p.setName(Network.players[player].name)
 		p.connect("kick", self, "kick")
 		
 func addNewPlayer(id:int):
 	var p = PlayerIcon.instance()
 	p.name = String(id)
 	$Main/Players.add_child(p)
+	p.setName(Network.players[id].name)
 	p.connect("kick", self, "kick")
 	
 	if is_network_master():
@@ -104,3 +110,13 @@ func _on_CharacterSelect_characterSelected(c):
 	$Main/Options/Self/Character/Name.text = character
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
+
+
+func _on_UPNP_toggled(button_pressed):
+	if button_pressed:
+		Network.activateUPNP()
+		$Main/Options/VBoxContainer/IPStuff/GlobalIP.text = Network.getUPNPAddress()
+		$Main/Options/VBoxContainer/IPStuff/GlobalIP.show()
+	else:
+		Network.deactivateUPNP()
+		$Main/Options/VBoxContainer/IPStuff/GlobalIP.hide()
