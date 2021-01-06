@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/Parent/Character.gd" type="Script" id=1]
+[ext_resource path="res://Game/Parent/HUD/AbilityIcon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Parent/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=4]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.729412, 0.0196078, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
 border_width_left = 10
 border_width_top = 10
@@ -23,8 +24,71 @@ expand_margin_right = 10.0
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=7]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 20
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 
 [node name="Character" type="KinematicBody2D" groups=[
 "Player",
@@ -50,7 +114,6 @@ script = ExtResource( 3 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Main" type="Control" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -74,8 +137,8 @@ margin_top = 15.0
 margin_right = 652.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 300, 20 )
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 step = 0.001
 value = 100.0
 percent_visible = false
@@ -83,10 +146,105 @@ percent_visible = false
 [node name="Num" type="Label" parent="UI/Main/CenterContainer/Health"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "100"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CenterContainer2" type="CenterContainer" parent="UI/Main"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -79.0
+margin_bottom = 18.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Main/CenterContainer2"]
+margin_left = 402.0
+margin_top = 20.0
+margin_right = 602.0
+margin_bottom = 76.0
+
+[node name="Abilities" type="PanelContainer" parent="UI/Main/CenterContainer2/VBoxContainer"]
+margin_left = 60.0
+margin_right = 140.0
+margin_bottom = 42.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 37.0
+custom_constants/separation = 6
+alignment = 1
+
+[node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" instance=ExtResource( 2 )]
+custom_styles/panel = SubResource( 6 )
+
+[node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 38.0
+margin_right = 70.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="Ammo" type="PanelContainer" parent="UI/Main/CenterContainer2/VBoxContainer"]
+margin_top = 46.0
+margin_right = 200.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 200, 0 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/CenterContainer2/VBoxContainer/Ammo"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 195.0
+margin_bottom = 5.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+
+[node name="Tag" type="Node2D" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tag"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 110, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Tag/VBoxContainer"]
+margin_left = 500.0
+margin_right = 609.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 8 )
+text = "EpicDude55"
+align = 1
+valign = 1
+
+[node name="Health" type="ProgressBar" parent="Tag/VBoxContainer"]
+margin_top = 28.0
+margin_right = 1110.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 50, 10 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+max_value = 1.0
+step = 0.001
+value = 1.0
+percent_visible = false

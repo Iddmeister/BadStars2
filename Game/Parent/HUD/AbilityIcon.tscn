@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game/Parent/HUD/AbilityIcon.gd" type="Script" id=1]
+[ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Ready"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_styles/panel:border_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.996078, 0.705882, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Use"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_styles/panel:border_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.364706, 0.364706, 0.364706, 1 ) ]
+}
+
+[node name="AbilityIcon" type="PanelContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 30.0
+margin_bottom = 30.0
+max_value = 1.0
+step = 0.001
+value = 1.0
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 30.0
+margin_bottom = 30.0
+
+[node name="Time" type="Label" parent="CenterContainer"]
+margin_left = 14.0
+margin_top = 4.0
+margin_right = 14.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/Ready = SubResource( 3 )
+anims/Use = SubResource( 4 )

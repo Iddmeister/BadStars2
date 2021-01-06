@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="StyleBoxFlat" id=5]
+resource_local_to_scene = true
+bg_color = Color( 1, 0.776471, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Ready"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_styles/fg:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.776471, 0, 1 ) ]
+}
+
+[node name="AmmoBox" type="ProgressBar"]
+margin_right = 30.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 30, 10 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+max_value = 1.0
+value = 1.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/Ready = SubResource( 4 )

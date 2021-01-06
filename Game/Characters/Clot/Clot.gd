@@ -2,18 +2,15 @@ extends Character
 
 export var Bullet:PackedScene
 
-
-func actions(delta:float):
+func attack1():
 	
-	.actions(delta)
-	
-	if Input.is_action_just_pressed("attack1"):
-		
-		rpc("shoot", global_position, (get_global_mouse_position()-global_position).angle(), OS.get_system_time_msecs())
-		
-		pass
+	rpc("shoot", global_position, (get_global_mouse_position()-global_position).angle(), OS.get_system_time_msecs())
 	
 	pass
+	
+func ability1():
+	
+	print("bruh")
 	
 remotesync func shoot(pos:Vector2, dir:float, time:int):
 	

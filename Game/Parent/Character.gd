@@ -9,13 +9,46 @@ onready var moveSpeed = maxMoveSpeed
 export var acceleration:float = 0.5
 export var deceleration:float = 0.5
 
+export var maxAmmo:int = 3
+onready var ammo:int = maxAmmo
+onready var currentAmmoBox = maxAmmo
+export var attack2AmmoCost:int = 1
+
+var AmmoBox = preload("res://Game/Parent/HUD/AmmoBox.tscn")
+
+export var reloadRate:float = 1
+var currentReloadTime:float = 0
+
+onready var ammoBoxes = $UI/Main/CenterContainer2/VBoxContainer/Ammo/HBoxContainer
+
+export var ability1Cooldown:float = 1
+onready var ability1Charge:float = 0
+
+export var ability2Cooldown:float = 1
+onready var ability2Charge:float = 0
+
 var loaded:bool = false
 var dead:bool = false
 
+var Ghost = preload("res://Game/Parent/Ghost.tscn")
+
 signal died()
+signal hit(damage)
+
+signal ability1Charged()
+signal ability2Charged()
+signal usedAbility1()
+signal usedAbility2()
+
+
+onready var ability1Icon = $UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer/Ability1
+onready var ability2Icon = $UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer/Ability2
+
 
 var moveVelocity:Vector2
 var addedVelocity:Vector2
+
+var currentCharacter:String
 
 var activeEffects = {}
 
@@ -31,6 +64,13 @@ signal lagging()
 
 func _ready():
 	
+	for a in range(maxAmmo):
+		
+		var b = AmmoBox.instance()
+		b.name = String(a)
+		ammoBoxes.add_child(b)
+	
+	
 	updateHealth()
 
 func initialize(id:int, allies:Array=[]):
@@ -40,15 +80,23 @@ func initialize(id:int, allies:Array=[]):
 	if is_network_master():
 		camera.current = true
 		$UI/Main.show()
+		$Tag.hide()
 	else:
 		$UI/Main.hide()
+		$Tag.show()
+		$Tag/VBoxContainer/Name.text = Network.players[id].name
 		
 	if is_network_master():
 		set_collision_layer_bit(0, true)
 	elif get_tree().get_network_unique_id() in allies:
 		set_collision_layer_bit(0, true)
+		$Tag/VBoxContainer/Health.modulate = Color(0.109804, 1, 0)
 	else:
 		set_collision_layer_bit(1, true)
+		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
+		
+	currentCharacter = Globals.currentGameInfo.players[id].character
+
 		
 # warning-ignore:function_conflicts_variable
 func loaded():
@@ -58,6 +106,7 @@ func _process(delta):
 	if loaded:
 		
 		if is_network_master() and not dead:
+			updateCooldowns(delta)
 			actions(delta)
 			masterAnimations(delta)
 		elif not dead:
@@ -159,7 +208,9 @@ remotesync func hit(damage:int, id:int):
 	
 	health = max(health-damage, 0)
 	
-	if health <= 0:
+	emit_signal("hit", damage)
+	
+	if health <= 0 and not dead:
 		die(id)
 		
 	updateHealth()
@@ -168,7 +219,19 @@ remotesync func hit(damage:int, id:int):
 	
 func die(id:int):
 	dead = true
+	$CollisionShape2D.set_deferred("disabled", true)
+	$UI/Main.hide()
 	clearEffects()
+	spawnGhost()
+	pass
+	
+func spawnGhost():
+	
+	var g = Ghost.instance()
+	get_parent().add_child(g)
+	g.global_position = global_position
+	g.initialze(get_network_master())
+	
 	pass
 	
 remotesync func heal(amount:int, id:int):
@@ -178,14 +241,54 @@ remotesync func heal(amount:int, id:int):
 	updateHealth()
 	
 func updateHealth():
-	$UI/Main/CenterContainer/Health.value = (float(health)/float(maxHealth))*100
-	$UI/Main/CenterContainer/Health/Num.text = String(health)
+	if is_network_master():
+		$UI/Main/CenterContainer/Health.value = (float(health)/float(maxHealth))*100
+		$UI/Main/CenterContainer/Health/Num.text = String(health)
+	else:
+		$Tag/VBoxContainer/Health.value = (float(health)/float(maxHealth))
 	pass
 	
 func actions(delta:float):
 	
-	## Attacks and Abilities
+	if Input.is_action_just_pressed("attack1") and ammo > 0:
+		
+		attack1()
+		if not currentAmmoBox >= maxAmmo:
+			ammoBoxes.get_child(currentAmmoBox).value = 0
+			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
+		useAmmo()
+		
+	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost:
+		
+		attack2()
+		if not currentAmmoBox >= maxAmmo:
+			ammoBoxes.get_child(currentAmmoBox).value = 0
+			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
+		useAmmo(attack2AmmoCost)
+		
+	if Input.is_action_pressed("ability1") and ability1Charge <= 0:
+		ability1()
+		ability1Icon.use()
+		ability1Charge = ability1Cooldown
+		
+	if Input.is_action_pressed("ability2") and ability2Charge <= 0:
+		ability2()
+		ability2Icon.use()
+		ability2Charge = ability2Cooldown
 	
+	pass
+	
+	
+func attack1():
+	pass
+	
+func attack2():
+	pass
+	
+func ability1():
+	pass
+
+func ability2():
 	pass
 	
 func masterAnimations(delta:float):
@@ -194,5 +297,54 @@ func masterAnimations(delta:float):
 	
 		
 func puppetAnimations(delta:float):
+	
+	pass
+
+remotesync func useAmmo(amount:int=1):
+	
+	if ammo <= 0:
+		return
+	
+	for i in range(amount):
+	
+		ammo -= 1
+		ammoBoxes.get_child(currentAmmoBox-1).value = 0
+		currentAmmoBox -= 1
+	
+	pass
+	
+remotesync func reloadAmmo(amount:int=1):
+	
+	if ammo >= maxAmmo:
+		return
+	
+	for i in range(amount):
+		
+		ammo += 1
+		ammoBoxes.get_child(currentAmmoBox).get_node("Animation").play("Ready")
+		currentAmmoBox += 1
+
+func updateCooldowns(delta:float):
+	
+	if not currentAmmoBox >= maxAmmo:
+	
+		currentReloadTime = min(reloadRate, currentReloadTime+delta)
+		
+		ammoBoxes.get_child(currentAmmoBox).value = currentReloadTime/reloadRate
+		
+		if currentReloadTime >= reloadRate:
+			currentReloadTime = 0
+			reloadAmmo()
+	
+	if not ability1Charge <= 0:
+		ability1Charge = max(0, ability1Charge-delta)
+		ability1Icon.setProgress(ability1Charge, ability1Cooldown)
+		if ability1Charge <= 0:
+			emit_signal("ability1Charged")
+	if not ability2Charge <= 0:
+		ability2Charge = max(0, ability2Charge-delta)
+		ability2Icon.setProgress(ability2Charge, ability2Cooldown)
+		if ability2Charge <= 0:
+			emit_signal("ability2Charged")
 	
 	pass
