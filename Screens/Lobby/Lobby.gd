@@ -6,6 +6,8 @@ var character:String = "none"
 
 var playerOptions = {}
 
+var inTeams:bool = true
+
 func _ready():
 	addAllPlayers()
 	Network.connect("playerJoined", self, "addNewPlayer")
@@ -16,22 +18,27 @@ func _ready():
 	
 	pass
 	
+func addPlayer(player:int):
+
+	var p = PlayerIcon.instance()
+	p.name = String(player)
+	$Main/Players.add_child(p)
+	p.setName(Network.players[player].name)
+	p.setTeams(inTeams)
+	p.setTeam(0)
+	p.connect("kick", self, "kick")
+	
+	pass
+	
 func addAllPlayers():
 	
 	for player in Network.players.keys():
 		
-		var p = PlayerIcon.instance()
-		p.name = String(player)
-		$Main/Players.add_child(p)
-		p.setName(Network.players[player].name)
-		p.connect("kick", self, "kick")
+		addPlayer(player)
 		
 func addNewPlayer(id:int):
-	var p = PlayerIcon.instance()
-	p.name = String(id)
-	$Main/Players.add_child(p)
-	p.setName(Network.players[id].name)
-	p.connect("kick", self, "kick")
+	
+	addPlayer(id)
 	
 	if is_network_master():
 		
@@ -60,6 +67,18 @@ remotesync func readyUp(id:int, r:bool):
 	
 	if is_network_master():
 		if checkAllReady():
+			
+			for player in $Main/Players.get_children():
+				playerOptions[int(player.name)]["team"] = player.team
+				
+			for player in playerOptions.keys():
+				playerOptions[player].allies = []
+				for player2 in playerOptions.keys():
+					if player2 == player:
+						continue
+					if playerOptions[player].team == playerOptions[player2].team:
+						playerOptions[player].allies.append(player2)
+			
 			rpc("startGame", playerOptions)
 	
 	pass
@@ -67,7 +86,7 @@ remotesync func readyUp(id:int, r:bool):
 remotesync func startGame(playerData:Dictionary):
 	
 	Globals.currentGameInfo["players"] = playerData
-	Manager.changeScene("res://Game/Parent/Game.tscn")
+	Manager.changeScene("res://Game/Modes/FreeForAll/FreeForAll.tscn")
 	
 	pass
 	
@@ -99,7 +118,7 @@ func _on_Ready_toggled(button_pressed):
 
 master func setCharacter(id:int, c:String):
 	
-	playerOptions[id] = {"character":c}
+	playerOptions[id] = {"character":c, "allies":[id]}
 	
 	pass
 

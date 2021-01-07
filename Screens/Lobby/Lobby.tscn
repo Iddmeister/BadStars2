@@ -5,31 +5,31 @@
 [ext_resource path="res://Screens/CharacterSelect/CharacterSelect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Misc/Themes/Main.tres" type="Theme" id=4]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.890196, 0.0980392, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.25098, 0.25098, 0.25098, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.117647, 1, 0.145098, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 64
 font_data = ExtResource( 1 )
 
@@ -57,6 +57,8 @@ margin_right = 490.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
 columns = 3
 
 [node name="Options" type="VBoxContainer" parent="Main"]
@@ -97,7 +99,7 @@ margin_right = 152.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 100, 40 )
 focus_mode = 0
-custom_styles/pressed = SubResource( 7 )
+custom_styles/pressed = SubResource( 1 )
 toggle_mode = true
 text = "UPNP"
 
@@ -126,7 +128,7 @@ margin_left = 170.0
 margin_top = 68.0
 margin_right = 248.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "None"
 
 [node name="Change" type="Button" parent="Main/Options/Self/Character"]
@@ -137,7 +139,7 @@ margin_bottom = 112.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 11
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Select Character"
 
 [node name="Ready" type="Button" parent="Main/Options/Self"]
@@ -149,10 +151,10 @@ rect_min_size = Vector2( 250, 100 )
 focus_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 5
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 toggle_mode = true
 text = "Ready"
 

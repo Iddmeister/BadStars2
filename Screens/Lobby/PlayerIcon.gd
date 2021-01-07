@@ -7,6 +7,9 @@ var ready:bool = false
 var showCharacter:bool = false
 
 signal kick(p)
+signal leave(p)
+
+var team:int = 0
 
 func _ready():
 	$VBoxContainer/Name.add_color_override("font_color", unreadyColour)
@@ -22,6 +25,15 @@ func setName(n:String):
 	
 func setCharacter(c:String):
 	$VBoxContainer/Character.text = c
+	
+func setTeams(d:bool):
+	if d:
+		$VBoxContainer/Team.show()
+		if not int(name) == get_tree().get_network_unique_id():
+			$VBoxContainer/Team.disabled = true
+			
+	else:
+		$VBoxContainer/Team.hide()
 
 func setReady(r:bool):
 	ready = r
@@ -31,6 +43,14 @@ func setReady(r:bool):
 	else:
 		$VBoxContainer/Name.add_color_override("font_color", unreadyColour)
 
+remotesync func setTeam(t:int):
+	team = t
+	$VBoxContainer/Team.selected = t
+	pass
 
 func _on_Kick_pressed():
 	emit_signal("kick", self)
+
+
+func _on_Team_item_selected(index):
+	rpc("setTeam", index)

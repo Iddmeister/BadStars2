@@ -10,3 +10,4 @@ var effects:Dictionary = {
 
 var currentGameInfo = {}
 
+var inputBusy:bool = false

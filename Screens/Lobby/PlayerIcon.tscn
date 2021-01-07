@@ -12,7 +12,9 @@ font_data = ExtResource( 2 )
 size = 12
 font_data = ExtResource( 2 )
 
-[node name="PlayerIcon" type="PanelContainer"]
+[node name="PlayerIcon" type="PanelContainer" groups=[
+"PlayerIcon",
+]]
 margin_right = 14.0
 margin_bottom = 14.0
 script = ExtResource( 1 )
@@ -27,6 +29,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 92.0
 margin_bottom = 27.0
+custom_constants/separation = 5
 
 [node name="Name" type="Label" parent="VBoxContainer"]
 margin_right = 85.0
@@ -34,6 +37,16 @@ margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
 text = "EpicDude55"
 align = 1
+
+[node name="Team" type="OptionButton" parent="VBoxContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 85.0
+margin_bottom = 44.0
+focus_mode = 0
+text = "-"
+items = [ "-", null, false, 0, null, "1", null, false, 1, null, "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null, "5", null, false, 5, null, "6", null, false, 6, null, "7", null, false, 7, null, "8", null, false, 8, null, "9", null, false, 9, null, "10", null, false, 10, null ]
+selected = 0
 
 [node name="Character" type="Label" parent="VBoxContainer"]
 visible = false
@@ -46,8 +59,9 @@ align = 1
 
 [node name="Kick" type="Button" parent="VBoxContainer"]
 visible = false
-margin_top = 48.0
+margin_top = 24.0
 margin_right = 85.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 text = "Kick"
+[connection signal="item_selected" from="VBoxContainer/Team" to="." method="_on_Team_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Kick" to="." method="_on_Kick_pressed"]

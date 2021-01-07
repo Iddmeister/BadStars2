@@ -1,7 +1,7 @@
 extends Node
 
 const PORT = 8543
-const MAX_PLAYERS = 6
+const MAX_PLAYERS = 20
 
 const mainMenuPath:String = "res://Screens/Menu/Menu.tscn"
 

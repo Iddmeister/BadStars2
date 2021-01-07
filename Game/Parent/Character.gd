@@ -30,10 +30,12 @@ onready var ability2Charge:float = 0
 var loaded:bool = false
 var dead:bool = false
 
+var team:int = 0
+
 var Ghost = preload("res://Game/Parent/Ghost.tscn")
 
-signal died()
-signal hit(damage)
+signal died(id, killer)
+signal hit(id, hitter)
 
 signal ability1Charged()
 signal ability2Charged()
@@ -107,10 +109,13 @@ func _process(delta):
 		
 		if is_network_master() and not dead:
 			updateCooldowns(delta)
-			actions(delta)
+			if not Globals.inputBusy:
+				actions(delta)
 			masterAnimations(delta)
 		elif not dead:
 			puppetAnimations(delta)
+			
+		updateEffects(delta)
 
 func _physics_process(delta):
 	
@@ -120,7 +125,6 @@ func _physics_process(delta):
 		elif not dead:
 			syncState(delta)
 				
-		updateEffects(delta)
 
 func getMoveDirection() -> Vector2:
 	
@@ -148,6 +152,9 @@ func getTimeInt():
 func movement(delta:float):
 	
 	var dir:Vector2 = getMoveDirection()
+	
+	if Globals.inputBusy:
+		dir = Vector2(0, 0)
 	
 	moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
 	
@@ -208,7 +215,7 @@ remotesync func hit(damage:int, id:int):
 	
 	health = max(health-damage, 0)
 	
-	emit_signal("hit", damage)
+	emit_signal("hit", get_network_master(), id)
 	
 	if health <= 0 and not dead:
 		die(id)
@@ -218,6 +225,7 @@ remotesync func hit(damage:int, id:int):
 	pass
 	
 func die(id:int):
+	emit_signal("died", get_network_master(), id)
 	dead = true
 	$CollisionShape2D.set_deferred("disabled", true)
 	$UI/Main.hide()
