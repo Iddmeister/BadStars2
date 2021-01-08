@@ -70,7 +70,7 @@ remotesync func removePlayer(id:int):
 	emit_signal("playerLeft", id)
 	
 func peer_disconnected(id:int):
-	rpc("removePlayer", id)
+	removePlayer(id)
 	pass
 	
 

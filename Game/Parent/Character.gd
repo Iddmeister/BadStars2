@@ -71,8 +71,6 @@ func _ready():
 		var b = AmmoBox.instance()
 		b.name = String(a)
 		ammoBoxes.add_child(b)
-	
-	
 	updateHealth()
 
 func initialize(id:int, allies:Array=[]):
@@ -210,6 +208,10 @@ puppet func updateState(pos:Vector2):
 	timeSinceUpdate = 0
 	pass
 	
+puppet func setPos(pos:Vector2):
+	global_position = pos
+	masterPos = pos
+	
 	
 remotesync func hit(damage:int, id:int):
 	
@@ -225,8 +227,8 @@ remotesync func hit(damage:int, id:int):
 	pass
 	
 func die(id:int):
-	emit_signal("died", get_network_master(), id)
 	dead = true
+	emit_signal("died", get_network_master(), id)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$UI/Main.hide()
 	clearEffects()
@@ -237,7 +239,7 @@ func spawnGhost():
 	
 	var g = Ghost.instance()
 	get_parent().add_child(g)
-	g.global_position = global_position
+	g.setPos(global_position)
 	g.initialze(get_network_master())
 	
 	pass

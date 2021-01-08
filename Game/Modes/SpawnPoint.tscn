@@ -1,0 +1,56 @@
+[gd_scene format=2]
+
+[node name="SpawnPoint" type="Node2D"]
+
+[node name="1" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="1"]
+
+[node name="2" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="2"]
+position = Vector2( -20, 0 )
+
+[node name="2" type="Position2D" parent="2"]
+position = Vector2( 20, 0 )
+
+[node name="3" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="3"]
+position = Vector2( -20, 10 )
+
+[node name="2" type="Position2D" parent="3"]
+position = Vector2( 20, 10 )
+
+[node name="3" type="Position2D" parent="3"]
+position = Vector2( 0, -15 )
+
+[node name="4" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="4"]
+position = Vector2( -20, -15 )
+
+[node name="2" type="Position2D" parent="4"]
+position = Vector2( 20, -15 )
+
+[node name="3" type="Position2D" parent="4"]
+position = Vector2( -20, 15 )
+
+[node name="4" type="Position2D" parent="4"]
+position = Vector2( 20, 15 )
+
+[node name="5" type="Node2D" parent="."]
+
+[node name="1" type="Position2D" parent="5"]
+position = Vector2( -20, -15 )
+
+[node name="2" type="Position2D" parent="5"]
+position = Vector2( 20, -15 )
+
+[node name="3" type="Position2D" parent="5"]
+position = Vector2( -20, 15 )
+
+[node name="4" type="Position2D" parent="5"]
+position = Vector2( 20, 15 )
+
+[node name="5" type="Position2D" parent="5"]

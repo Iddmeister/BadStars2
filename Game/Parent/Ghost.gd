@@ -41,6 +41,10 @@ func _physics_process(delta):
 		
 	pass
 	
+puppet func setPos(pos:Vector2):
+	masterPos = pos
+	global_position = pos
+	
 puppet func updatePos(pos:Vector2):
 	masterPos = pos
 

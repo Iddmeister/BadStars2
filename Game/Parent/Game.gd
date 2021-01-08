@@ -9,9 +9,17 @@ var killMessages = {
 	
 }
 
-var killWatch = {}
-var fastKillTime:float = 5
+onready var chat = $UI/Chat
 
+var killWatch = {}
+var fastKillTime:float = 4
+
+func loadMap(map:String):
+	
+	var mapScene = load(Globals.maps[map]).instance()
+	$Map.add_child(mapScene)
+	
+	pass
 
 func _process(delta):
 	
@@ -24,16 +32,29 @@ func _process(delta):
 
 func spawnPlayers(players:Dictionary, points:Array):
 	
+	var spawned = {}
+	
 	for player in players.keys():
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
 		$Players.add_child(character)
-		character.global_position = points[0].global_position
+		points.shuffle()
+		var spawnedWithAlly = false
+		for ally in players[player].allies:
+			if spawned.has(ally):
+				character.global_position = spawned[ally].global_position
+				spawnedWithAlly = true
+				break
+		if not spawnedWithAlly:
+			character.global_position = points[0].global_position
+			
 		points.remove(0)
 		character.initialize(player, players[player].allies)
 		character.connect("hit", self, "playerDamaged")
 		character.connect("died", self, "playerDied")
+		character.setPos(character.global_position)
+		spawned[player] = character
 		
 	pass
 	
@@ -46,19 +67,31 @@ func playerDamaged(player:int, hitter:int):
 	
 func playerDied(player:int, killer:int):
 	
-	var killMessage:String
+	match killer:
+		
+		Globals.deathCodes.OUT_OF_MAP:
+			
+			chat.addMessage(-1, "%s Fell Into the Void" % Network.players[player].name)
+			
+		Globals.deathCodes.LAGGING:
+			
+			chat.addMessage(-1, "%s Lagged out of existence" % Network.players[player].name)
+			
+		_:
 	
-	if killWatch.has(player):
-		killMessages.fast.shuffle()
-		killMessage = killMessages.fast[0]
-	else:
-		killMessages.norm.shuffle()
-		killMessage = killMessages.norm[0]
-	
-	$UI/Chat.addMessage(-1, "%s %s %s" % [Network.players[killer].name, killMessage, Network.players[player].name])
-	
+			var killMessage:String
+			
+			if killWatch.has(player):
+				killMessages.fast.shuffle()
+				killMessage = killMessages.fast[0]
+			else:
+				killMessages.norm.shuffle()
+				killMessage = killMessages.norm[0]
+			
+			chat.addMessage(-1, "%s %s %s" % [Network.players[killer].name, killMessage, Network.players[player].name])
+		
 	pass
-	
-remotesync func endGame():
-	pass
+
+remotesync func returnToLobby():
+	Manager.changeScene("res://Screens/Lobby/Lobby.tscn")
 

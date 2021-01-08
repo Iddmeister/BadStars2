@@ -11,3 +11,23 @@ var effects:Dictionary = {
 var currentGameInfo = {}
 
 var inputBusy:bool = false
+
+enum {YES, NO, OPTIONAL}
+var deathCodes = {"OUT_OF_MAP":-10, "LAGGING":-9}
+
+var gameModes = {
+	
+	"Free For All":
+		{
+		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
+		"teams":OPTIONAL,
+		"maps":["Box Boy"]
+		},
+	
+}
+
+var maps = {
+	
+	"Box Boy":"res://Game/Maps/BoxBoy/BoxBoy.tscn"
+	
+}

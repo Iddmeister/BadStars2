@@ -47,6 +47,12 @@ remotesync func setTeam(t:int):
 	team = t
 	$VBoxContainer/Team.selected = t
 	pass
+	
+func updateTeam():
+	
+	rpc("setTeam", team)
+	
+	pass
 
 func _on_Kick_pressed():
 	emit_signal("kick", self)

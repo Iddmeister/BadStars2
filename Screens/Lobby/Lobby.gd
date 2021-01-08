@@ -6,15 +6,32 @@ var character:String = "none"
 
 var playerOptions = {}
 
-var inTeams:bool = true
+onready var gameMode = $Main/Options/VBoxContainer/Mode
+onready var gameMap = $Main/Options/VBoxContainer/Map
 
 func _ready():
 	addAllPlayers()
 	Network.connect("playerJoined", self, "addNewPlayer")
 	Network.connect("playerLeft", self, "removePlayer")
 	
+	for mode in Globals.gameModes.keys():
+		
+		gameMode.add_item(mode, gameMode.get_item_count())
+		
+	updateMaps(gameMode.get_item_text(gameMode.selected))
+	
 	if not is_network_master():
 		$Main/Options/VBoxContainer/IPStuff.hide()
+		gameMode.disabled = true
+		$Main/Options/VBoxContainer/Teams.disabled = true
+		gameMap.disabled = true
+	
+	pass
+	
+func updateMaps(mode:String):
+	
+	for map in Globals.gameModes[mode].maps:
+		gameMap.add_item(map, gameMap.get_item_count())
 	
 	pass
 	
@@ -24,7 +41,7 @@ func addPlayer(player:int):
 	p.name = String(player)
 	$Main/Players.add_child(p)
 	p.setName(Network.players[player].name)
-	p.setTeams(inTeams)
+	p.setTeams($Main/Options/VBoxContainer/Teams.pressed)
 	p.setTeam(0)
 	p.connect("kick", self, "kick")
 	
@@ -49,6 +66,10 @@ func addNewPlayer(id:int):
 			players[player.name] = player.ready
 			
 		rpc_id(id, "updatePlayers", players)
+		
+		rpc_id(id, "syncState", gameMode.selected, $Main/Options/VBoxContainer/Teams.pressed)
+	
+		get_tree().call_group("PlayerIcon", "updateTeam")
 	
 	pass
 	
@@ -73,20 +94,25 @@ remotesync func readyUp(id:int, r:bool):
 				
 			for player in playerOptions.keys():
 				playerOptions[player].allies = []
+				if playerOptions[player].team == 0:
+					continue
 				for player2 in playerOptions.keys():
 					if player2 == player:
 						continue
 					if playerOptions[player].team == playerOptions[player2].team:
 						playerOptions[player].allies.append(player2)
 			
-			rpc("startGame", playerOptions)
+			rpc("startGame", playerOptions, gameMode.get_item_text(gameMode.selected), gameMap.get_item_text(gameMap.selected))
 	
 	pass
 	
-remotesync func startGame(playerData:Dictionary):
+remotesync func startGame(playerData:Dictionary, mode:String, map:String):
 	
 	Globals.currentGameInfo["players"] = playerData
-	Manager.changeScene("res://Game/Modes/FreeForAll/FreeForAll.tscn")
+	Globals.currentGameInfo["map"] = map
+	Globals.currentGameInfo["map"] = map
+	Globals.currentGameInfo["mode"] = mode
+	Manager.changeScene(Globals.gameModes[mode].scene)
 	
 	pass
 	
@@ -139,3 +165,48 @@ func _on_UPNP_toggled(button_pressed):
 	else:
 		Network.deactivateUPNP()
 		$Main/Options/VBoxContainer/IPStuff/GlobalIP.hide()
+
+remotesync func setMode(mode:int):
+	
+	gameMode.selected = mode
+	
+	var teamOptions:int = Globals.gameModes[gameMode.get_item_text(mode)].teams
+	
+	match teamOptions:
+		
+		Globals.YES:
+			$Main/Options/VBoxContainer/Teams.pressed = true
+			$Main/Options/VBoxContainer/Teams.disabled = true
+		Globals.NO:
+			$Main/Options/VBoxContainer/Teams.pressed = false
+			$Main/Options/VBoxContainer/Teams.disabled = true
+		Globals.OPTIONAL:
+			$Main/Options/VBoxContainer/Teams.pressed = false
+			$Main/Options/VBoxContainer/Teams.disabled = false
+			
+	if not is_network_master():
+		$Main/Options/VBoxContainer/Teams.disabled = true
+	
+	pass
+	
+puppet func syncState(mode:int, teams:bool):
+	setMode(mode)
+	enableTeams(teams)
+	
+	pass
+	
+remotesync func enableTeams(d:bool):
+	$Main/Options/VBoxContainer/Teams.pressed = d
+	get_tree().call_group("PlayerIcon", "setTeams", d)
+	pass
+
+func _on_Mode_item_selected(index):
+	rpc("setMode", index)
+
+
+func _on_Teams_toggled(button_pressed):
+	rpc("enableTeams", button_pressed)
+
+
+func _on_Map_item_selected(index):
+	pass # Replace with function body.
