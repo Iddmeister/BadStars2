@@ -5,6 +5,8 @@ class_name Projectile
 var startPos:Vector2
 export var maxDistance:float = 500
 
+signal collided(body)
+
 func _physics_process(delta):
 	move(delta)
 
@@ -22,6 +24,7 @@ remotesync func destroy():
 	queue_free()
 
 func collided(body):
+	emit_signal("collided", body)
 	pass
 
 func _on_Projectile_body_entered(body):

@@ -26,6 +26,8 @@ func _ready():
 
 func collided(body:PhysicsBody2D):
 	
+	.collided(body)
+	
 	if is_network_master():
 	
 		if damage > 0:

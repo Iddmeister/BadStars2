@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Projectiles/StraightProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Clot/ClotBullet.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 17.7688
+height = 31.6781
+
+[node name="ClotBigBullet" instance=ExtResource( 1 )]
+maxDistance = 1000.0
+damage = 50
+collideWithEnemies = true
+speed = 500.0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+scale = Vector2( 2, 3 )
+texture = ExtResource( 2 )
+offset = Vector2( 1, 0.5 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+rotation = 1.57079
+shape = SubResource( 1 )

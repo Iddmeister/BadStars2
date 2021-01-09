@@ -8,6 +8,11 @@ func _ready():
 	
 	spawnPlayers(data, get_tree().get_nodes_in_group("SpawnPoint"))
 	
+	rpc("playerLoaded", get_tree().get_network_unique_id())
+	
+remotesync func start():
+	
+	.start()
 	get_tree().call_group("Player", "loaded")
 
 

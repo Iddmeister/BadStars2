@@ -88,12 +88,15 @@ func initialize(id:int, allies:Array=[]):
 		
 	if is_network_master():
 		set_collision_layer_bit(0, true)
+		add_to_group("Ally")
 	elif get_tree().get_network_unique_id() in allies:
 		set_collision_layer_bit(0, true)
 		$Tag/VBoxContainer/Health.modulate = Color(0.109804, 1, 0)
+		add_to_group("Ally")
 	else:
 		set_collision_layer_bit(1, true)
 		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
+		add_to_group("Enemy")
 		
 	currentCharacter = Globals.currentGameInfo.players[id].character
 
@@ -244,23 +247,21 @@ func spawnGhost():
 	
 	pass
 	
-remotesync func heal(amount:int, id:int):
+remotesync func heal(amount:int, id:int=-1):
 	
 	health = min(maxHealth, health+amount)
 	
 	updateHealth()
 	
 func updateHealth():
-	if is_network_master():
-		$UI/Main/CenterContainer/Health.value = (float(health)/float(maxHealth))*100
-		$UI/Main/CenterContainer/Health/Num.text = String(health)
-	else:
-		$Tag/VBoxContainer/Health.value = (float(health)/float(maxHealth))
+	$UI/Main/CenterContainer/Health.value = (float(health)/float(maxHealth))*100
+	$UI/Main/CenterContainer/Health/Num.text = String(health)
+	$Tag/VBoxContainer/Health.value = (float(health)/float(maxHealth))
 	pass
 	
 func actions(delta:float):
 	
-	if Input.is_action_just_pressed("attack1") and ammo > 0:
+	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1:
 		
 		attack1()
 		if not currentAmmoBox >= maxAmmo:
@@ -268,7 +269,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo()
 		
-	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost:
+	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2:
 		
 		attack2()
 		if not currentAmmoBox >= maxAmmo:
@@ -288,6 +289,8 @@ func actions(delta:float):
 	
 	pass
 	
+var usingAttack1:bool = false
+var usingAttack2:bool = false
 	
 func attack1():
 	pass

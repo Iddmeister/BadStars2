@@ -4,21 +4,21 @@
 [ext_resource path="res://Game/Characters/Clot/ClotBullet.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 9.937
-height = 30.094
+radius = 5.61692
+height = 55.0358
 
-[node name="ClotBullet" instance=ExtResource( 1 )]
+[node name="ClotLifeSteal" instance=ExtResource( 1 )]
 maxDistance = 600.0
-damage = 15
+damage = 30
 collideWithEnemies = true
-speed = 430.0
+speed = 500.0
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 1.49615, 0 )
+[node name="Sprite" type="Sprite" parent="." index="0"]
+modulate = Color( 1, 0.258824, 0.258824, 1 )
+scale = Vector2( 2, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 1, 0.5 )
+
+[node name="CollisionShape2D" parent="." index="1"]
 rotation = 1.57079
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 2 )
-offset = Vector2( 2, 0.5 )

@@ -12,6 +12,7 @@ var killMessages = {
 onready var chat = $UI/Chat
 
 var killWatch = {}
+var playersLoaded = []
 var fastKillTime:float = 4
 
 func loadMap(map:String):
@@ -95,3 +96,16 @@ func playerDied(player:int, killer:int):
 remotesync func returnToLobby():
 	Manager.changeScene("res://Screens/Lobby/Lobby.tscn")
 
+master func playerLoaded(id:int):
+	
+	playersLoaded.append(id)
+	
+	if playersLoaded.size() >= Network.players.size():
+		yield(get_tree().create_timer(0.5), "timeout")
+		rpc("start")
+	
+	pass
+
+remotesync func start():
+	$UI/LoadingScreen.hide()
+	pass
