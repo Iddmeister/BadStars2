@@ -7,9 +7,9 @@
 [ext_resource path="res://Game/Characters/Clot/ClotBigBullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Characters/Clot/ClotLifeSteal.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 21.771
-height = 55.089
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.7518
+height = 30.7029
 
 [sub_resource type="StyleBoxFlat" id=2]
 resource_local_to_scene = true
@@ -50,10 +50,11 @@ BigBullet = ExtResource( 5 )
 LifeSteal = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
-scale = Vector2( 3, 3 )
+position = Vector2( -1.58919, -0.52974 )
+scale = Vector2( 2.00675, 2.00675 )
 texture = ExtResource( 4 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]

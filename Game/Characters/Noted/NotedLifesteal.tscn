@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Characters/Clot/ClotLifeSteal.tscn" type="PackedScene" id=1]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Boom.png-77ea0608827b9bf134d7c2d7abbea943.stex"
+
+[node name="ClotLifeSteal" instance=ExtResource( 1 )]
+maxDistance = 1.0
+damage = 1000
+heal = -50
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( -0.565102, -1.7653 )
+scale = Vector2( 0.177324, 0.148051 )
+texture = SubResource( 1 )

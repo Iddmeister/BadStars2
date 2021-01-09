@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game/Characters/Clot/Clot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Noted/Notedbullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Characters/Noted/NotedLifesteal.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Noted.png.png-20c3685500b8bb778ebd5d9935f79b8e.stex"
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Clot" instance=ExtResource( 1 )]
+maxHealth = 5
+maxMoveSpeed = 1000.0
+acceleration = 1.0
+deceleration = 1.0
+maxAmmo = 1
+attack2AmmoCost = 1
+reloadRate = 0.2
+ability1Cooldown = 100.0
+NormBullet = ExtResource( 2 )
+LifeSteal = ExtResource( 3 )
+attack1NumBullets = 5
+shootDelay = 0.1
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -0.529732 )
+
+[node name="Sprite" parent="Graphics" index="0"]
+position = Vector2( 0.300751, 0.712934 )
+scale = Vector2( 0.111662, 0.119404 )
+texture = SubResource( 3 )
+
+[node name="Camera" parent="Space" index="0"]
+position = Vector2( 0.177383, 1.41422 )
+
+[node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
+custom_styles/panel = SubResource( 2 )
