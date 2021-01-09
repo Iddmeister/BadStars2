@@ -8,10 +8,15 @@ var masterPos:Vector2
 var masterID:int
 var startTime:int
 var synced:bool = false
+var started:bool = false
 
 signal collided(body)
 
 func _physics_process(delta):
+	
+	if not started:
+		return
+	
 	if masterID == get_tree().get_network_unique_id():
 		move(delta)
 	else:
@@ -27,6 +32,7 @@ func initialize(id:int, start:Vector2, _startTime:int, dir:float):
 	global_position = start
 	global_rotation = dir
 	masterPos = calcMasterPos()
+	started = true
 	pass
 	
 func calcMasterPos() -> Vector2:

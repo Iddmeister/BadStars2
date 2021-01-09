@@ -32,7 +32,7 @@ func puppetMove(delta:float):
 	
 	global_position = global_position.linear_interpolate(masterPos, syncSpeed*delta*60)
 	
-	if (masterPos-global_position).length() <= 0.5:
+	if (masterPos-global_position).length() <= 2:
 		synced = true
 		
 	.puppetMove(delta)

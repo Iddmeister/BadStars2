@@ -24,6 +24,8 @@ func ability1():
 	
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:int, bulletType):
 	
+	Manager.draw.addDrawCall("draw_circle", [pos, 5, Color(0, 1 ,0, 1)], 1)
+	
 	var bullet:PackedScene
 	
 	match bulletType:
