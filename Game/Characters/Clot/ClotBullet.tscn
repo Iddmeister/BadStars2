@@ -11,7 +11,7 @@ height = 30.094
 maxDistance = 600.0
 damage = 15
 collideWithEnemies = true
-speed = 430.0
+speed = 1000.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 1.49615, 0 )

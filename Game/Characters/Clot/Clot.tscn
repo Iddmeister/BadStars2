@@ -7,7 +7,7 @@
 [ext_resource path="res://Game/Characters/Clot/ClotBigBullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Characters/Clot/ClotLifeSteal.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 21.771
 height = 55.089
 
@@ -40,7 +40,7 @@ expand_margin_bottom = 2.0
 [node name="Clot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 maxHealth = 70
-maxMoveSpeed = 300.0
+maxMoveSpeed = 400.0
 attack2AmmoCost = 3
 reloadRate = 1.6
 ability1Cooldown = 5.0
@@ -50,7 +50,7 @@ BigBullet = ExtResource( 5 )
 LifeSteal = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 scale = Vector2( 3, 3 )
