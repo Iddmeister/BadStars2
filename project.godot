@@ -128,10 +128,9 @@ chat={
 
 [layer_names]
 
-2d_physics/layer_1="Allies"
-2d_physics/layer_2="Enemies"
-2d_physics/layer_3="Terrain"
-2d_physics/layer_4="Projectiles"
-2d_physics/layer_5="Melee"
-2d_physics/layer_6="Pickups"
-2d_physics/layer_7="Monitors"
+2d_physics/layer_1="Players"
+2d_physics/layer_2="Terrain"
+2d_physics/layer_3="Projectiles"
+2d_physics/layer_4="Melee"
+2d_physics/layer_5="Pickups"
+2d_physics/layer_6="Monitors"

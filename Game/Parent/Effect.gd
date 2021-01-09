@@ -10,3 +10,4 @@ func start(info:Dictionary, player:Character):
 	
 func end(info:Dictionary, player:Character):
 	pass
+
