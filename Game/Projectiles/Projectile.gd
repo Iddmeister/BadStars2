@@ -6,7 +6,7 @@ var startPos:Vector2
 export var maxDistance:float = 500
 var masterPos:Vector2
 var masterID:int
-var startTime:int
+var startTime:float
 var synced:bool = false
 var started:bool = false
 
@@ -25,7 +25,7 @@ func _physics_process(delta):
 		else:
 			move(delta)
 
-func initialize(id:int, start:Vector2, _startTime:int, dir:float):
+func initialize(id:int, start:Vector2, _startTime:float, dir:float):
 	masterID = id
 	startPos = start
 	startTime = _startTime

@@ -31,6 +31,7 @@ var inGame:bool = false
 remotesync func setClock(time:float):
 	
 	clock = time
+	print(clock)
 	
 	pass
 	
