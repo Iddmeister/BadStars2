@@ -50,7 +50,7 @@ remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 	
 func lifeSteal(body, amount:int):
 	if body.is_in_group("Player") and body.is_in_group("Enemy"):
-		rpc("heal", amount)
+		die(1)
 	pass
 	
 var flipped:bool = false
