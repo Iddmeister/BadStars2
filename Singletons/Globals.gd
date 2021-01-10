@@ -7,6 +7,7 @@ var effects:Dictionary = {
 	"speed":preload("res://Game/Effects/Speed/Speed.tscn")
 	
 }
+var version:String = "0.1.1"
 
 var currentGameInfo = {}
 

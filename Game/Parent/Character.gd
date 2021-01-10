@@ -86,17 +86,15 @@ func initialize(id:int, allies:Array=[]):
 		$Tag.show()
 		$Tag/VBoxContainer/Name.text = Network.players[id].name
 		
-	if is_network_master():
-		set_collision_layer_bit(0, true)
-		add_to_group("Ally")
-	elif get_tree().get_network_unique_id() in allies:
-		set_collision_layer_bit(0, true)
+	add_to_group("Ally"+String(get_network_master()))
+	
+	for ally in allies:
+		add_to_group("Ally"+String(ally))
+		
+	if get_tree().get_network_unique_id() in allies:
 		$Tag/VBoxContainer/Health.modulate = Color(0.109804, 1, 0)
-		add_to_group("Ally")
-	else:
-		set_collision_layer_bit(1, true)
+	elif not is_network_master():
 		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
-		add_to_group("Enemy")
 		
 	currentCharacter = Globals.currentGameInfo.players[id].character
 
@@ -142,13 +140,6 @@ func getMoveDirection() -> Vector2:
 		
 	return dir.normalized()
 	
-func getTime():
-	return String(OS.get_system_time_msecs())
-	pass
-	
-func getTimeInt():
-	return OS.get_system_time_msecs()
-	pass
 
 func movement(delta:float):
 	
