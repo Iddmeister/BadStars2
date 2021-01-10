@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Misc/Fonts/Mostwasted.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Misc/Themes/Main.tres" type="Theme" id=2]
@@ -12,6 +12,10 @@ size = 64
 outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.013245, 0.596026, 0.741722, 0.834437, 0.874172, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.618164, 0, 1, 0.913086, 1, 0, 1, 0.984314, 1, 0, 0, 0.96437, 1, 0, 0.28, 1, 1, 1, 0 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -33,6 +37,10 @@ __meta__ = {
 [node name="Main" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -0.707092
+margin_top = 0.707108
+margin_right = -0.707092
+margin_bottom = 0.707092
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,6 +82,21 @@ margin_right = 376.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 100, 50 )
 text = "Options"
+
+[node name="Pow" type="CPUParticles2D" parent="Main/VBoxContainer/VBoxContainer"]
+position = Vector2( 191.926, 93.5789 )
+emitting = false
+amount = 500
+speed_scale = 3.5
+emission_shape = 2
+emission_rect_extents = Vector2( 200, 10 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 60.0
+scale_amount = 10.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 3 )
+hue_variation_random = 0.43
 
 [node name="Quit" type="Button" parent="Main/VBoxContainer/VBoxContainer"]
 margin_top = 120.0
@@ -121,8 +144,40 @@ margin_right = 300.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 300, 0 )
 placeholder_text = "IP Address"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Shh" type="VBoxContainer" parent="."]
+margin_left = 3.0
+margin_top = 552.0
+margin_right = 384.0
+margin_bottom = 598.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Shh"]
+margin_top = 23.0
+margin_right = 381.0
+margin_bottom = 23.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Shh/CenterContainer"]
+visible = false
+margin_top = -19.0
+margin_right = 381.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 1, 0.796078, 0, 1 )
+text = "You don't deserve Options"
+align = 1
+valign = 1
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="text_changed" from="Play/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
 [connection signal="pressed" from="Play/VBoxContainer/Host" to="." method="_on_Host_pressed"]
 [connection signal="pressed" from="Play/VBoxContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

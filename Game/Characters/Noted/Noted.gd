@@ -23,6 +23,12 @@ func ability1():
 	$Animation.play("Ascension")
 	moveSpeed += 100
 	
+func ability2():
+	maxHealth += 1000
+	health += 1000
+	$Graphics/FUN.emitting = true
+	$Timer.start(0.5)
+		
 remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 	
 	var bullet:PackedScene
@@ -51,7 +57,7 @@ remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 func lifeSteal(body, amount:int):
 	if body.is_in_group("Player") and body.is_in_group("Enemy"):
 		yield(get_tree().create_timer(0.1), "timeout")
-		die(1)
+		die(0)
 	pass
 	
 var flipped:bool = false
@@ -80,3 +86,10 @@ func puppetAnimations(delta:float):
 	
 	pass
 
+
+
+func _on_Timer_timeout():
+	maxHealth -=1000
+	health -= 1000
+	$Graphics/FUN.emitting = false
+	pass
