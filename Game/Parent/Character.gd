@@ -62,9 +62,15 @@ var timeSinceUpdate:float = 0
 var masterPos:Vector2
 var syncSpeed:float = 0.5
 
+export var killLines:PoolStringArray = []
+var killStreams:Array
+
 signal lagging()
 
 func _ready():
+	
+	for line in range(killLines.size()):
+		killStreams.append(load(killLines[line]))
 	
 	for a in range(maxAmmo):
 		
@@ -102,6 +108,7 @@ func initialize(id:int, allies:Array=[]):
 # warning-ignore:function_conflicts_variable
 func loaded():
 	loaded = true
+	$Spawn.play()
 
 func _process(delta):
 	if loaded:
@@ -227,7 +234,16 @@ func die(id:int):
 	$UI/Main.hide()
 	clearEffects()
 	spawnGhost()
+	$Death.play()
 	pass
+	
+func kill():
+	killStreams.shuffle()
+	$Kill.stream = killStreams[0]
+	$Kill.play()
+	
+func win():
+	$Win.play()
 	
 func spawnGhost():
 	

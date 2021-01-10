@@ -246,3 +246,11 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 percent_visible = false
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Kill" type="AudioStreamPlayer2D" parent="."]
