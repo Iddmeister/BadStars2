@@ -12,6 +12,7 @@ extents = Vector2( 16.7879, 14.769 )
 scale = Vector2( 5.56, 5.64 )
 
 [node name="Walls" type="Node2D" parent="." index="1"]
+scale = Vector2( 1.76529, 1.66342 )
 
 [node name="Wall1" type="StaticBody2D" parent="Walls" index="0"]
 light_mask = 2
@@ -294,40 +295,66 @@ shape = SubResource( 1 )
 [node name="SpawnPoint1" type="Position2D" parent="SpawnPoints" index="0" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( 144, 0 )
+position = Vector2( 256, 0 )
 
 [node name="SpawnPoint2" type="Position2D" parent="SpawnPoints" index="1" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( 120, -120 )
+position = Vector2( 192, -192 )
 
 [node name="SpawnPoint3" type="Position2D" parent="SpawnPoints" index="2" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( 0, -144 )
+position = Vector2( 0, -224 )
 
 [node name="SpawnPoint4" type="Position2D" parent="SpawnPoints" index="3" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( -120, -120 )
+position = Vector2( -208, -208 )
 
 [node name="SpawnPoint5" type="Position2D" parent="SpawnPoints" index="4" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( -144, 0 )
+position = Vector2( -216, 0 )
 
 [node name="SpawnPoint6" type="Position2D" parent="SpawnPoints" index="5" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( -120, 120 )
+position = Vector2( -192, 192 )
 
 [node name="SpawnPoint7" type="Position2D" parent="SpawnPoints" index="6" groups=[
 "SpawnPoint",
 ]]
-position = Vector2( 0, 144 )
+position = Vector2( 0, 224 )
 
 [node name="SpawnPoint8" type="Position2D" parent="SpawnPoints" index="7" groups=[
 "SpawnPoint",
 ]]
+position = Vector2( -64, 0 )
+
+[node name="SpawnPoint10" type="Position2D" parent="SpawnPoints" index="8" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 0, -64 )
+
+[node name="SpawnPoint11" type="Position2D" parent="SpawnPoints" index="9" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 64, 0 )
+
+[node name="SpawnPoint12" type="Position2D" parent="SpawnPoints" index="10" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 0, 64 )
+
+[node name="SpawnPoint13" type="Position2D" parent="SpawnPoints" index="11" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 118600, -51552 )
+
+[node name="SpawnPoint9" type="Position2D" parent="SpawnPoints" index="12" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 192, 192 )
 
 [editable path="MapArea"]
