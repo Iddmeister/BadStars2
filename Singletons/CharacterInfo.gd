@@ -19,11 +19,11 @@ var characters:Dictionary = {
 
 	"Noted":{"icon":"res://Game/Characters/Noted/Noted.png", "info":{
 		
-		"description":"An old freind",
-		"attack1":"Shoots 3 Bullets in a line",
-		"attack2":"BIG BULLET",
-		"ability1":"Shoots bullets in 3 directions",
-		"ability2":"Shoots a Big Laser",
+		"description":"An old friend",
+		"attack1":"Tactical Spraying",
+		"attack2":"RIP",
+		"ability1":"Ascension",
+		"ability2":"???",
 		
 	}, "scene":"res://Game/Characters/Noted/Noted.tscn"},
 #	"Frozone":{"icon":"res://Misc/Frozone.png"},

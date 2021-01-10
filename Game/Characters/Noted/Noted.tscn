@@ -1,14 +1,67 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game/Characters/Clot/Clot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Game/Characters/Noted/Notedbullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Characters/Noted/Noted.gd" type="Script" id=2]
 [ext_resource path="res://Game/Characters/Noted/NotedLifesteal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Characters/Noted/Notedbullet.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="Animation" id=1]
+resource_name = "Ascension"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.99, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.111662, 0.119404 ), Vector2( 0.334871, 0.358089 ), Vector2( 0.334871, 0.358089 ), Vector2( 0.112, 0.119 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.99, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.94902, 0.839216, 0.164706, 0.54902 ), Color( 0.94902, 0.839216, 0.164706, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.99, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 21.7518, 61.8598, 61.8598, 21.752 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.99, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 30.7029, 83.013, 83.013, 30.703 ]
+}
+
+[sub_resource type="StreamTexture" id=2]
 flags = 4
 load_path = "res://.import/Noted.png.png-20c3685500b8bb778ebd5d9935f79b8e.stex"
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -21,7 +74,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -35,32 +88,37 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
 [node name="Clot" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 maxHealth = 5
-maxMoveSpeed = 1000.0
+maxMoveSpeed = 200.0
 acceleration = 1.0
 deceleration = 1.0
-maxAmmo = 1
-attack2AmmoCost = 1
-reloadRate = 0.2
-ability1Cooldown = 100.0
-NormBullet = ExtResource( 2 )
+maxAmmo = 2
+attack2AmmoCost = 2
+reloadRate = 1.0
+ability2Cooldown = 1.0
+NormBullet = ExtResource( 4 )
+BigBullet = null
 LifeSteal = ExtResource( 3 )
-attack1NumBullets = 5
-shootDelay = 0.1
+attack1NumBullets = 4
+shootDelay = 0.05
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, -0.529732 )
+position = Vector2( -0.28064, -0.529732 )
+
+[node name="Animation" type="AnimationPlayer" parent="." index="1"]
+anims/Ascension = SubResource( 1 )
 
 [node name="Sprite" parent="Graphics" index="0"]
-position = Vector2( 0.300751, 0.712934 )
+position = Vector2( 0.464829, -0.619041 )
 scale = Vector2( 0.111662, 0.119404 )
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="Camera" parent="Space" index="0"]
 position = Vector2( 0.177383, 1.41422 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 4 )

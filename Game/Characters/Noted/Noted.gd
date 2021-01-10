@@ -20,7 +20,8 @@ func attack2():
 	
 func ability1():
 	
-	rpc("shoot", global_position, (get_global_mouse_position()-global_position).angle(), OS.get_system_time_msecs(), 2)
+	$Animation.play("Ascension")
+	moveSpeed += 100
 	
 remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 	
@@ -30,9 +31,9 @@ remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 		
 		0:
 			bullet = NormBullet
-		1:
-			bullet = BigBullet
 		2:
+			bullet = BigBullet
+		1:
 			bullet = LifeSteal
 	
 	var timePassed = float(OS.get_system_time_msecs()-time)

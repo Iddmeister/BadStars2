@@ -9,9 +9,14 @@ load_path = "res://.import/Boom.png-77ea0608827b9bf134d7c2d7abbea943.stex"
 maxDistance = 1.0
 damage = 1000
 heal = -50
+speed = 1.0
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( -0.565102, -1.7653 )
-scale = Vector2( 0.177324, 0.148051 )
+modulate = Color( 0.988235, 0.556863, 0.556863, 0.290196 )
+position = Vector2( -0.0774384, -0.316792 )
+scale = Vector2( 0.314665, 0.262719 )
+z_index = -1
 texture = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0.58371, 0.58371 )
