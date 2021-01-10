@@ -19,4 +19,4 @@ z_index = -1
 texture = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0.848587, 0.0539782 )
+position = Vector2( 0.0539858, -0.475754 )

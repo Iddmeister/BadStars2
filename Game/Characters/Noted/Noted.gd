@@ -50,6 +50,7 @@ remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
 	
 func lifeSteal(body, amount:int):
 	if body.is_in_group("Player") and body.is_in_group("Enemy"):
+		yield(get_tree().create_timer(0.1), "timeout")
 		die(1)
 	pass
 	
