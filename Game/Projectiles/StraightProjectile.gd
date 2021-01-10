@@ -27,8 +27,6 @@ func puppetMove(delta:float):
 
 	masterPos = calcMasterPos()
 	
-	Manager.draw.addDrawCall("draw_circle", [masterPos, 5, Color(1, 0, 0, 1)], 1000)
-	
 	global_position = global_position.linear_interpolate(masterPos, syncSpeed*delta*60)
 	
 	if (masterPos-global_position).length() <= 2:

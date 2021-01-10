@@ -24,12 +24,6 @@ func ability1():
 	
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	
-	Manager.draw.addDrawCall("draw_circle", [pos, 5, Color(0, 1 ,0, 1)], 5)
-	
-	if not is_network_master():
-		yield(get_tree().create_timer(0.5), "timeout")
-		
-	
 	var bullet:PackedScene
 	
 	match bulletType:
