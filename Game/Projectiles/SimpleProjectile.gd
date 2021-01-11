@@ -14,10 +14,10 @@ func collided(body:PhysicsBody2D):
 	
 	.collided(body)
 	
-	if is_network_master():
+	if (body.is_in_group("Ally"+String(masterID)) and collideWithAllies) or (collideWithEnemies and not body.is_in_group("Ally"+String(masterID))):
 		
-		if (body.is_in_group("Ally"+String(masterID)) and collideWithAllies) or (collideWithEnemies and not body.is_in_group("Ally"+String(masterID))):
-	
+		if is_network_master():
+
 			if damage > 0:
 			
 				if body.has_method("hit"):
@@ -34,11 +34,11 @@ func collided(body:PhysicsBody2D):
 					
 					body.rpc("addEffect", Manager.generateUniqueID(), effect.type, effect.time, effect.info)
 					
-			if not body.is_in_group("Player"):
-				hitTerrain()
-				return
-			if not pierce:
-				destroy()
+		if not body.is_in_group("Player"):
+			hitTerrain()
+			return
+		if not pierce:
+			destroy()
 	
 	pass
 	

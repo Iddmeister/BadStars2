@@ -5,6 +5,8 @@ export var BigBullet:PackedScene
 export var LifeSteal:PackedScene
 export var attack1NumBullets:int = 3
 export var shootDelay:float = 0.12
+export var laserWindup:float = 0.8
+export var laserDamage:int = 65
 
 func attack1():
 	usingAttack1 = true
@@ -21,6 +23,27 @@ func attack2():
 func ability1():
 	
 	rpc("shoot", get_network_master(), global_position, (get_global_mouse_position()-global_position).angle(), Network.clock, 2)
+	
+func ability2():
+	rpc("shootLaser", (get_global_mouse_position()-global_position).angle())
+	pass
+	
+remotesync func shootLaser(dir:float):
+	$LaserShoot.play()
+	$Laser.global_rotation = dir
+	$Laser/Tell.visible = true
+	canMove = false
+	yield(get_tree().create_timer(laserWindup), "timeout")
+	$Laser/Tell.visible = false
+	$Laser/Line.visible = true
+	if is_network_master():
+		for body in $Laser.get_overlapping_bodies():
+			if not body.is_in_group("Ally"+String(get_network_master())):
+				body.rpc("hit", laserDamage, get_network_master())
+	yield(get_tree().create_timer(0.3), "timeout")
+	canMove = true
+	$Laser.visible = false
+	pass
 	
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	
@@ -39,13 +62,15 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	b.set_network_master(1)
 	Manager.loose.add_child(b)
 	b.initialize(id, pos, time, dir)
-	if bulletType == 2 and is_network_master():
+	if bulletType == 2 and get_tree().is_network_server():
 		b.connect("collided", self, "lifeSteal", [b.damage])
+		
+	$Shoot.play()
 	
 	pass
 	
 func lifeSteal(body, amount:int):
-	if body.is_in_group("Player") and body.is_in_group("Enemy"):
+	if body.is_in_group("Player") and not body.is_in_group("Ally"+String(get_network_master())):
 		rpc("heal", amount)
 	pass
 	

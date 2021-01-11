@@ -29,6 +29,7 @@ onready var ability2Charge:float = 0
 
 var loaded:bool = false
 var dead:bool = false
+var canMove:bool = true
 
 var team:int = 0
 
@@ -152,7 +153,7 @@ func movement(delta:float):
 	
 	var dir:Vector2 = getMoveDirection()
 	
-	if Globals.inputBusy:
+	if Globals.inputBusy or not canMove:
 		dir = Vector2(0, 0)
 	
 	moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
