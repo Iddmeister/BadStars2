@@ -236,7 +236,14 @@ func die(id:int):
 	clearEffects()
 	spawnGhost()
 	$Death.play()
+	$Graphics.material.set_shader_param("enabled", true)
+	$Graphics.global_rotation_degrees = -90
+	$Blood.emitting = true
+	$DieTime.start()
 	pass
+	
+func destroy():
+	queue_free()
 	
 func kill():
 	killStreams.shuffle()

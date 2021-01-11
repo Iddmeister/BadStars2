@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Clot/Clot.gd" type="Script" id=2]
@@ -47,6 +47,9 @@ expand_margin_bottom = 2.0
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 313.561, 10 )
 
+[sub_resource type="Animation" id=5]
+resource_name = "Die"
+
 [node name="Clot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 maxHealth = 70
@@ -64,6 +67,7 @@ LifeSteal = ExtResource( 6 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
+use_parent_material = true
 scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
@@ -113,3 +117,6 @@ volume_db = 2.0
 [node name="LaserShoot" type="AudioStreamPlayer2D" parent="." index="12"]
 stream = ExtResource( 11 )
 volume_db = 2.0
+
+[node name="Animation" type="AnimationPlayer" parent="." index="13"]
+anims/Die = SubResource( 5 )

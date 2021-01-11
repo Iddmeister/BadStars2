@@ -25,7 +25,12 @@ func _ready():
 		gameMode.disabled = true
 		$Main/Options/VBoxContainer/Teams.disabled = true
 		gameMap.disabled = true
-	
+		
+	if not Globals.lastPickedCharacter == "none":
+		$Main/Options/Self/Character/Name.text = Globals.lastPickedCharacter
+		$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[Globals.lastPickedCharacter].icon)
+		rpc("setCharacter", get_tree().get_network_unique_id(), Globals.lastPickedCharacter)
+		character = Globals.lastPickedCharacter
 	pass
 	
 func updateMaps(mode:String):
@@ -155,6 +160,7 @@ func _on_CharacterSelect_characterSelected(c):
 	$Main/Options/Self/Character/Name.text = character
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
+	Globals.lastPickedCharacter = character
 
 
 func _on_UPNP_toggled(button_pressed):

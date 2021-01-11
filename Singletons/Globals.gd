@@ -10,6 +10,7 @@ var effects:Dictionary = {
 var version:String = "0.1.1"
 
 var currentGameInfo = {}
+var lastPickedCharacter:String = "none"
 
 var inputBusy:bool = false
 
