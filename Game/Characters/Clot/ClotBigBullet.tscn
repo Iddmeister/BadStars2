@@ -8,16 +8,17 @@ radius = 17.7688
 height = 31.6781
 
 [node name="ClotBigBullet" instance=ExtResource( 1 )]
-maxDistance = 1000.0
+maxDistance = 2000.0
 damage = 50
 collideWithEnemies = true
-speed = 500.0
+speed = 400.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
-scale = Vector2( 2, 3 )
+scale = Vector2( 3, 4.5 )
 texture = ExtResource( 2 )
 offset = Vector2( 1, 0.5 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 rotation = 1.57079
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )

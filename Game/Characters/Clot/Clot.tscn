@@ -50,7 +50,7 @@ extents = Vector2( 313.561, 10 )
 [node name="Clot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 maxHealth = 70
-maxMoveSpeed = 300.0
+maxMoveSpeed = 400.0
 attack2AmmoCost = 3
 reloadRate = 1.6
 ability1Cooldown = 5.0
