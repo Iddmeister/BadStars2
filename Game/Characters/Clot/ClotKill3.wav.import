@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ClotKill3.wav-30fb7649ba9a1034f20d631b670e544c.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Clot/ClotKill3.wav"
+dest_files=[ "res://.import/ClotKill3.wav-30fb7649ba9a1034f20d631b670e544c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -68,6 +68,9 @@ func playerDamaged(player:int, hitter:int):
 	
 func playerDied(player:int, killer:int):
 	
+	if $Players.has_node(String(killer)):
+		$Players.get_node(String(killer)).kill()
+	
 	match killer:
 		
 		Globals.deathCodes.OUT_OF_MAP:

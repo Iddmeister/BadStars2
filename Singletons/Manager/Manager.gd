@@ -2,6 +2,7 @@ extends Node
 
 onready var scene = $Scene
 onready var loose = $Loose
+onready var draw = $draw
 
 signal sceneLoaded()
 
