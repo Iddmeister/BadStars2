@@ -86,5 +86,6 @@ remotesync func lampMode(d:bool, dir:float):
 
 
 func _on_LampDamage_body_entered(body):
-	body.rpc("hit", lampDamage, get_network_master())
+	if get_tree().is_network_server():
+		body.rpc("hit", lampDamage, get_network_master())
 	pass

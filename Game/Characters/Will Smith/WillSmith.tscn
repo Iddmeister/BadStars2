@@ -14,20 +14,20 @@
 [ext_resource path="res://Game/Characters/Will Smith/Yarr3.wav" type="AudioStream" id=12]
 [ext_resource path="res://Game/Characters/Will Smith/Yarr2.wav" type="AudioStream" id=13]
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 56.6052
 height = 82.0815
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 32.5952
 height = 36.9582
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/enabled = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -40,7 +40,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -74,15 +74,15 @@ Dust = ExtResource( 11 )
 [node name="LampCollision" type="CollisionShape2D" parent="." index="0"]
 visible = false
 rotation = 1.57079
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, -4.77046 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Graphics" parent="." index="2"]
-material = SubResource( 2 )
+material = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 use_parent_material = true
@@ -98,10 +98,10 @@ texture = ExtResource( 10 )
 flip_h = true
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 
 [node name="Tag" parent="." index="6"]
 position = Vector2( 0, 38 )
