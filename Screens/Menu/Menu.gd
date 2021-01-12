@@ -34,14 +34,12 @@ func _on_Name_text_changed(new_text):
 	Data.saveData()
 
 
-func _on_Options_pressed():
-	$Shh/CenterContainer/Label.visible = true
-	$Main/VBoxContainer/VBoxContainer/Pow.emitting = true
-	$Timer.start(3)
-	pass 
+func _on_x_pressed():
+	Manager.changeScene("res://Screens/Menu/X.tscn")
+	pass # Replace with function body.
 
 
-func _on_Timer_timeout():
-	$Shh/CenterContainer/Label.visible = false
-	$Main/VBoxContainer/VBoxContainer/Pow.emitting = false
-	pass
+func _on_Y_button_down():
+	$Main/VBoxContainer/Title.text = "Bruh stars"
+	$Main/VBoxContainer/Title/Y.visible = false
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Misc/Fonts/Mostwasted.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Misc/Themes/Main.tres" type="Theme" id=2]
@@ -13,12 +13,14 @@ outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0.013245, 0.596026, 0.741722, 0.834437, 0.874172, 1 )
-colors = PoolColorArray( 1, 0, 0, 1, 1, 0.618164, 0, 1, 0.913086, 1, 0, 1, 0.984314, 1, 0, 0, 0.96437, 1, 0, 0.28, 1, 1, 1, 0 )
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 1, 0.764706, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -40,10 +42,6 @@ __meta__ = {
 [node name="Main" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.707092
-margin_top = 0.707108
-margin_right = -0.707092
-margin_bottom = 0.707092
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -67,6 +65,33 @@ custom_colors/font_color = Color( 1, 0.764706, 0, 1 )
 text = "BAD STARS 2"
 align = 1
 
+[node name="x" type="Button" parent="Main/VBoxContainer/Title"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 20.0
+margin_right = 100.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Y" type="Button" parent="Main/VBoxContainer/Title"]
+anchor_left = 0.915
+anchor_top = 0.8
+anchor_right = 1.016
+anchor_bottom = 0.9
+margin_left = 37.96
+margin_top = -7.15256e-07
+margin_right = 6.98399
+margin_bottom = 31.0
+rect_rotation = 90.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer"]
 margin_top = 120.0
 margin_right = 376.0
@@ -85,21 +110,6 @@ margin_right = 376.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 100, 50 )
 text = "Options"
-
-[node name="Pow" type="CPUParticles2D" parent="Main/VBoxContainer/VBoxContainer"]
-position = Vector2( 191.926, 93.5789 )
-emitting = false
-amount = 500
-speed_scale = 3.5
-emission_shape = 2
-emission_rect_extents = Vector2( 200, 10 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 60.0
-scale_amount = 10.0
-scale_amount_random = 1.0
-color_ramp = SubResource( 3 )
-hue_variation_random = 0.43
 
 [node name="Quit" type="Button" parent="Main/VBoxContainer/VBoxContainer"]
 margin_top = 120.0
@@ -182,7 +192,7 @@ valign = 1
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="CenterContainer" type="CenterContainer" parent="QuitMessage"]
 anchor_right = 1.0
@@ -194,10 +204,10 @@ margin_top = 281.0
 margin_right = 552.0
 margin_bottom = 319.0
 text = "Loser"
+[connection signal="pressed" from="Main/VBoxContainer/Title/x" to="." method="_on_x_pressed"]
+[connection signal="button_down" from="Main/VBoxContainer/Title/Y" to="." method="_on_Y_button_down"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="text_changed" from="Play/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
 [connection signal="pressed" from="Play/VBoxContainer/Host" to="." method="_on_Host_pressed"]
 [connection signal="pressed" from="Play/VBoxContainer/Join" to="." method="_on_Join_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
