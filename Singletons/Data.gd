@@ -4,6 +4,15 @@ extends Node
 var data = {
 	
 	"username":"EpicDude54",
+	"controls":
+		{
+		
+			"attack1":InputMap.get_action_list("attack1")[0],
+			"attack2":InputMap.get_action_list("attack2")[0],
+			"ability1":InputMap.get_action_list("ability1")[0],
+			"ability2":InputMap.get_action_list("ability2")[0],
+		
+		}
 	
 }
 

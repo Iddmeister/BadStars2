@@ -43,3 +43,7 @@ func _on_Y_button_down():
 	$Main/VBoxContainer/Title.text = "Bruh stars"
 	$Main/VBoxContainer/Title/Y.visible = false
 	pass # Replace with function body.
+
+
+func _on_Options_pressed():
+	Manager.changeScene("res://Screens/Options/Options.tscn")

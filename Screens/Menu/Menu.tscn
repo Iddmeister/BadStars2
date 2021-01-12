@@ -207,6 +207,7 @@ text = "Loser"
 [connection signal="pressed" from="Main/VBoxContainer/Title/x" to="." method="_on_x_pressed"]
 [connection signal="button_down" from="Main/VBoxContainer/Title/Y" to="." method="_on_Y_button_down"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="text_changed" from="Play/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
 [connection signal="pressed" from="Play/VBoxContainer/Host" to="." method="_on_Host_pressed"]
