@@ -32,7 +32,7 @@ remotesync func shootLaser(dir:float):
 	$LaserShoot.play()
 	$Laser.global_rotation = dir
 	$Laser/Tell.visible = true
-	canMove = false
+	canMove += 1
 	yield(get_tree().create_timer(laserWindup), "timeout")
 	$Laser/Tell.visible = false
 	$Laser/Line.visible = true
@@ -41,7 +41,7 @@ remotesync func shootLaser(dir:float):
 			if not body.is_in_group("Ally"+String(get_network_master())):
 				body.rpc("hit", laserDamage, get_network_master())
 	yield(get_tree().create_timer(0.3), "timeout")
-	canMove = true
+	canMove -= 1
 	$Laser.visible = false
 	pass
 	

@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game/Projectiles/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Will Smith/MagicCarpet.gd" type="Script" id=2]
+[ext_resource path="res://Game/Characters/Will Smith/MagicCarpet.jpg" type="Texture" id=3]
+[ext_resource path="res://Misc/Circle.png" type="Texture" id=4]
+[ext_resource path="res://Game/Characters/Will Smith/Blowing.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 88, 120 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.662921, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 60.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 4 )
+color = Color( 0.954102, 0, 0.348212, 1 )
+
+[node name="MagicCarpet" instance=ExtResource( 1 )]
+z_index = -1
+collision_mask = 1
+script = ExtResource( 2 )
+maxDistance = 2000.0
+speed = 700.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+rotation = 1.57079
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 3 )
+
+[node name="Trail" type="Particles2D" parent="." index="2"]
+position = Vector2( -65.5159, 0 )
+rotation = 3.14159
+z_index = -1
+amount = 50
+preprocess = 0.5
+local_coords = false
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="Blowing" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource( 5 )
+pitch_scale = 1.5
+[connection signal="body_exited" from="." to="." method="_on_MagicCarpet_body_exited"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Blowing.wav-bc9494b277f83ff491ffb6cd6a2df214.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Will Smith/Blowing.wav"
+dest_files=[ "res://.import/Blowing.wav-bc9494b277f83ff491ffb6cd6a2df214.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
