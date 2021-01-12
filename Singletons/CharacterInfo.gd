@@ -34,21 +34,20 @@ var characters:Dictionary = {
 					"ability2":"JAHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
 				}
 		},
-    
-    "Noted":
-    {
-      "icon":"res://Game/Characters/Noted/Noted.png",
-      "scene":"res://Game/Characters/Noted/Noted.tscn",
-      "info":
-        {
-          "description":"An old friend",
-          "attack1":"Tactical Spraying",
-          "attack2":"RIP",
-          "ability1":"Ascension",
-          "ability2":"???",
-		
-      	}, 
-     },
+	
+	"Noted":
+	{
+	  "icon":"res://Game/Characters/Noted/Noted.png",
+	  "scene":"res://Game/Characters/Noted/Noted.tscn",
+	  "info":
+		{
+		  "description":"An old friend",
+		  "attack1":"Tactical Spraying",
+		  "attack2":"RIP",
+		  "ability1":"Ascension",
+		  "ability2":"???",
+		}, 
+	 },
 	
 }
 

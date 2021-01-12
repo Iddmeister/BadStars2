@@ -24,6 +24,9 @@ func playerDied(player:int, killer:int):
 	
 	if is_network_master():
 		
+		if Network.players.size() <= 1:
+			return
+		
 		var winner:int = -1
 		var passed = []
 		

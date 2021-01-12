@@ -12,6 +12,7 @@ func _on_Play_pressed():
 
 
 func _on_Quit_pressed():
+	$QuitMessage.show()
 	get_tree().quit()
 
 

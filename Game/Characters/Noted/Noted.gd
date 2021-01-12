@@ -1,63 +1,76 @@
 extends Character
 
-export var NormBullet:PackedScene
-export var BigBullet:PackedScene
-export var LifeSteal:PackedScene
+export var Bullet:PackedScene
 export var attack1NumBullets:int = 3
 export var shootDelay:float = 0.12
 
 func attack1():
 	usingAttack1 = true
-	var dir = (get_global_mouse_position()-global_position).angle()
+	var dir = getAimDirection()
 	for b in range(attack1NumBullets):
-		rpc("shoot", global_position, dir, OS.get_system_time_msecs(), 0)
+		rpc("shoot", get_network_master(), global_position, dir, Network.clock)
 		yield(get_tree().create_timer(shootDelay), "timeout")
 	usingAttack1 = false
 	pass
 	
 func attack2():
-	rpc("shoot", global_position, (get_global_mouse_position()-global_position).angle(), OS.get_system_time_msecs(), 1)
+	rpc("boom")
+	pass
 	
-func ability1():
+remotesync func boom():
 	
-	$Animation.play("Ascension")
-	moveSpeed += 100
+	$Explosion/Animation.play("Boom")
 	
-func ability2():
-	maxHealth += 1000
-	health += 1000
-	$Graphics/FUN.emitting = true
-	$Timer.start(0.5)
-		
-remotesync func shoot(pos:Vector2, dir:float, time:int, bulletType):
+	canMove += 1
 	
-	var bullet:PackedScene
-	
-	match bulletType:
-		
-		0:
-			bullet = NormBullet
-		2:
-			bullet = BigBullet
-		1:
-			bullet = LifeSteal
-	
-	var timePassed = float(OS.get_system_time_msecs()-time)
-	
-	var b:Projectile = bullet.instance()
-	b.set_network_master(get_network_master())
-	b.global_position = global_position
-	Manager.loose.add_child(b)
-	if bulletType == 2 and is_network_master():
-		b.connect("collided", self, "lifeSteal", [b.damage])
-	b.fastForward(pos, dir, timePassed/1000)
+	if is_network_master():
+		for body in $Explosion.get_overlapping_bodies():
+			if not body.is_in_group("Ally"+String(get_network_master())):
+				body.rpc("hit", 100000, get_network_master())
+		yield(get_tree().create_timer(0.5), "timeout")
+		rpc("hit", 100000, get_network_master())
+				
 	
 	pass
 	
+	
+remotesync func shoot(id:int, pos:Vector2, dir:float, time:float):
+	
+	var b:Projectile = Bullet.instance()
+	Manager.loose.add_child(b)
+	b.initialize(id, pos, dir, time)
+		
+	#$Shoot.play()
+	
+	pass
+	
+func ability1():
+	rpc("ascension")
+
+remotesync func ascension():
+	$Animation.play("Ascension")
+	moveSpeed += 100
+	pass
+	
+func ability2():
+	rpc("questionMark")
+	
+remotesync func questionMark():
+	maxHealth += 1000
+	health += 1000
+	$Graphics/FUN.emitting = true
+	updateHealth()
+	yield(get_tree().create_timer(1), "timeout")
+	maxHealth -= 1000
+	health -= 1000
+	$Graphics/FUN.emitting = false
+	updateHealth()
+	pass
+	
 func lifeSteal(body, amount:int):
-	if body.is_in_group("Player") and body.is_in_group("Enemy"):
+	if body.is_in_group("Player") and not body.is_in_group("Ally"+String(get_network_master())):
 		yield(get_tree().create_timer(0.1), "timeout")
-		die(0)
+		rpc("hit", 100000, get_network_master())
 	pass
 	
 var flipped:bool = false
@@ -88,8 +101,3 @@ func puppetAnimations(delta:float):
 
 
 
-func _on_Timer_timeout():
-	maxHealth -=1000
-	health -= 1000
-	$Graphics/FUN.emitting = false
-	pass

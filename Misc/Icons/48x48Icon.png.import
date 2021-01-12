@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Notedbullet.png-a8112c4c631493c8c5df202a8022e9d6.stex"
+path="res://.import/48x48Icon.png-f54239298dd913e4cad9ad6863b4549c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Characters/Noted/Notedbullet.png"
-dest_files=[ "res://.import/Notedbullet.png-a8112c4c631493c8c5df202a8022e9d6.stex" ]
+source_file="res://Misc/Icons/48x48Icon.png"
+dest_files=[ "res://.import/48x48Icon.png-f54239298dd913e4cad9ad6863b4549c.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

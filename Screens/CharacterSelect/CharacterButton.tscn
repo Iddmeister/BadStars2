@@ -4,7 +4,6 @@
 [ext_resource path="res://Screens/CharacterSelect/CharacterButton.gd" type="Script" id=2]
 [ext_resource path="res://Game/Characters/Will Smith/WillSmith.png" type="Texture" id=3]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 border_width_left = 10
@@ -25,10 +24,10 @@ expand_margin_bottom = 3.0
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
 [node name="CharacterButton" type="PanelContainer"]
@@ -85,7 +84,7 @@ valign = 1
 margin_top = 58.0
 margin_right = 478.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "DudeDudeDudeDudeDude"
 align = 1
 
@@ -111,7 +110,7 @@ margin_right = 104.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Attack1"
 align = 1
 
@@ -121,7 +120,7 @@ margin_right = 104.0
 margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "ddddddddddddddd"
 align = 1
 autowrap = true
@@ -139,7 +138,7 @@ margin_right = 105.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Attack2"
 align = 1
 
@@ -149,7 +148,7 @@ margin_right = 105.0
 margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 align = 1
 autowrap = true
 
@@ -167,7 +166,7 @@ margin_right = 104.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Ability1"
 align = 1
 
@@ -177,7 +176,7 @@ margin_right = 104.0
 margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "dddddddddddddddd"
 align = 1
 autowrap = true
@@ -196,7 +195,7 @@ margin_right = 105.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Ability2"
 align = 1
 
@@ -206,7 +205,7 @@ margin_right = 105.0
 margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 align = 1
 autowrap = true
 [connection signal="gui_input" from="." to="." method="_on_CharacterButton_gui_input"]

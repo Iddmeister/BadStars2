@@ -26,6 +26,6 @@ func _on_CharacterButton_gui_input(event):
 	
 	if event is InputEventMouseButton:
 		
-		if event.is_pressed():
+		if event.is_action_pressed("click"):
 			
 			emit_signal("selected", character)

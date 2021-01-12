@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Misc/Fonts/Mostwasted.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Misc/Themes/Main.tres" type="Theme" id=2]
@@ -16,6 +16,9 @@ font_data = ExtResource( 1 )
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.013245, 0.596026, 0.741722, 0.834437, 0.874172, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0.618164, 0, 1, 0.913086, 1, 0, 1, 0.984314, 1, 0, 0, 0.96437, 1, 0, 0.28, 1, 1, 1, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -174,6 +177,23 @@ custom_colors/font_color = Color( 1, 0.796078, 0, 1 )
 text = "You don't deserve Options"
 align = 1
 valign = 1
+
+[node name="QuitMessage" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="QuitMessage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Loser" type="Label" parent="QuitMessage/CenterContainer"]
+margin_left = 471.0
+margin_top = 281.0
+margin_right = 552.0
+margin_bottom = 319.0
+text = "Loser"
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

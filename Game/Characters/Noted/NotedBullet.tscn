@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Projectiles/StraightProjectile.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.08131
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/aNotedbullet.png-fa7d95cf07224dbd1643af31fad31917.stex"
+
+[node name="NotedBullet" instance=ExtResource( 1 )]
+maxDistance = 700.0
+damage = 5
+collideWithEnemies = true
+speed = 700.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+position = Vector2( -0.00622904, -0.194985 )
+rotation = 1.5708
+scale = Vector2( 0.126067, 0.126067 )
+texture = SubResource( 1 )
+offset = Vector2( 2, 0.5 )
+__meta__ = {
+"_editor_description_": ""
+}
