@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WillSmith.png-22aa829e86294fe83ebca05f36690d1c.stex"
+path="res://.import/ClotLifeStealIcon.png-88473d2fbccf05f5f9df71164c0b2001.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Misc/WillSmith.png"
-dest_files=[ "res://.import/WillSmith.png-22aa829e86294fe83ebca05f36690d1c.stex" ]
+source_file="res://Game/Characters/Clot/ClotLifeStealIcon.png"
+dest_files=[ "res://.import/ClotLifeStealIcon.png-88473d2fbccf05f5f9df71164c0b2001.stex" ]
 
 [params]
 

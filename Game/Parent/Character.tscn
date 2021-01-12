@@ -1,14 +1,21 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/Parent/Character.gd" type="Script" id=1]
 [ext_resource path="res://Game/Parent/HUD/AbilityIcon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Parent/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Misc/greyscale.shader" type="Shader" id=5]
+[ext_resource path="res://Misc/Circle.png" type="Texture" id=6]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0.729412, 0.0196078, 1 )
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/enabled = false
 
 [sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0.729412, 0.0196078, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
 border_width_left = 10
 border_width_top = 10
@@ -24,29 +31,16 @@ expand_margin_right = 10.0
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 0.121569, 0.121569, 0.121569, 1 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-resource_local_to_scene = true
-bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.996078, 0.705882, 0, 1 )
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=6]
 resource_local_to_scene = true
@@ -62,6 +56,19 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=7]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -69,16 +76,16 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=9]
 size = 20
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -90,16 +97,37 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.713483, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+scale_random = 0.1
+scale_curve = SubResource( 13 )
+color = Color( 1, 0.0666667, 0.0666667, 1 )
+hue_variation = -0.05
+hue_variation_random = 0.5
+
 [node name="Character" type="KinematicBody2D" groups=[
 "Player",
 ]]
-collision_layer = 0
-collision_mask = 4
+collision_mask = 6
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Graphics" type="Node2D" parent="."]
+material = SubResource( 1 )
 
 [node name="Effects" type="Node2D" parent="."]
 
@@ -137,8 +165,8 @@ margin_top = 15.0
 margin_right = 652.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 300, 20 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
 step = 0.001
 value = 100.0
 percent_visible = false
@@ -146,7 +174,7 @@ percent_visible = false
 [node name="Num" type="Label" parent="UI/Main/CenterContainer/Health"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "100"
 align = 1
 valign = 1
@@ -175,7 +203,7 @@ margin_left = 60.0
 margin_right = 140.0
 margin_bottom = 42.0
 size_flags_horizontal = 4
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities"]
 margin_left = 5.0
@@ -186,19 +214,19 @@ custom_constants/separation = 6
 alignment = 1
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" instance=ExtResource( 2 )]
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 38.0
 margin_right = 70.0
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 7 )
 
 [node name="Ammo" type="PanelContainer" parent="UI/Main/CenterContainer2/VBoxContainer"]
 margin_top = 46.0
 margin_right = 200.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 200, 0 )
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Main/CenterContainer2/VBoxContainer/Ammo"]
 margin_left = 5.0
@@ -230,7 +258,7 @@ margin_right = 109.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 50, 0 )
 size_flags_horizontal = 4
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "EpicDude55"
 align = 1
 valign = 1
@@ -241,9 +269,31 @@ margin_right = 110.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 50, 10 )
 size_flags_horizontal = 3
-custom_styles/fg = SubResource( 9 )
-custom_styles/bg = SubResource( 10 )
+custom_styles/fg = SubResource( 10 )
+custom_styles/bg = SubResource( 11 )
 max_value = 1.0
 step = 0.001
 value = 1.0
 percent_visible = false
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Kill" type="AudioStreamPlayer2D" parent="."]
+
+[node name="DieTime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Blood" type="Particles2D" parent="."]
+emitting = false
+amount = 15
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+process_material = SubResource( 14 )
+texture = ExtResource( 6 )
+[connection signal="timeout" from="DieTime" to="." method="destroy"]

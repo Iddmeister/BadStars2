@@ -7,7 +7,7 @@ onready var health = maxHealth
 export var maxMoveSpeed:float = 200
 onready var moveSpeed = maxMoveSpeed
 export var acceleration:float = 0.5
-export var deceleration:float = 0.5
+export var deceleration:float = 0.2
 
 export var maxAmmo:int = 3
 onready var ammo:int = maxAmmo
@@ -29,6 +29,8 @@ onready var ability2Charge:float = 0
 
 var loaded:bool = false
 var dead:bool = false
+var canMove:int = 0
+var invincible:int = 0
 
 var team:int = 0
 
@@ -48,6 +50,7 @@ onready var ability2Icon = $UI/Main/CenterContainer2/VBoxContainer/Abilities/HBo
 
 
 var moveVelocity:Vector2
+var knockVelocity:Vector2
 var addedVelocity:Vector2
 
 var currentCharacter:String
@@ -62,9 +65,15 @@ var timeSinceUpdate:float = 0
 var masterPos:Vector2
 var syncSpeed:float = 0.5
 
+export var killLines:PoolStringArray = []
+var killStreams:Array
+
 signal lagging()
 
 func _ready():
+	
+	for line in range(killLines.size()):
+		killStreams.append(load(killLines[line]))
 	
 	for a in range(maxAmmo):
 		
@@ -86,17 +95,15 @@ func initialize(id:int, allies:Array=[]):
 		$Tag.show()
 		$Tag/VBoxContainer/Name.text = Network.players[id].name
 		
-	if is_network_master():
-		set_collision_layer_bit(0, true)
-		add_to_group("Ally")
-	elif get_tree().get_network_unique_id() in allies:
-		set_collision_layer_bit(0, true)
+	add_to_group("Ally"+String(get_network_master()))
+	
+	for ally in allies:
+		add_to_group("Ally"+String(ally))
+		
+	if get_tree().get_network_unique_id() in allies:
 		$Tag/VBoxContainer/Health.modulate = Color(0.109804, 1, 0)
-		add_to_group("Ally")
-	else:
-		set_collision_layer_bit(1, true)
+	elif not is_network_master():
 		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
-		add_to_group("Enemy")
 		
 	currentCharacter = Globals.currentGameInfo.players[id].character
 
@@ -104,6 +111,7 @@ func initialize(id:int, allies:Array=[]):
 # warning-ignore:function_conflicts_variable
 func loaded():
 	loaded = true
+	$Spawn.play()
 
 func _process(delta):
 	if loaded:
@@ -142,26 +150,22 @@ func getMoveDirection() -> Vector2:
 		
 	return dir.normalized()
 	
-func getTime():
-	return String(OS.get_system_time_msecs())
-	pass
+func getAimDirection() -> float:
+	return (get_global_mouse_position()-global_position).angle()
 	
-func getTimeInt():
-	return OS.get_system_time_msecs()
-	pass
 
 func movement(delta:float):
 	
 	var dir:Vector2 = getMoveDirection()
 	
-	if Globals.inputBusy:
+	if Globals.inputBusy or canMove > 0:
 		dir = Vector2(0, 0)
 	
 	moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
 	
-	addedVelocity = addedVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
+	knockVelocity = knockVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
 	
-	move_and_slide(moveVelocity+addedVelocity)
+	move_and_slide(moveVelocity+knockVelocity+addedVelocity)
 	
 	rpc_unreliable("updateState", global_position)
 
@@ -218,6 +222,9 @@ puppet func setPos(pos:Vector2):
 	
 remotesync func hit(damage:int, id:int):
 	
+	if invincible > 0:
+		return
+	
 	health = max(health-damage, 0)
 	
 	emit_signal("hit", get_network_master(), id)
@@ -236,7 +243,23 @@ func die(id:int):
 	$UI/Main.hide()
 	clearEffects()
 	spawnGhost()
+	$Death.play()
+	$Graphics.material.set_shader_param("enabled", true)
+	$Graphics.global_rotation_degrees = -90
+	$Blood.emitting = true
+	$DieTime.start()
 	pass
+	
+func destroy():
+	queue_free()
+	
+func kill():
+	killStreams.shuffle()
+	$Kill.stream = killStreams[0]
+	$Kill.play()
+	
+func win():
+	$Win.play()
 	
 func spawnGhost():
 	
@@ -246,6 +269,15 @@ func spawnGhost():
 	g.initialze(get_network_master())
 	
 	pass
+
+master func knock(vel:Vector2):
+	
+	knockVelocity += vel
+	
+	pass
+	
+master func setAddedVelocity(vel:Vector2):
+	addedVelocity = vel
 	
 remotesync func heal(amount:int, id:int=-1):
 	
@@ -261,7 +293,7 @@ func updateHealth():
 	
 func actions(delta:float):
 	
-	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1:
+	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1 and canUseAttack1:
 		
 		attack1()
 		if not currentAmmoBox >= maxAmmo:
@@ -269,7 +301,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo()
 		
-	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2:
+	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2 and canUseAttack2:
 		
 		attack2()
 		if not currentAmmoBox >= maxAmmo:
@@ -277,12 +309,12 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo(attack2AmmoCost)
 		
-	if Input.is_action_pressed("ability1") and ability1Charge <= 0:
+	if Input.is_action_pressed("ability1") and ability1Charge <= 0 and canUseAbility1:
 		ability1()
 		ability1Icon.use()
 		ability1Charge = ability1Cooldown
 		
-	if Input.is_action_pressed("ability2") and ability2Charge <= 0:
+	if Input.is_action_pressed("ability2") and ability2Charge <= 0 and canUseAbility2:
 		ability2()
 		ability2Icon.use()
 		ability2Charge = ability2Cooldown
@@ -291,6 +323,11 @@ func actions(delta:float):
 	
 var usingAttack1:bool = false
 var usingAttack2:bool = false
+
+var canUseAttack1:bool = true
+var canUseAttack2:bool = true
+var canUseAbility1:bool = true
+var canUseAbility2:bool = true
 	
 func attack1():
 	pass
@@ -360,4 +397,14 @@ func updateCooldowns(delta:float):
 		if ability2Charge <= 0:
 			emit_signal("ability2Charged")
 	
+	pass
+	
+remotesync func enableAbilities(d:bool):
+	canUseAbility1 = d
+	canUseAbility2 = d
+	pass
+	
+remotesync func enableAttacks(d:bool):
+	canUseAttack1 = d
+	canUseAttack2 = d
 	pass

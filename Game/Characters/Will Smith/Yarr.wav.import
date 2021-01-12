@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Yarr.wav-c657b2e07d2c09307cadb8729a904216.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Will Smith/Yarr.wav"
+dest_files=[ "res://.import/Yarr.wav-c657b2e07d2c09307cadb8729a904216.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

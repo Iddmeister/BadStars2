@@ -7,29 +7,48 @@ extends Node
 var characters:Dictionary = {
 	
 	
-	"Clot":{"icon":"res://Game/Characters/Clot/Clot.png", "info":{
+	"Clot":
+		{
+			"icon":"res://Game/Characters/Clot/Clot.png", 
+			"scene":"res://Game/Characters/Clot/Clot.tscn", 
+			"info":
+				{
+					"description":"Still Has Red Hair",
+					"attack1":"Shoots 3 Bullets in a line",
+					"attack2":"BIG BULLET",
+					"ability1":"Shoots bullets in 3 directions",
+					"ability2":"Shoots a Big Laser",
+				}
+		},
 		
-		"description":"Still Has Red Hair",
-		"attack1":"Shoots 3 Bullets in a line",
-		"attack2":"BIG BULLET",
-		"ability1":"Shoots bullets in 3 directions",
-		"ability2":"Shoots a Big Laser",
+	"Will Smith":
+		{
+			"icon":"res://Game/Characters/Will Smith/WillSmith.png",
+			"scene":"res://Game/Characters/Will Smith/WillSmith.tscn",
+			"info":
+				{
+					"description":"Is Will Smiff",
+					"attack1":"Jahrrrrrrrr",
+					"attack2":"Jahrrrrrrrrrrrrrrrrrr",
+					"ability1":"Jahrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+					"ability2":"JAHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+				}
+		},
+    
+    "Noted":
+    {
+      "icon":"res://Game/Characters/Noted/Noted.png",
+      "scene":"res://Game/Characters/Noted/Noted.tscn",
+      "info":
+        {
+          "description":"An old friend",
+          "attack1":"Tactical Spraying",
+          "attack2":"RIP",
+          "ability1":"Ascension",
+          "ability2":"???",
 		
-	}, "scene":"res://Game/Characters/Clot/Clot.tscn"},
-
-	"Noted":{"icon":"res://Game/Characters/Noted/Noted.png", "info":{
-		
-		"description":"An old friend",
-		"attack1":"Tactical Spraying",
-		"attack2":"RIP",
-		"ability1":"Ascension",
-		"ability2":"???",
-		
-	}, "scene":"res://Game/Characters/Noted/Noted.tscn"},
-#	"Frozone":{"icon":"res://Misc/Frozone.png"},
-#	"Karl Marx":{"icon":"res://Misc/KarlMarx.png"},
-#	"Will Smith":{"icon":"res://Misc/WillSmith.png"}
-	
+      	}, 
+     },
 	
 }
 
