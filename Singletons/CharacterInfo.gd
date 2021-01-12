@@ -7,18 +7,33 @@ extends Node
 var characters:Dictionary = {
 	
 	
-	"Clot":{"icon":"res://Game/Characters/Clot/Clot.png", "info":{
+	"Clot":
+		{
+			"icon":"res://Game/Characters/Clot/Clot.png", 
+			"scene":"res://Game/Characters/Clot/Clot.tscn", 
+			"info":
+				{
+					"description":"Still Has Red Hair",
+					"attack1":"Shoots 3 Bullets in a line",
+					"attack2":"BIG BULLET",
+					"ability1":"Shoots bullets in 3 directions",
+					"ability2":"Shoots a Big Laser",
+				}
+		},
 		
-		"description":"Still Has Red Hair",
-		"attack1":"Shoots 3 Bullets in a line",
-		"attack2":"BIG BULLET",
-		"ability1":"Shoots bullets in 3 directions",
-		"ability2":"Shoots a Big Laser",
-		
-	}, "scene":"res://Game/Characters/Clot/Clot.tscn"},
-#	"Frozone":{"icon":"res://Misc/Frozone.png"},
-#	"Karl Marx":{"icon":"res://Misc/KarlMarx.png"},
-#	"Will Smith":{"icon":"res://Misc/WillSmith.png"}
+	"Will Smith":
+		{
+			"icon":"res://Game/Characters/Will Smith/WillSmith.png",
+			"scene":"res://Game/Characters/Will Smith/WillSmith.tscn",
+			"info":
+				{
+					"description":"Is Will Smiff",
+					"attack1":"Jahrrrrrrrr",
+					"attack2":"Jahrrrrrrrrrrrrrrrrrr",
+					"ability1":"Jahrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+					"ability2":"JAHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+				}
+		}
 	
 	
 }

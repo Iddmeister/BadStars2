@@ -25,7 +25,7 @@ func _physics_process(delta):
 		else:
 			move(delta)
 
-func initialize(id:int, start:Vector2, _startTime:float, dir:float):
+func initialize(id:int, start:Vector2, dir:float, _startTime:float):
 	masterID = id
 	startPos = start
 	startTime = _startTime

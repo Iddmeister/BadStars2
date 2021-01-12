@@ -148,6 +148,9 @@ func getMoveDirection() -> Vector2:
 		
 	return dir.normalized()
 	
+func getAimDirection() -> float:
+	return (get_global_mouse_position()-global_position).angle()
+	
 
 func movement(delta:float):
 	

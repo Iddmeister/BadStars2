@@ -10,7 +10,7 @@ export var laserDamage:int = 65
 
 func attack1():
 	usingAttack1 = true
-	var dir = (get_global_mouse_position()-global_position).angle()
+	var dir = getAimDirection()
 	for b in range(attack1NumBullets):
 		rpc("shoot", get_network_master(), global_position, dir, Network.clock, 0)
 		yield(get_tree().create_timer(shootDelay), "timeout")
@@ -18,14 +18,14 @@ func attack1():
 	pass
 	
 func attack2():
-	rpc("shoot", get_network_master(), global_position, (get_global_mouse_position()-global_position).angle(), Network.clock, 1)
+	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 1)
 	
 func ability1():
 	
-	rpc("shoot", get_network_master(), global_position, (get_global_mouse_position()-global_position).angle(), Network.clock, 2)
+	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 2)
 	
 func ability2():
-	rpc("shootLaser", (get_global_mouse_position()-global_position).angle())
+	rpc("shootLaser", getAimDirection())
 	pass
 	
 remotesync func shootLaser(dir:float):
@@ -59,9 +59,8 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 			bullet = LifeSteal
 	
 	var b:Projectile = bullet.instance()
-	b.set_network_master(1)
 	Manager.loose.add_child(b)
-	b.initialize(id, pos, time, dir)
+	b.initialize(id, pos, dir, time)
 	if bulletType == 2 and get_tree().is_network_server():
 		b.connect("collided", self, "lifeSteal", [b.damage])
 		

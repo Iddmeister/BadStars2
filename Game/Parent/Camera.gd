@@ -3,11 +3,24 @@ extends Camera2D
 var currentImportance:int = 0
 
 var moving:bool = false
-onready var followPlayer:bool = true
+var followPlayer:bool = true
+enum {STATIC, SMOOTH}
+onready var followType:int = STATIC
+export var smoothSpeed:float = 3000
+signal caughtUp()
 
 func _physics_process(delta):
 	if followPlayer:
-		global_position = get_parent().get_parent().global_position
+		match followType:
+			
+			STATIC:
+				global_position = get_parent().get_parent().global_position
+			SMOOTH:
+				if (get_parent().get_parent().global_position-global_position).length() <= smoothSpeed*delta:
+					emit_signal("caughtUp")
+					global_position = get_parent().get_parent().global_position
+				else:
+					global_position += (get_parent().get_parent().global_position-global_position).normalized()*smoothSpeed*delta
 	pass
 
 func move_camera(move:Vector2):
