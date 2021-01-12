@@ -46,7 +46,7 @@ remotesync func addMessage(id:int, message:String, colour:Color=Color(1, 1, 1 ,1
 	
 	if message.begins_with("/team"):
 		message = message.replace("/team", "[team]")
-	
+		
 	if not id == -1:
 		l.text = "[%s] %s" % [Network.players[id].name, message]
 	else:

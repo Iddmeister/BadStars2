@@ -31,3 +31,16 @@ func _on_Name_text_changed(new_text):
 	Network.info.name = new_text
 	Data.data.username = new_text
 	Data.saveData()
+
+
+func _on_Options_pressed():
+	$Shh/CenterContainer/Label.visible = true
+	$Main/VBoxContainer/VBoxContainer/Pow.emitting = true
+	$Timer.start(3)
+	pass 
+
+
+func _on_Timer_timeout():
+	$Shh/CenterContainer/Label.visible = false
+	$Main/VBoxContainer/VBoxContainer/Pow.emitting = false
+	pass
