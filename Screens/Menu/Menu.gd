@@ -31,3 +31,14 @@ func _on_Name_text_changed(new_text):
 	Network.info.name = new_text
 	Data.data.username = new_text
 	Data.saveData()
+
+
+func _on_x_pressed():
+	Manager.changeScene("res://Screens/Menu/X.tscn")
+	pass # Replace with function body.
+
+
+func _on_Y_button_down():
+	$Main/VBoxContainer/Title.text = "Bruh stars"
+	$Main/VBoxContainer/Title/Y.visible = false
+	pass # Replace with function body.
