@@ -27,21 +27,21 @@ func playerDied(player:int, killer:int):
 		if Network.players.size() <= 1:
 			return
 		
+		yield(get_tree(), "idle_frame")
+		
 		var winner:int = -1
 		var passed = []
 		
 		for player in get_tree().get_nodes_in_group("Player"):
-			if int(player.name) in passed:
+			if passed.has(int(player.name)):
 				continue
 			if not player.dead:
 				if not winner == -1:
 					return
 				winner = int(player.name)
 				passed.append(int(player.name))
-				
 				for ally in Globals.currentGameInfo.players[int(player.name)].allies:
 					passed.append(ally)
-					
 					
 		rpc("endGame", winner)
 		
