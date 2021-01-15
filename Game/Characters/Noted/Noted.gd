@@ -20,6 +20,7 @@ func attack2():
 remotesync func boom():
 	
 	$Explosion/Animation.play("Boom")
+	$ExplosionSound.play()
 	
 	canMove += 1
 	

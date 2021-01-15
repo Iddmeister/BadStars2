@@ -10,6 +10,7 @@ extents = Vector2( 16.7879, 14.769 )
 
 [node name="CollisionPolygon2D" parent="MapArea" index="0"]
 scale = Vector2( 5.56, 5.64 )
+polygon = PoolVector2Array( 56.1151, -35.461, 37.4101, -51.0638, -37.4101, -52.4823, -54.6763, -36.8794, -54.6763, 34.0426, -37.4101, 51.0638, 33.0935, 51.0638, 54.6763, 29.7872 )
 
 [node name="Walls" type="Node2D" parent="." index="1"]
 scale = Vector2( 1.76529, 1.66342 )

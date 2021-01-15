@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/NotedKill_2.wav-73dfda0d4a973569830a81c3a3ba5218.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Noted/NotedKill_2.wav"
+dest_files=[ "res://.import/NotedKill_2.wav-73dfda0d4a973569830a81c3a3ba5218.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

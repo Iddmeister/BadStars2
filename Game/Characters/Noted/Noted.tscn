@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Noted/Noted.gd" type="Script" id=2]
 [ext_resource path="res://Game/Characters/Noted/NotedBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Characters/Noted/Boom.png" type="Texture" id=4]
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=5]
+[ext_resource path="res://Game/Characters/Noted/NotedWin_Sound.wav" type="AudioStream" id=6]
+[ext_resource path="res://Game/Characters/Noted/NotedDeath_Sound.wav" type="AudioStream" id=7]
+[ext_resource path="res://Game/Characters/Noted/NotedSpawn_sound.wav" type="AudioStream" id=8]
+[ext_resource path="res://Game/Characters/Noted/Explosion.wav" type="AudioStream" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.7518
@@ -131,7 +135,7 @@ maxAmmo = 2
 attack2AmmoCost = 2
 ability1Cooldown = 5.0
 ability2Cooldown = 30.0
-killLines = PoolStringArray( "res://Game/Characters/Clot/ClotKill1.wav", "res://Game/Characters/Clot/ClotKill2.wav", "res://Game/Characters/Clot/ClotKill3.wav", "res://Game/Characters/Clot/ClotKill4.wav", "res://Game/Characters/Clot/ClotKill5.wav" )
+killLines = PoolStringArray( "res://Game/Characters/Noted/NotedKill_1.wav", "res://Game/Characters/Noted/NotedKill_2.wav" )
 Bullet = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -173,6 +177,21 @@ custom_styles/panel = SubResource( 6 )
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
 custom_styles/panel = SubResource( 7 )
 
+[node name="Death" parent="." index="6"]
+stream = ExtResource( 7 )
+volume_db = -20.0
+
+[node name="Spawn" parent="." index="7"]
+stream = ExtResource( 8 )
+volume_db = -20.0
+
+[node name="Win" parent="." index="8"]
+stream = ExtResource( 6 )
+volume_db = -20.0
+
+[node name="Kill" parent="." index="9"]
+volume_db = -20.0
+
 [node name="Animation" type="AnimationPlayer" parent="." index="12"]
 anims/Ascension = SubResource( 8 )
 
@@ -189,3 +208,7 @@ shape = SubResource( 9 )
 [node name="Animation" type="AnimationPlayer" parent="Explosion" index="2"]
 playback_speed = 3.0
 anims/Boom = SubResource( 10 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="14"]
+stream = ExtResource( 9 )
+pitch_scale = 2.0

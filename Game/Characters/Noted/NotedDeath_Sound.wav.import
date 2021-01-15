@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/NotedDeath_Sound.wav-c8c5e39dcdd9aa9fa78b2a7463269767.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Noted/NotedDeath_Sound.wav"
+dest_files=[ "res://.import/NotedDeath_Sound.wav-c8c5e39dcdd9aa9fa78b2a7463269767.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
