@@ -118,40 +118,59 @@ margin_bottom = 170.0
 rect_min_size = Vector2( 100, 50 )
 text = "Quit"
 
-[node name="Play" type="CenterContainer" parent="."]
+[node name="Play" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Play"]
+[node name="Back" type="Button" parent="Play"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 100, 40 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Play/CenterContainer"]
 margin_left = 362.0
 margin_top = 172.0
 margin_right = 662.0
 margin_bottom = 428.0
 custom_constants/separation = 20
 
-[node name="Name" type="LineEdit" parent="Play/VBoxContainer"]
+[node name="Name" type="LineEdit" parent="Play/CenterContainer/VBoxContainer"]
 margin_right = 300.0
 margin_bottom = 48.0
 text = "EpicDude54"
 max_length = 14
 placeholder_text = "Username"
 
-[node name="Host" type="Button" parent="Play/VBoxContainer"]
+[node name="Host" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 margin_top = 68.0
 margin_right = 300.0
 margin_bottom = 118.0
 rect_min_size = Vector2( 200, 50 )
 text = "Host Game"
 
-[node name="Join" type="Button" parent="Play/VBoxContainer"]
+[node name="Join" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 margin_top = 138.0
 margin_right = 300.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 200, 50 )
 text = "Join Game"
 
-[node name="IP" type="LineEdit" parent="Play/VBoxContainer"]
+[node name="IP" type="LineEdit" parent="Play/CenterContainer/VBoxContainer"]
 margin_top = 208.0
 margin_right = 300.0
 margin_bottom = 256.0
@@ -181,6 +200,7 @@ text = "Loser"
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="text_changed" from="Play/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
-[connection signal="pressed" from="Play/VBoxContainer/Host" to="." method="_on_Host_pressed"]
-[connection signal="pressed" from="Play/VBoxContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="Play/Back" to="." method="_on_Back_pressed"]
+[connection signal="text_changed" from="Play/CenterContainer/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
+[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Host" to="." method="_on_Host_pressed"]
+[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Join" to="." method="_on_Join_pressed"]

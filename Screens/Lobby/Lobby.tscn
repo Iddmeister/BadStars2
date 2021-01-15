@@ -184,6 +184,17 @@ text = "Ready"
 
 [node name="CharacterSelect" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="Leave" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -30.0
+margin_right = 100.0
+rect_min_size = Vector2( 100, 30 )
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="toggled" from="Main/Options/VBoxContainer/IPStuff/UPNP" to="." method="_on_UPNP_toggled"]
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Mode" to="." method="_on_Mode_item_selected"]
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Map" to="." method="_on_Map_item_selected"]
@@ -191,3 +202,4 @@ visible = false
 [connection signal="pressed" from="Main/Options/Self/Character/Change" to="." method="_on_Change_pressed"]
 [connection signal="toggled" from="Main/Options/Self/Ready" to="." method="_on_Ready_toggled"]
 [connection signal="characterSelected" from="CharacterSelect" to="." method="_on_CharacterSelect_characterSelected"]
+[connection signal="pressed" from="Leave" to="." method="_on_Leave_pressed"]

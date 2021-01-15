@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	$Play/VBoxContainer/Name.text = Network.info.name
+	$Play/CenterContainer/VBoxContainer/Name.text = Network.info.name
 	pass
 
 
@@ -22,7 +22,7 @@ func _on_Host_pressed():
 		Manager.changeScene("res://Screens/Lobby/Lobby.tscn")
 
 func _on_Join_pressed():
-	var err = Network.joinGame($Play/VBoxContainer/IP.text)
+	var err = Network.joinGame($Play/CenterContainer/VBoxContainer/IP.text)
 	if err == OK:
 		yield(Network, "recievedPlayerInfo")
 		Manager.changeScene("res://Screens/Lobby/Lobby.tscn")
@@ -47,3 +47,8 @@ func _on_Y_button_down():
 
 func _on_Options_pressed():
 	Manager.changeScene("res://Screens/Options/Options.tscn")
+
+
+func _on_Back_pressed():
+	$Play.hide()
+	$Main.show()

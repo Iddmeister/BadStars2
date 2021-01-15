@@ -7,10 +7,10 @@ var data = {
 	"controls":
 		{
 		
-			"attack1":InputMap.get_action_list("attack1")[0],
-			"attack2":InputMap.get_action_list("attack2")[0],
-			"ability1":InputMap.get_action_list("ability1")[0],
-			"ability2":InputMap.get_action_list("ability2")[0],
+			"attack1":{"type":"mouse", "button_index":1},
+			"attack2":{"type":"mouse", "button_index":2},
+			"ability1":{"type":"key", "scancode":81},
+			"ability2":{"type":"key", "scancode":69},
 		
 		}
 	
@@ -22,6 +22,22 @@ var savePath:String = "user://BadStars2Data.save"
 func _ready():
 	retrieveData()
 	Network.info.name = data.username
+	
+	updateControls()
+	
+func updateControls():
+	
+	InputMap.action_erase_events("attack1")
+	InputMap.action_add_event("attack1", getInputEventFromDict(data.controls.attack1))
+
+	InputMap.action_erase_events("attack2")
+	InputMap.action_add_event("attack2", getInputEventFromDict(data.controls.attack2))
+
+	InputMap.action_erase_events("ability1")
+	InputMap.action_add_event("ability1", getInputEventFromDict(data.controls.ability1))
+
+	InputMap.action_erase_events("ability2")
+	InputMap.action_add_event("ability2", getInputEventFromDict(data.controls.ability2))
 
 func saveData():
 	
@@ -48,3 +64,19 @@ func retrieveData():
 		data[key] = file.get_value("data", key, data[key])
 	
 	pass
+	
+func getInputEventFromDict(dict:Dictionary):
+	
+	var event:InputEvent
+	
+	if dict.type == "mouse":
+		event = InputEventMouseButton.new()
+		event.button_index = dict.button_index
+	elif dict.type == "key":
+		event = InputEventKey.new()
+		event.scancode = dict.scancode
+		
+	return event
+	
+	pass
+	

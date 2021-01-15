@@ -216,3 +216,7 @@ func _on_Teams_toggled(button_pressed):
 
 func _on_Map_item_selected(index):
 	pass # Replace with function body.
+
+
+func _on_Leave_pressed():
+	Network.leaveGame()

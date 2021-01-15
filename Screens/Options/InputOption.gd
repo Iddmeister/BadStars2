@@ -26,6 +26,8 @@ func _input(event):
 		disabled = false
 	
 	pass
+	
+
 
 
 func _on_InputOption_button_up():
