@@ -160,34 +160,6 @@ placeholder_text = "IP Address"
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Shh" type="VBoxContainer" parent="."]
-margin_left = 3.0
-margin_top = 552.0
-margin_right = 384.0
-margin_bottom = 598.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="Shh"]
-margin_top = 23.0
-margin_right = 381.0
-margin_bottom = 23.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Shh/CenterContainer"]
-visible = false
-margin_top = -19.0
-margin_right = 381.0
-margin_bottom = 19.0
-custom_colors/font_color = Color( 1, 0.796078, 0, 1 )
-text = "You don't deserve Options"
-align = 1
-valign = 1
-
 [node name="QuitMessage" type="Panel" parent="."]
 visible = false
 anchor_right = 1.0
