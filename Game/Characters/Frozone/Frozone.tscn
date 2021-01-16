@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Frozone/Frozone.png" type="Texture" id=2]
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=3]
 [ext_resource path="res://Game/Characters/Frozone/Frozone.gd" type="Script" id=4]
+[ext_resource path="res://Game/Characters/Frozone/Icicle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Characters/Frozone/SlippyIcicle.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 21.4361
@@ -45,6 +47,10 @@ script = ExtResource( 4 )
 maxHealth = 130
 maxMoveSpeed = 300.0
 acceleration = 0.05
+maxAmmo = 4
+attack2AmmoCost = 2
+Icicle = ExtResource( 5 )
+SlipperyIcicle = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 4 )

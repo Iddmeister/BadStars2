@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Parent/Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Effects/Slippery/Slippery.gd" type="Script" id=2]
+
+[node name="Slippery" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="." index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -28.5
+margin_top = -7.0
+margin_right = 28.5
+margin_bottom = 7.0
+text = "SLIPPERY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
