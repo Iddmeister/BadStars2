@@ -31,6 +31,7 @@ var loaded:bool = false
 var dead:bool = false
 var canMove:int = 0
 var invincible:int = 0
+var slippery:int = 0
 
 var team:int = 0
 
@@ -224,6 +225,8 @@ remotesync func hit(damage:int, id:int):
 	
 	if invincible > 0:
 		return
+		
+	damage = damageTaken(damage)
 	
 	health = max(health-damage, 0)
 	
@@ -235,6 +238,9 @@ remotesync func hit(damage:int, id:int):
 	updateHealth()
 	
 	pass
+	
+func damageTaken(damage:int):
+	return damage
 	
 func die(id:int):
 	dead = true
