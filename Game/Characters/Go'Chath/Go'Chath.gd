@@ -45,7 +45,7 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType:int
 	
 func attack1():
 	
-		rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 0)
+	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 0)
 	
 func attack2():
 	
@@ -62,9 +62,10 @@ func ability2():
 	pass
 	
 remotesync func knockUpArea(dir:float):
-	
+
 	$KnockUpArea.global_rotation = dir
 	if is_network_master():
+		yield(get_tree(), "physics_frame")
 		for body in $KnockUpArea.get_overlapping_bodies():
 			if not body.is_in_group("Ally"+String(get_network_master())):
 				body.rpc("knockUp", knockUpTime)
