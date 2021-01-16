@@ -142,6 +142,12 @@ func _on_Change_pressed():
 
 
 func _on_Ready_toggled(button_pressed):
+	
+	if is_network_master():
+		if not Network.hasPing >= Network.players.size():
+			$Main/Options/Self/Ready.pressed = false
+			return
+			
 	if not character == "none":
 		rpc("readyUp", get_tree().get_network_unique_id(), button_pressed)
 	else:

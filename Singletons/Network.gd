@@ -28,6 +28,8 @@ var upnpActive = false
 var clock:float = 0
 var inGame:bool = false
 
+var hasPing:int = 1
+
 remotesync func setClock(time:float):
 	
 	clock = time
@@ -76,7 +78,7 @@ func getAveragePing(id:int):
 	
 	var total:int
 	
-	for i in range(10):
+	for i in range(30):
 		total += yield(measurePing(id), "completed")
 		
 	return ceil(float(total)/10)
@@ -114,6 +116,7 @@ remotesync func addPlayer(id:int, i:Dictionary):
 	
 	if is_network_master():
 		players[id].ping = yield(getAveragePing(id), "completed")
+		hasPing += 1
 		rpc_id(id, "setClock", clock+((float(players[id].ping)/2)/1000))
 	
 	pass
@@ -175,6 +178,7 @@ func cleanup():
 	info.character = "none"
 	inGame = true
 	clock = 0
+	hasPing = 1
 	
 	pass
 	
