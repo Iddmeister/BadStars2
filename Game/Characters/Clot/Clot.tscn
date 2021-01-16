@@ -15,16 +15,16 @@
 [ext_resource path="res://Game/Characters/Clot/ClotLaserIcon.png" type="Texture" id=13]
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=14]
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 21.7518
 height = 30.7029
 
-[sub_resource type="ShaderMaterial" id=18]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 14 )
 shader_param/enabled = false
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=3]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -37,7 +37,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=4]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -50,7 +50,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 313.561, 10 )
 
 [node name="Clot" instance=ExtResource( 1 )]
@@ -67,10 +67,10 @@ BigBullet = ExtResource( 5 )
 LifeSteal = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 8 )
+shape = SubResource( 1 )
 
 [node name="Graphics" parent="." index="1"]
-material = SubResource( 18 )
+material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 use_parent_material = true
@@ -78,11 +78,11 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 19 )
+custom_styles/panel = SubResource( 3 )
 icon = ExtResource( 12 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 20 )
+custom_styles/panel = SubResource( 4 )
 icon = ExtResource( 13 )
 
 [node name="Tag" parent="." index="5"]
@@ -102,7 +102,7 @@ collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" index="0"]
 position = Vector2( 312, 0 )
-shape = SubResource( 17 )
+shape = SubResource( 5 )
 
 [node name="Line" type="Line2D" parent="Laser" index="1"]
 visible = false
