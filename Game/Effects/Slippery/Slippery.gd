@@ -6,3 +6,4 @@ func start(info:Dictionary, player:Character):
 	
 func end(info:Dictionary, player:Character):
 	player.slippery -= 1
+	queue_free()
