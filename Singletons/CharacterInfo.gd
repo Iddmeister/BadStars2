@@ -16,12 +16,7 @@ var characters:Dictionary = {
 		"ability2":"Shoots a Big Laser",
 		
 	}, "scene":"res://Game/Characters/Clot/Clot.tscn"},
-#	"Frozone":{"icon":"res://Misc/Frozone.png"},
-#	"Karl Marx":{"icon":"res://Misc/KarlMarx.png"},
-#	"Will Smith":{"icon":"res://Misc/WillSmith.png"}
 	
-<<<<<<< Updated upstream
-=======
 	"Frozone":
 	{
 	  "icon":"res://Game/Characters/Frozone/Frozone.png",
@@ -47,7 +42,6 @@ var characters:Dictionary = {
 		  "ability3":"OMNOMNOM",
 		}, 
 	 },
->>>>>>> Stashed changes
 	
 }
 }
