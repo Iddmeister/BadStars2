@@ -29,37 +29,45 @@ func playerDied(player:int, killer:int):
 		
 		yield(get_tree(), "idle_frame")
 		
-		var winner:int = -1
-		var passed = []
+		var players = Network.players.keys()
 		
-		for player in get_tree().get_nodes_in_group("Player"):
-			if passed.has(int(player.name)):
+		var winners = []
+		
+		for player in players:
+			
+			var scene = $Players.get_node(String(player))
+			
+			if scene.dead:
 				continue
-			if not player.dead:
-				if not winner == -1:
-					return
-				winner = int(player.name)
-				passed.append(int(player.name))
-				for ally in Globals.currentGameInfo.players[int(player.name)].allies:
-					passed.append(ally)
-					
-		rpc("endGame", winner)
+				
+			winners.append(player)
+			
+		var team:int = -1
+			
+		for winner in winners:
+			
+			if team == -1:
+				team = $Players.get_node(String(winner)).team
+				continue
+				
+			if $Players.get_node(String(winner)).team != team:
+				return
+			
+			
+		
+		rpc("endGame", winners)
 		
 	pass
 	
-remotesync func endGame(winner:int):
+remotesync func endGame(winnerIDs:Array):
 	
 	var winners = []
-	winners.append(Network.players[winner].name)
-	for ally in Globals.currentGameInfo.players[winner].allies:
-		winners.append(Network.players[ally].name)
+	
+	for winner in winnerIDs:
+		winners.append(Network.players[winner].name)
 		
-	if $Players.has_node(String(winner)):
-		$Players.get_node(String(winner)).win()
-		
-	for ally in Globals.currentGameInfo.players[winner].allies:
-		if $Players.has_node(String(ally)):
-			$Players.get_node(String(ally))
+		if $Players.has_node(String(winner)):
+			$Players.get_node(String(winner)).win()
 		
 	var message = ""
 	

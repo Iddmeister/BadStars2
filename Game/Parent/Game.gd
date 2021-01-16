@@ -33,14 +33,15 @@ func _process(delta):
 
 func spawnPlayers(players:Dictionary, points:Array):
 	
+	randomize()
 	var spawned = {}
+	points.shuffle()
 	
 	for player in players.keys():
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
 		$Players.add_child(character)
-		points.shuffle()
 		var spawnedWithAlly = false
 		for ally in players[player].allies:
 			if spawned.has(ally):
@@ -49,13 +50,13 @@ func spawnPlayers(players:Dictionary, points:Array):
 				break
 		if not spawnedWithAlly:
 			character.global_position = points[0].global_position
+			spawned[player] = character
 			
 		points.remove(0)
 		character.initialize(player, players[player].allies)
 		character.connect("hit", self, "playerDamaged")
 		character.connect("died", self, "playerDied")
 		character.setPos(character.global_position)
-		spawned[player] = character
 		
 	pass
 	

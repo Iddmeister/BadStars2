@@ -4,11 +4,15 @@ export var speed:float = 600
 
 var masterPos:Vector2
 
+var syncing:bool = false
+
 func initialze(id:int):
 	set_network_master(id)
 	
 	if is_network_master():
 		$Camera.current = true
+		yield(get_tree().create_timer(1), "timeout")
+		syncing = true
 	else:
 		modulate.a = 0.5
 
@@ -33,7 +37,8 @@ func _physics_process(delta):
 	
 		global_position += getMoveDirection()*speed*delta
 		
-		rpc_unreliable("updatePos", global_position)
+		if syncing:
+			rpc_unreliable("updatePos", global_position)
 		
 	else:
 		
