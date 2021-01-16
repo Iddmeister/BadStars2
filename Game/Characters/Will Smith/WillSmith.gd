@@ -4,9 +4,9 @@ export var Ball:PackedScene
 export var numOfBalls:int = 3
 export var angle:float = 30
 export var MagicCarpet:PackedScene
-export var lampSpeed:float = 10000
-export var lampDamage:int = 50
 export var Dust:PackedScene
+export var lampHeals:int = 50
+export var lampTime:float = 3
 
 func attack1():
 	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock)
@@ -59,13 +59,13 @@ remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
 	pass
 	
 func ability2():
-	rpc("lampMode", true, getAimDirection())
-	knock(Vector2(10000, 0).rotated(getAimDirection()))
-	yield(get_tree().create_timer(1), "timeout")
-	rpc("lampMode", false, 0)
+	rpc("lampMode", true)
+	rpc("heal", lampHeals)
+	yield(get_tree().create_timer(lampTime), "timeout")
+	rpc("lampMode", false)
 	pass
 	
-remotesync func lampMode(d:bool, dir:float):
+remotesync func lampMode(d:bool):
 	
 	enableAbilities(not d)
 	enableAttacks(not d)
@@ -75,17 +75,13 @@ remotesync func lampMode(d:bool, dir:float):
 	
 	if d:
 		invincible += 1
+		canMove += 1
 	else:
 		invincible -= 1
-	global_rotation = dir
+		canMove -= 1
 	$LampCollision.disabled = not d
 	$Graphics/Lamp.visible = d
 	$Graphics/Sprite.visible = not d
-	$LampDamage/CollisionShape2D.disabled = not d
 	
 
 
-func _on_LampDamage_body_entered(body):
-	if get_tree().is_network_server():
-		body.rpc("hit", lampDamage, get_network_master())
-	pass
