@@ -32,7 +32,13 @@ func collided(body:PhysicsBody2D):
 					
 				for effect in effects:
 					
-					body.rpc("addEffect", Manager.generateUniqueID(), effect.type, effect.time, effect.info)
+					if effect.has("info"):
+					
+						body.rpc("addEffect", Manager.generateUniqueID(), effect.type, effect.time, effect.info)
+					
+					else:
+						
+						body.rpc("addEffect", Manager.generateUniqueID(), effect.type, effect.time, {})
 					
 		if not body.is_in_group("Player"):
 			hitTerrain()
