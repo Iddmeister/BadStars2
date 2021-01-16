@@ -49,5 +49,19 @@ var characters:Dictionary = {
 		}, 
 	 },
 	
+	"Frozone":
+	{
+	  "icon":"res://Game/Characters/Frozone/Frozone.png",
+	  "scene":"res://Game/Characters/Frozone/Frozone.tscn",
+	  "info":
+		{
+		  "description":"Honey, where's my supersuit",
+		  "attack1":"Throws Icicle",
+		  "attack2":"Slippery Icicle",
+		  "ability1":"Shits out ice",
+		  "ability2":"Ice Wall",
+		}, 
+	 },
+	
 }
 

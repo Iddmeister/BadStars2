@@ -4,7 +4,8 @@ extends Node
 #childed to a character
 var effects:Dictionary = {
 	
-	"speed":preload("res://Game/Effects/Speed/Speed.tscn")
+	"speed":preload("res://Game/Effects/Speed/Speed.tscn"),
+	"silence":preload("res://Game/Effects/Silence/Silence.tscn")
 	
 }
 var version:String = "0.1.1"
