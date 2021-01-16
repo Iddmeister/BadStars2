@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icon1.png-32d1f4abf5c97740dc46e313c2ffcf2c.stex"
+path="res://.import/JAH.png-0f21704d3839fc3af991d2bf74989af5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Characters/Will Smith/Icon1.png"
-dest_files=[ "res://.import/Icon1.png-32d1f4abf5c97740dc46e313c2ffcf2c.stex" ]
+source_file="res://Game/Characters/Will Smith/JAH.png"
+dest_files=[ "res://.import/JAH.png-0f21704d3839fc3af991d2bf74989af5.stex" ]
 
 [params]
 
