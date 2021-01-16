@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Noted/Noted.gd" type="Script" id=2]
@@ -43,7 +43,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/BrokenHalo.png-32311a6f202bc7eee81f20705d7cc9e4.stex"
+
+[sub_resource type="StyleBoxFlat" id=8]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -56,7 +59,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="StreamTexture" id=12]
+load_path = "res://.import/BrokenDemon.png-cc4aec4d0e72d3a412a2fd85e16f1486.stex"
+
+[sub_resource type="Animation" id=9]
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/Sprite:scale")
@@ -107,11 +113,10 @@ tracks/3/keys = {
 "values": [ 30.7029, 83.013, 83.013, 30.703 ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=10]
 radius = 141.495
 
-[sub_resource type="Animation" id=10]
-resource_name = "Boom"
+[sub_resource type="Animation" id=11]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -171,11 +176,23 @@ orbit_velocity_curve = SubResource( 4 )
 scale_amount = 2.0
 color_ramp = SubResource( 5 )
 
+[node name="Main" parent="UI" index="0"]
+margin_left = 11.2599
+margin_right = -8.74011
+
+[node name="CenterContainer2" parent="UI/Main" index="1"]
+margin_left = 2.51984
+margin_top = -80.2599
+margin_right = 2.51984
+margin_bottom = 16.7401
+
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
 custom_styles/panel = SubResource( 6 )
+icon = SubResource( 7 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
+icon = SubResource( 12 )
 
 [node name="Death" parent="." index="6"]
 stream = ExtResource( 7 )
@@ -193,7 +210,7 @@ volume_db = -20.0
 volume_db = -20.0
 
 [node name="Animation" type="AnimationPlayer" parent="." index="12"]
-anims/Ascension = SubResource( 8 )
+anims/Ascension = SubResource( 9 )
 
 [node name="Explosion" type="Area2D" parent="." index="13"]
 collision_layer = 32
@@ -203,11 +220,11 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion" index="1"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="Animation" type="AnimationPlayer" parent="Explosion" index="2"]
 playback_speed = 3.0
-anims/Boom = SubResource( 10 )
+anims/Boom = SubResource( 11 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = ExtResource( 9 )
