@@ -2,7 +2,7 @@ extends SimpleProjectile
 
 class_name StraightProjectile
 
-export var speed:float = 300
+export var speed:float = 500
 export var syncSpeed:float = 0.3
 
 

@@ -8,7 +8,7 @@ export var numOfBullets:int = 4
 export var Bullet:PackedScene
 export var bulletSpacing:float = 5
 
-remotesync func shoot(id:int, pos:Vector2, dir:float, time:float):
+remotesync func shootsilencebullet(id:int, pos:Vector2, dir:float, time:float):
 
 
 	for num in range(numOfBullets):
@@ -20,18 +20,16 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float):
 
 		var spawnPos = pos+Vector2(0, offset).rotated(getAimDirection())
 
-		var b:Projectile = Bullet.instance()
+		var b:Projectile = Silence.instance()
 		Manager.loose.add_child(b)
 		b.initialize(id, spawnPos, dir, time)
 
 	pass
 	
-func attack2():
-	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 1)
 	
 func ability1():
 	
-	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 2)
+	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock)
 	
 func ability2():
 	rpc("shootLaser", getAimDirection())

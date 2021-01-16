@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Projectiles/StraightProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Go'Chath/silence.png" type="Texture" id=2]
+
+[node name="StraightProjectile" instance=ExtResource( 1 )]
+effects = [ {
+"type": "silence"
+} ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+position = Vector2( 76, 16 )
+scale = Vector2( 0.445833, 0.525926 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+position = Vector2( -1.30001, -1.60001 )
+scale = Vector2( 1.00781, 0.994792 )
+polygon = PoolVector2Array( 1.28993, 1.60838, 1.80156, 76.0901, 97.5961, 152.316, 130.759, 190.931, 130.313, -192.458, 96.6881, -152.385, 1.53799, -76.8 )
