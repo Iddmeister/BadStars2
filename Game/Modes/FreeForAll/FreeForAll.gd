@@ -51,6 +51,13 @@ remotesync func endGame(winner:int):
 	for ally in Globals.currentGameInfo.players[winner].allies:
 		winners.append(Network.players[ally].name)
 		
+	if $Players.has_node(String(winner)):
+		$Players.get_node(String(winner)).win()
+		
+	for ally in Globals.currentGameInfo.players[winner].allies:
+		if $Players.has_node(String(ally)):
+			$Players.get_node(String(ally))
+		
 	var message = ""
 	
 	for n in range(winners.size()):

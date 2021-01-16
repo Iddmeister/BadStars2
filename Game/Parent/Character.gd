@@ -29,6 +29,7 @@ onready var ability2Charge:float = 0
 
 var loaded:bool = false
 var dead:bool = false
+var canMove:bool = true
 
 var team:int = 0
 
@@ -62,9 +63,15 @@ var timeSinceUpdate:float = 0
 var masterPos:Vector2
 var syncSpeed:float = 0.5
 
+export var killLines:PoolStringArray = []
+var killStreams:Array
+
 signal lagging()
 
 func _ready():
+	
+	for line in range(killLines.size()):
+		killStreams.append(load(killLines[line]))
 	
 	for a in range(maxAmmo):
 		
@@ -86,17 +93,15 @@ func initialize(id:int, allies:Array=[]):
 		$Tag.show()
 		$Tag/VBoxContainer/Name.text = Network.players[id].name
 		
-	if is_network_master():
-		set_collision_layer_bit(0, true)
-		add_to_group("Ally")
-	elif get_tree().get_network_unique_id() in allies:
-		set_collision_layer_bit(0, true)
+	add_to_group("Ally"+String(get_network_master()))
+	
+	for ally in allies:
+		add_to_group("Ally"+String(ally))
+		
+	if get_tree().get_network_unique_id() in allies:
 		$Tag/VBoxContainer/Health.modulate = Color(0.109804, 1, 0)
-		add_to_group("Ally")
-	else:
-		set_collision_layer_bit(1, true)
+	elif not is_network_master():
 		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
-		add_to_group("Enemy")
 		
 	currentCharacter = Globals.currentGameInfo.players[id].character
 
@@ -104,6 +109,7 @@ func initialize(id:int, allies:Array=[]):
 # warning-ignore:function_conflicts_variable
 func loaded():
 	loaded = true
+	$Spawn.play()
 
 func _process(delta):
 	if loaded:
@@ -142,19 +148,12 @@ func getMoveDirection() -> Vector2:
 		
 	return dir.normalized()
 	
-func getTime():
-	return String(OS.get_system_time_msecs())
-	pass
-	
-func getTimeInt():
-	return OS.get_system_time_msecs()
-	pass
 
 func movement(delta:float):
 	
 	var dir:Vector2 = getMoveDirection()
 	
-	if Globals.inputBusy:
+	if Globals.inputBusy or not canMove:
 		dir = Vector2(0, 0)
 	
 	moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
@@ -236,7 +235,16 @@ func die(id:int):
 	$UI/Main.hide()
 	clearEffects()
 	spawnGhost()
+	$Death.play()
 	pass
+	
+func kill():
+	killStreams.shuffle()
+	$Kill.stream = killStreams[0]
+	$Kill.play()
+	
+func win():
+	$Win.play()
 	
 func spawnGhost():
 	

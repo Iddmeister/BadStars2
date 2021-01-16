@@ -17,9 +17,8 @@ polygon = PoolVector2Array( -457.818, -677.171, 1692.89, -685.646, 1695.01, -465
 [node name="Walls" type="Node2D" parent="." index="1"]
 
 [node name="Wall" type="StaticBody2D" parent="Walls" index="0"]
-position = Vector2( -413.191, 150.444 )
-scale = Vector2( 1, 26 )
-collision_layer = 4
+scale = Vector2( 1, 20 )
+collision_layer = 2
 collision_mask = 0
 __meta__ = {
 "_edit_group_": true
@@ -34,9 +33,9 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Wall2" type="StaticBody2D" parent="Walls" index="1"]
-position = Vector2( 1650.81, 150.444 )
-scale = Vector2( 1, 26 )
-collision_layer = 4
+position = Vector2( 1280, 0 )
+scale = Vector2( 1, 20 )
+collision_layer = 2
 collision_mask = 0
 __meta__ = {
 "_edit_group_": true
@@ -53,8 +52,8 @@ shape = SubResource( 1 )
 [node name="Wall3" type="StaticBody2D" parent="Walls" index="2"]
 position = Vector2( 633.643, 949.147 )
 rotation = 1.5708
-scale = Vector2( 1, 33 )
-collision_layer = 4
+scale = Vector2( 1, 20 )
+collision_layer = 2
 collision_mask = 0
 __meta__ = {
 "_edit_group_": true
@@ -71,8 +70,8 @@ shape = SubResource( 1 )
 [node name="Wall4" type="StaticBody2D" parent="Walls" index="3"]
 position = Vector2( 633.643, -641.903 )
 rotation = 1.5708
-scale = Vector2( 1, 33 )
-collision_layer = 4
+scale = Vector2( 1, 20 )
+collision_layer = 2
 collision_mask = 0
 __meta__ = {
 "_edit_group_": true

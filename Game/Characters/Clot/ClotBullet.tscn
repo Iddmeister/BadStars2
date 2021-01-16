@@ -8,7 +8,7 @@ radius = 9.937
 height = 30.094
 
 [node name="ClotBullet" instance=ExtResource( 1 )]
-maxDistance = 600.0
+maxDistance = 2000.0
 damage = 15
 collideWithEnemies = true
 speed = 1000.0
