@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Projectiles/StraightProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Go'Chath/Vorpal Spikes.png" type="Texture" id=2]
+
+[node name="StraightProjectile" instance=ExtResource( 1 )]
+damage = 25
+collideWithEnemies = true
+speed = 700.0
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+scale = Vector2( 0.2, 2 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, 100 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+position = Vector2( -4.48985, 65.1121 )
+scale = Vector2( 0.2, 2 )
+polygon = PoolVector2Array( -97.5507, -72.556, 102.449, -60.556, 22.4493, -52.556, 262.449, -48.556, 222.449, -40.556, 502.449, -28.556, -3.80008, -22.25, 62.4493, -28.556, -257.551, -28.556, -125.311, -39, -497.551, -36.556 )
