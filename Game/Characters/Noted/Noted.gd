@@ -28,7 +28,7 @@ remotesync func boom():
 		for body in $Explosion.get_overlapping_bodies():
 			if not body.is_in_group("Ally"+String(get_network_master())):
 				body.rpc("hit", 100000, get_network_master())
-		#yield(get_tree().create_timer(0.5), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
 		rpc("hit", 100000, get_network_master())
 				
 	
@@ -63,7 +63,7 @@ remotesync func questionMark():
 	updateHealth()
 	yield(get_tree().create_timer(1), "timeout")
 	maxHealth -= 1000
-	health -= 1000
+	health = maxHealth
 	$Graphics/FUN.emitting = false
 	updateHealth()
 	pass
