@@ -296,4 +296,6 @@ speed_scale = 2.0
 explosiveness = 0.7
 process_material = SubResource( 14 )
 texture = ExtResource( 6 )
+
+[node name="KnockTween" type="Tween" parent="."]
 [connection signal="timeout" from="DieTime" to="." method="destroy"]

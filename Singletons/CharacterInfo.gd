@@ -61,7 +61,19 @@ var characters:Dictionary = {
 		  "ability1":"Shits out ice",
 		  "ability2":"Ice Wall",
 		}, 
+	},
+		
+	"Go'Chath":
+	{
+	  "icon":"res://Game/Characters/Go'Chath/Go'Chath.png",
+	  "scene":"res://Game/Characters/Go'Chath/Go'Chath.tscn",
+	  "info":
+		{
+		  "description":"OMNOMNOM",
+		  "attack1":"Vorpal Spikes",
+		  "attack2":"Silence",
+		  "ability1":"BONK",
+		  "ability2":"OMNOMNOM",
+		}, 
 	 },
-	
 }
-

@@ -32,6 +32,7 @@ var dead:bool = false
 var canMove:int = 0
 var invincible:int = 0
 var slippery:int = 0
+var knockedUp:float = false
 
 var team:int = 0
 
@@ -162,10 +163,11 @@ func movement(delta:float):
 	if Globals.inputBusy or canMove > 0:
 		dir = Vector2(0, 0)
 	
-	moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
-	
-	knockVelocity = knockVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
-	
+	if slippery < 1:
+		moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
+		
+		knockVelocity = knockVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
+		
 	move_and_slide(moveVelocity+knockVelocity+addedVelocity)
 	
 	rpc_unreliable("updateState", global_position)
@@ -279,6 +281,27 @@ func spawnGhost():
 master func knock(vel:Vector2):
 	
 	knockVelocity += vel
+	
+	pass
+	
+remotesync func knockUp(time:float):
+	if knockedUp:
+		return
+	knockedUp = true
+	canMove += 1
+	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(3, 2.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.start()
+	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 0, 180, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
+	$KnockTween.start()
+	yield($KnockTween, "tween_completed")
+	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(1, 1), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.start()
+	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 180, 360, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
+	$KnockTween.start()
+	yield($KnockTween, "tween_completed")
+	rotation_degrees = 0
+	canMove -= 1
+	knockedUp = false
 	
 	pass
 	

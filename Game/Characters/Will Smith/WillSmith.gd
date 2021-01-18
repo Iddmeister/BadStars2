@@ -74,10 +74,8 @@ remotesync func lampMode(d:bool):
 		$LampNoise.play()
 	
 	if d:
-		invincible += 1
 		canMove += 1
 	else:
-		invincible -= 1
 		canMove -= 1
 	$LampCollision.disabled = not d
 	$Graphics/Lamp.visible = d

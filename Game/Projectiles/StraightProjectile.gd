@@ -3,7 +3,7 @@ extends SimpleProjectile
 class_name StraightProjectile
 
 export var speed:float = 300
-export var syncSpeed:float = 0.3
+export var syncSpeed:float = 0.5
 
 
 func calcMasterPos() -> Vector2:
