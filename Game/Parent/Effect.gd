@@ -1,9 +1,6 @@
 extends Node2D
 
 class_name Effect
-
-func _ready():
-	pass
 	
 func start(info:Dictionary, player:Character):
 	pass

@@ -72,6 +72,7 @@ killLines = PoolStringArray( "res://Game/Characters/Will Smith/Yarr.wav" )
 Ball = ExtResource( 5 )
 MagicCarpet = ExtResource( 9 )
 Dust = ExtResource( 11 )
+lampTime = 1.6
 
 [node name="LampCollision" type="CollisionShape2D" parent="." index="0"]
 visible = false

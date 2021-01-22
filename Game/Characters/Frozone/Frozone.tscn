@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Frozone/Frozone.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Game/Characters/Frozone/Frozone.gd" type="Script" id=4]
 [ext_resource path="res://Game/Characters/Frozone/Icicle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Characters/Frozone/SlippyIcicle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Characters/Frozone/FreezeZone.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.4361
@@ -49,8 +50,10 @@ maxMoveSpeed = 300.0
 acceleration = 0.2
 maxAmmo = 4
 attack2AmmoCost = 2
+ability1Cooldown = 8.0
 Icicle = ExtResource( 5 )
 SlipperyIcicle = ExtResource( 6 )
+FreezeZone = ExtResource( 7 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -72,3 +75,7 @@ custom_styles/panel = SubResource( 4 )
 
 [node name="Tag" parent="." index="5"]
 position = Vector2( 0, 48 )
+
+[node name="FreezeZoneInterval" type="Timer" parent="." index="13"]
+wait_time = 0.1
+[connection signal="timeout" from="FreezeZoneInterval" to="." method="_on_FreezeZoneInterval_timeout"]

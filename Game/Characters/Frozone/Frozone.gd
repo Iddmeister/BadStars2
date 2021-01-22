@@ -2,6 +2,10 @@ extends Character
 
 export var Icicle:PackedScene
 export var SlipperyIcicle:PackedScene
+export var FreezeZone:PackedScene
+export var speedTime:float = 3
+export var speedIncrease:float = 300
+var timePassed:float = 0
 
 func attack1():
 	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 0)
@@ -9,6 +13,21 @@ func attack1():
 	
 func attack2():
 	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 1)
+	pass
+	
+func ability1():
+	$FreezeZoneInterval.start()
+	timePassed = 0
+	moveSpeed += speedIncrease
+	pass
+	
+remotesync func placeFreezeZone(pos:Vector2):
+	
+	var zone = FreezeZone.instance()
+	zone.initialize(get_network_master())
+	Manager.loose.add_child(zone)
+	zone.global_position = pos
+	
 	pass
 	
 	
@@ -30,3 +49,12 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	#$Shoot.play()
 	
 	pass
+
+
+func _on_FreezeZoneInterval_timeout():
+	rpc("placeFreezeZone", global_position)
+	timePassed += $FreezeZoneInterval.wait_time
+	if timePassed >= speedTime:
+		$FreezeZoneInterval.stop()
+		moveSpeed -= speedIncrease
+		

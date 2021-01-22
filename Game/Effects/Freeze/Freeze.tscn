@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Parent/Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Effects/EffectFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Game/Effects/Freeze/Freeze.gd" type="Script" id=3]
+
+[node name="Freeze" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="." index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -21.5
+margin_right = 66.0
+margin_bottom = 21.5
+custom_fonts/font = ExtResource( 2 )
+text = "FROZEN"
+__meta__ = {
+"_edit_use_anchors_": false
+}

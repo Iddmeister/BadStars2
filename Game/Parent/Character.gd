@@ -186,6 +186,8 @@ func updateEffects(delta:float):
 
 remotesync func addEffect(id:String, type:String, time:float, info:Dictionary={}):
 	
+	if activeEffects.has(id):
+		return
 	var effect = Globals.effects[type].instance()
 	$Effects.add_child(effect)
 	effect.start(info, self)
@@ -204,6 +206,15 @@ remotesync func clearEffects():
 	for effect in activeEffects.keys():
 		removeEffect(effect)
 	
+	pass
+	
+remotesync func cleanse():
+	canMove = 0
+	canUseAbility1 = 0
+	canUseAbility2 = 0
+	canUseAttack1 = 0
+	canUseAttack2 = 0
+	slippery = 0
 	pass
 	
 func syncState(delta:float):
@@ -262,9 +273,10 @@ func destroy():
 	queue_free()
 	
 func kill():
-	killStreams.shuffle()
-	$Kill.stream = killStreams[0]
-	$Kill.play()
+	if not killStreams.empty():
+		killStreams.shuffle()
+		$Kill.stream = killStreams[0]
+		$Kill.play()
 	
 func win():
 	$Win.play()
@@ -322,7 +334,7 @@ func updateHealth():
 	
 func actions(delta:float):
 	
-	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1 and canUseAttack1:
+	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1 and canUseAttack1 <= 0:
 		
 		attack1()
 		if not currentAmmoBox >= maxAmmo:
@@ -330,7 +342,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo()
 		
-	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2 and canUseAttack2:
+	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2 and canUseAttack2 <= 0:
 		
 		attack2()
 		if not currentAmmoBox >= maxAmmo:
@@ -338,12 +350,12 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo(attack2AmmoCost)
 		
-	if Input.is_action_pressed("ability1") and ability1Charge <= 0 and canUseAbility1:
+	if Input.is_action_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0:
 		ability1()
 		ability1Icon.use()
 		ability1Charge = ability1Cooldown
 		
-	if Input.is_action_pressed("ability2") and ability2Charge <= 0 and canUseAbility2:
+	if Input.is_action_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0:
 		ability2()
 		ability2Icon.use()
 		ability2Charge = ability2Cooldown
@@ -353,10 +365,10 @@ func actions(delta:float):
 var usingAttack1:bool = false
 var usingAttack2:bool = false
 
-var canUseAttack1:bool = true
-var canUseAttack2:bool = true
-var canUseAbility1:bool = true
-var canUseAbility2:bool = true
+var canUseAttack1:int = 0
+var canUseAttack2:int = 0
+var canUseAbility1:int = 0
+var canUseAbility2:int = 0
 	
 func attack1():
 	pass
@@ -428,12 +440,21 @@ func updateCooldowns(delta:float):
 	
 	pass
 	
+	
 remotesync func enableAbilities(d:bool):
-	canUseAbility1 = d
-	canUseAbility2 = d
+	if d:
+		canUseAbility1 -= 1
+		canUseAbility2 -= 1
+	else:
+		canUseAbility1 += 1
+		canUseAbility2 += 1
 	pass
 	
 remotesync func enableAttacks(d:bool):
-	canUseAttack1 = d
-	canUseAttack2 = d
+	if d:
+		canUseAttack1 -= 1
+		canUseAttack2 -= 1
+	else:
+		canUseAttack1 += 1
+		canUseAttack2 += 1
 	pass
