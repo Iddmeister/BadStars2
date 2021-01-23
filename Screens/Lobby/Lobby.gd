@@ -86,6 +86,7 @@ remote func updatePlayers(players:Dictionary):
 	
 func removePlayer(id:int):
 	$Main/Players.get_node(String(id)).queue_free()
+	playerOptions.erase(id)
 
 remotesync func readyUp(id:int, r:bool):
 	
@@ -97,7 +98,10 @@ remotesync func readyUp(id:int, r:bool):
 			for player in $Main/Players.get_children():
 				playerOptions[int(player.name)]["team"] = player.team
 				
+			var num:int = 0
 			for player in playerOptions.keys():
+				playerOptions[player].pos = num
+				num += 1
 				playerOptions[player].allies = []
 				if playerOptions[player].team == 0:
 					continue

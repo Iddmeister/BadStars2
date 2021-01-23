@@ -18,7 +18,7 @@ var lastPickedCharacter:String = "none"
 var inputBusy:bool = false
 
 enum {YES, NO, OPTIONAL}
-var deathCodes = {"OUT_OF_MAP":-10, "LAGGING":-9}
+var deathCodes = {"OUT_OF_MAP":-10, "LAGGING":-9, "SURRENDER":-8}
 
 var gameModes = {
 	
