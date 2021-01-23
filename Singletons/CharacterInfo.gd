@@ -72,8 +72,8 @@ var characters:Dictionary = {
 		  "description":"OMNOMNOM",
 		  "attack1":"Vorpal Spikes",
 		  "attack2":"Silence",
-		  "ability1":"BONK",
-		  "ability2":"OMNOMNOM",
+		  "ability1":"BIG",
+		  "ability2":"BONK",
 		}, 
 	 },
 }

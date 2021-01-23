@@ -127,6 +127,11 @@ func _process(delta):
 			puppetAnimations(delta)
 			
 		updateEffects(delta)
+		
+	updates(delta)
+		
+func updates(delta:float):
+	pass
 
 func _physics_process(delta):
 	
@@ -307,12 +312,12 @@ remotesync func knockUp(time:float):
 		return
 	knockedUp = true
 	canMove += 1
-	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(3, 2.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.interpolate_property($Graphics, "scale", null, scale+Vector2(2, 1.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 0, 180, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	yield($KnockTween, "tween_completed")
-	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(1, 1), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.interpolate_property($Graphics, "scale", null, scale-Vector2(2, 1.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 180, 360, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$KnockTween.start()
