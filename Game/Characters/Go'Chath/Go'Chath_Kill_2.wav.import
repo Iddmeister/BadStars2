@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Go'Chath_Kill_2.wav-77ce5901edd5be4523d8f0f2de6860e4.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Go'Chath/Go'Chath_Kill_2.wav"
+dest_files=[ "res://.import/Go'Chath_Kill_2.wav-77ce5901edd5be4523d8f0f2de6860e4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

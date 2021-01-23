@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Parent/Effect.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Effects/Silence/Silence.gd" type="Script" id=2]
+[ext_resource path="res://Game/Effects/EffectFont.tres" type="DynamicFont" id=3]
 
 [node name="Silence" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -11,10 +12,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -30.5
-margin_top = -7.0
-margin_right = 30.5
-margin_bottom = 7.0
+margin_left = -79.0
+margin_top = -21.5
+margin_right = 79.0
+margin_bottom = 21.5
+custom_fonts/font = ExtResource( 3 )
 text = "SILENCED"
 __meta__ = {
 "_edit_use_anchors_": false

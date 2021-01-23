@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Go'Chath/silence.tscn" type="PackedScene" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://Game/Characters/Go'Chath/Go'Chath.png" type="Texture" id=5]
 [ext_resource path="res://Game/Characters/Go'Chath/attack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Characters/Go'Chath/KnockUp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Death_Sound.wav" type="AudioStream" id=8]
+[ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Spawn_Sound.wav" type="AudioStream" id=9]
+[ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Win_Sound.wav" type="AudioStream" id=10]
+[ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Attack_Sound.wav" type="AudioStream" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -42,10 +46,10 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 124.546
+radius = 233.997
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 212.056
+radius = 301.458
 
 [node name="Go\'Chath" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -55,6 +59,7 @@ attack2AmmoCost = 3
 reloadRate = 3.0
 ability1Cooldown = 5.0
 ability2Cooldown = 12.0
+killLines = PoolStringArray( "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_1.wav", "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_2.wav", "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_3.wav" )
 BasicAttack = ExtResource( 6 )
 Silence = ExtResource( 2 )
 knockUpParticles = ExtResource( 7 )
@@ -84,11 +89,20 @@ custom_styles/panel = SubResource( 4 )
 [node name="Tag" parent="." index="6"]
 position = Vector2( 0, 38 )
 
+[node name="Death" parent="." index="7"]
+stream = ExtResource( 8 )
+
+[node name="Spawn" parent="." index="8"]
+stream = ExtResource( 9 )
+
+[node name="Win" parent="." index="9"]
+stream = ExtResource( 10 )
+
 [node name="KnockUpArea" type="Area2D" parent="." index="14"]
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KnockUpArea" index="0"]
-position = Vector2( 264.722, 0 )
+position = Vector2( 304.365, 0 )
 shape = SubResource( 5 )
 
 [node name="EatArea" type="Area2D" parent="." index="15"]
@@ -97,3 +111,6 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea" index="0"]
 position = Vector2( 0, -64.4272 )
 shape = SubResource( 6 )
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="." index="16"]
+stream = ExtResource( 11 )

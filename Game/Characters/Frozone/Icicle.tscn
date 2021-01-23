@@ -8,7 +8,7 @@ points = PoolVector2Array( -32, -12, -32, 12, 35, 0 )
 
 [node name="Icicle" instance=ExtResource( 1 )]
 maxDistance = 700.0
-damage = 10
+damage = 30
 collideWithEnemies = true
 speed = 700.0
 

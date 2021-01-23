@@ -11,6 +11,8 @@ export var knockUpParticles:PackedScene
 
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType:int=0):
 	
+	$Attack.play()
+	
 	var bullet:PackedScene
 	var multiple:bool = true
 	

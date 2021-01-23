@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Spawn.wav-666a1ab05bb59f7b8c3865318b0e250f.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Frozone/Spawn.wav"
+dest_files=[ "res://.import/Spawn.wav-666a1ab05bb59f7b8c3865318b0e250f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
