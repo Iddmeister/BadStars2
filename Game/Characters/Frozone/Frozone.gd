@@ -5,6 +5,7 @@ export var SlipperyIcicle:PackedScene
 export var FreezeZone:PackedScene
 export var speedTime:float = 3
 export var speedIncrease:float = 300
+export var IceWall:PackedScene
 var timePassed:float = 0
 
 func attack1():
@@ -19,6 +20,20 @@ func ability1():
 	$FreezeZoneInterval.start()
 	timePassed = 0
 	moveSpeed += speedIncrease
+	pass
+	
+func ability2():
+	var offset = Vector2(100, 0).rotated(getAimDirection())
+	rpc("placeWall", global_position+offset, getAimDirection(), Network.clock)
+	
+remotesync func placeWall(pos:Vector2, rot:float, startTime:float):
+	
+	var i = IceWall.instance()
+	i.initialize(startTime)
+	Manager.loose.add_child(i)
+	i.global_position = pos
+	i.global_rotation = rot
+	
 	pass
 	
 remotesync func placeFreezeZone(pos:Vector2):

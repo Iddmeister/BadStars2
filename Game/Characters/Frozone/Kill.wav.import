@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Kill.wav-817559d66b27c06a3c913acc9f90661b.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Frozone/Kill.wav"
+dest_files=[ "res://.import/Kill.wav-817559d66b27c06a3c913acc9f90661b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

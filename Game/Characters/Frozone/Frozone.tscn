@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Frozone/Frozone.png" type="Texture" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://Game/Characters/Frozone/Icicle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Characters/Frozone/SlippyIcicle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Characters/Frozone/FreezeZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Characters/Frozone/IceWall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/Characters/Frozone/Die.wav" type="AudioStream" id=9]
+[ext_resource path="res://Game/Characters/Frozone/Spawn.wav" type="AudioStream" id=10]
+[ext_resource path="res://Game/Characters/Frozone/Win.wav" type="AudioStream" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.4361
@@ -50,10 +54,14 @@ maxMoveSpeed = 300.0
 acceleration = 0.2
 maxAmmo = 4
 attack2AmmoCost = 2
-ability1Cooldown = 8.0
+ability1Cooldown = 10.0
+ability2Cooldown = 7.0
+killLines = PoolStringArray( "res://Game/Characters/Frozone/Kill.wav" )
 Icicle = ExtResource( 5 )
 SlipperyIcicle = ExtResource( 6 )
 FreezeZone = ExtResource( 7 )
+speedTime = 1.6
+IceWall = ExtResource( 8 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -75,6 +83,15 @@ custom_styles/panel = SubResource( 4 )
 
 [node name="Tag" parent="." index="5"]
 position = Vector2( 0, 48 )
+
+[node name="Death" parent="." index="6"]
+stream = ExtResource( 9 )
+
+[node name="Spawn" parent="." index="7"]
+stream = ExtResource( 10 )
+
+[node name="Win" parent="." index="8"]
+stream = ExtResource( 11 )
 
 [node name="FreezeZoneInterval" type="Timer" parent="." index="13"]
 wait_time = 0.1

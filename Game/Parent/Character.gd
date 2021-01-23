@@ -163,10 +163,16 @@ func movement(delta:float):
 	if Globals.inputBusy or canMove > 0:
 		dir = Vector2(0, 0)
 	
-	if slippery < 1:
-		moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
+	if slippery > 0:
 		
+		if moveVelocity.length() <= 0:
+			moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
+		else:
+			moveVelocity = moveVelocity.linear_interpolate(moveVelocity.normalized()*moveSpeed, acceleration*delta*60)
+		
+	else:
 		knockVelocity = knockVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
+		moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
 		
 	move_and_slide(moveVelocity+knockVelocity+addedVelocity)
 	
