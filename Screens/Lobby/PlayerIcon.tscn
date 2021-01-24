@@ -50,11 +50,20 @@ selected = 0
 
 [node name="Character" type="Label" parent="VBoxContainer"]
 visible = false
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 85.0
-margin_bottom = 39.0
+margin_bottom = 40.0
 custom_fonts/font = SubResource( 2 )
 text = "None"
+align = 1
+
+[node name="Ping" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 25.0
+margin_right = 85.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 2 )
+text = "0ms"
 align = 1
 
 [node name="Kick" type="Button" parent="VBoxContainer"]

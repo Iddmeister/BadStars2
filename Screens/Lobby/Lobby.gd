@@ -13,6 +13,7 @@ func _ready():
 	addAllPlayers()
 	Network.connect("playerJoined", self, "addNewPlayer")
 	Network.connect("playerLeft", self, "removePlayer")
+	Network.connect("gotPing", self, "gotPing")
 	
 	for mode in Globals.gameModes.keys():
 		
@@ -33,6 +34,12 @@ func _ready():
 		character = Globals.lastPickedCharacter
 	pass
 	
+func gotPing(id:int):
+	
+	$Main/Players.get_node(String(id)).setPing(Network.players[id].ping)
+	
+	pass
+	
 func updateMaps(mode:String):
 	
 	for map in Globals.gameModes[mode].maps:
@@ -49,6 +56,12 @@ func addPlayer(player:int):
 	p.setTeams($Main/Options/VBoxContainer/Teams.pressed)
 	p.setTeam(0)
 	p.connect("kick", self, "kick")
+	
+	if player == 1:
+		p.setHost(true)
+		return
+	if Network.players[player].has("ping"):
+		p.setPing(Network.players[player].ping)
 	
 	pass
 	
@@ -144,11 +157,20 @@ func _on_Change_pressed():
 	$Main.hide()
 	$CharacterSelect.show()
 
+func checkAllHavePing():
+	
+	for player in Network.players.keys():
+		if not Network.players[player].has("ping"):
+			return false
+			
+	return true
+	
+	pass
 
 func _on_Ready_toggled(button_pressed):
 	
 	if is_network_master():
-		if not Network.hasPing >= Network.players.size():
+		if not checkAllHavePing():
 			$Main/Options/Self/Ready.pressed = false
 			return
 			
