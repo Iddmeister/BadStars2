@@ -41,7 +41,6 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
-		$Players.add_child(character)
 		var spawnedWithAlly = false
 		for ally in players[player].allies:
 			if spawned.has(ally):
@@ -52,6 +51,7 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 			character.global_position = points[players[player].pos].global_position
 			spawned[player] = character
 			
+		$Players.add_child(character)
 		character.initialize(player, players[player].allies)
 		character.team = players[player].team
 		character.connect("hit", self, "playerDamaged")
@@ -85,6 +85,10 @@ func playerDied(player:int, killer:int):
 		Globals.deathCodes.SURRENDER:
 			
 			chat.addMessage(-1, "%s Self Destructed" % Network.players[player].name)
+		
+		Globals.deathCodes.SPIKES:
+			
+			chat.addMessage(-1, "%s Has Been Impaled" % Network.players[player].name)
 		_:
 	
 			var killMessage:String

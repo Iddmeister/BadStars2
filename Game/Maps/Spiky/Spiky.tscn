@@ -1,0 +1,1097 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Maps/Objects/Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Misc/Square.png" type="Texture" id=2]
+[ext_resource path="res://Game/Objects/Spike/Spike.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Spiky" instance=ExtResource( 1 )]
+
+[node name="CollisionPolygon2D" parent="MapArea" index="0"]
+visible = false
+polygon = PoolVector2Array( 1.23041, -1104.97, 2209.23, -1106.97, 2205.23, 1105.03, 5.23047, 1103.03 )
+
+[node name="Walls" type="Node2D" parent="." index="1"]
+
+[node name="Wall" type="StaticBody2D" parent="Walls" index="0"]
+scale = Vector2( 1, 70 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall2" type="StaticBody2D" parent="Walls" index="1"]
+position = Vector2( 1105.83, -1104 )
+rotation = -1.57079
+scale = Vector2( 1, 70 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall2" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall4" type="StaticBody2D" parent="Walls" index="2"]
+position = Vector2( 1105.83, 1104 )
+rotation = -1.57079
+scale = Vector2( 1, 70 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall4" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall3" type="StaticBody2D" parent="Walls" index="3"]
+position = Vector2( 2211.66, 0 )
+scale = Vector2( 1, 70 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall3" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall5" type="StaticBody2D" parent="Walls" index="4"]
+position = Vector2( 1888.88, 3.1748 )
+scale = Vector2( 20, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall5" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall5" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall8" type="StaticBody2D" parent="Walls" index="5"]
+position = Vector2( 328.015, 570.027 )
+scale = Vector2( 20, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall8" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall8" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall10" type="StaticBody2D" parent="Walls" index="6"]
+position = Vector2( 1344.91, 831.546 )
+scale = Vector2( 10, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall10" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall10" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall9" type="StaticBody2D" parent="Walls" index="7"]
+position = Vector2( 242.061, -865.48 )
+rotation = 3.92699
+scale = Vector2( 20, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall9" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall9" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall6" type="StaticBody2D" parent="Walls" index="8"]
+position = Vector2( 1582.79, -2.43805 )
+rotation = 1.57079
+scale = Vector2( 20, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall6" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall6" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Wall7" type="StaticBody2D" parent="Walls" index="9"]
+position = Vector2( 1315.4, -466.403 )
+rotation = 3.66519
+scale = Vector2( 20, 1 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Walls/Wall7" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall7" index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Spikes" type="Node2D" parent="." index="2"]
+
+[node name="Spike" parent="Spikes" index="0" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1204.57, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike9" parent="Spikes" index="1" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 297.86 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike10" parent="Spikes" index="2" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 259.86 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike11" parent="Spikes" index="3" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 223.049 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike12" parent="Spikes" index="4" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 183.696 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike13" parent="Spikes" index="5" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 145.696 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike14" parent="Spikes" index="6" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 108.885 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike15" parent="Spikes" index="7" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 74.8111 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike110" parent="Spikes" index="8" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, 119.18 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike111" parent="Spikes" index="9" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, 81.1796 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike112" parent="Spikes" index="10" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 44.3685 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike131" parent="Spikes" index="11" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, 234.793 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike132" parent="Spikes" index="12" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, 196.793 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike133" parent="Spikes" index="13" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 159.982 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike134" parent="Spikes" index="14" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, 355.001 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike135" parent="Spikes" index="15" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, 317.001 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike136" parent="Spikes" index="16" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 280.19 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike113" parent="Spikes" index="17" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, 5.01575 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike114" parent="Spikes" index="18" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -32.9843 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike115" parent="Spikes" index="19" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, -69.7953 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike116" parent="Spikes" index="20" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -103.869 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike117" parent="Spikes" index="21" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -144.82 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike118" parent="Spikes" index="22" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, -182.82 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike119" parent="Spikes" index="23" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, -219.631 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike120" parent="Spikes" index="24" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -258.984 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike121" parent="Spikes" index="25" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -296.984 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike122" parent="Spikes" index="26" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, -333.795 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike123" parent="Spikes" index="27" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -367.869 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike124" parent="Spikes" index="28" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -406.82 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike125" parent="Spikes" index="29" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, -444.82 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike126" parent="Spikes" index="30" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, -481.631 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike127" parent="Spikes" index="31" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -520.984 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike128" parent="Spikes" index="32" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -558.984 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike129" parent="Spikes" index="33" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0002, -595.795 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike130" parent="Spikes" index="34" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16.0005, -629.869 )
+rotation = -6.28318
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike16" parent="Spikes" index="35" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 36.8111 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike17" parent="Spikes" index="36" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, 0 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike18" parent="Spikes" index="37" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -36.5513 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike19" parent="Spikes" index="38" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -74.5513 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike20" parent="Spikes" index="39" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -111.362 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike21" parent="Spikes" index="40" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -146.164 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike22" parent="Spikes" index="41" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -184.164 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike23" parent="Spikes" index="42" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -220.975 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike24" parent="Spikes" index="43" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -253.216 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike25" parent="Spikes" index="44" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1568.88, -290.027 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike35" parent="Spikes" index="45" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -127.32 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike36" parent="Spikes" index="46" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -165.32 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike37" parent="Spikes" index="47" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -202.131 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike38" parent="Spikes" index="48" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -241.484 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike39" parent="Spikes" index="49" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -279.484 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike40" parent="Spikes" index="50" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -316.295 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike41" parent="Spikes" index="51" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -350.368 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike42" parent="Spikes" index="52" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -388.368 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike43" parent="Spikes" index="53" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -461.731 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike51" parent="Spikes" index="54" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -424.731 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike44" parent="Spikes" index="55" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -499.731 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike45" parent="Spikes" index="56" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -536.542 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike46" parent="Spikes" index="57" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -571.344 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike47" parent="Spikes" index="58" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -609.344 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike48" parent="Spikes" index="59" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -646.155 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike49" parent="Spikes" index="60" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -678.396 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike50" parent="Spikes" index="61" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, -715.207 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike72" parent="Spikes" index="62" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 858.21 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike73" parent="Spikes" index="63" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 820.21 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike74" parent="Spikes" index="64" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 783.399 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike75" parent="Spikes" index="65" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 744.046 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike76" parent="Spikes" index="66" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 706.046 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike77" parent="Spikes" index="67" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 669.235 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike78" parent="Spikes" index="68" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 635.161 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike89" parent="Spikes" index="69" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 1062.12 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike90" parent="Spikes" index="70" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 1024.12 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike91" parent="Spikes" index="71" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 987.311 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike92" parent="Spikes" index="72" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 947.958 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike93" parent="Spikes" index="73" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 909.958 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike94" parent="Spikes" index="74" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 873.147 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike95" parent="Spikes" index="75" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 839.073 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike96" parent="Spikes" index="76" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 793.076 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike97" parent="Spikes" index="77" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 755.076 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike98" parent="Spikes" index="78" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 718.265 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike99" parent="Spikes" index="79" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 678.912 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike100" parent="Spikes" index="80" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 640.912 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike101" parent="Spikes" index="81" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 16, 604.101 )
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike79" parent="Spikes" index="82" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 597.161 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike80" parent="Spikes" index="83" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 523.799 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike81" parent="Spikes" index="84" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 560.798 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike82" parent="Spikes" index="85" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 485.799 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike83" parent="Spikes" index="86" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 448.988 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike84" parent="Spikes" index="87" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 414.186 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike85" parent="Spikes" index="88" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 376.186 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike86" parent="Spikes" index="89" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 339.374 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike87" parent="Spikes" index="90" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 307.134 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike88" parent="Spikes" index="91" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2195.66, 270.323 )
+rotation = -3.14159
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike26" parent="Spikes" index="92" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1484.44, -350.082 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike27" parent="Spikes" index="93" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1451.95, -368.448 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike28" parent="Spikes" index="94" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1420.49, -387.926 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike29" parent="Spikes" index="95" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1389.69, -406.651 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike30" parent="Spikes" index="96" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1357.2, -425.016 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike31" parent="Spikes" index="97" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1325.74, -444.494 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike32" parent="Spikes" index="98" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1291.42, -463.347 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike33" parent="Spikes" index="99" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1258.93, -481.713 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike34" parent="Spikes" index="100" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1227.46, -501.191 )
+rotation = -4.18878
+scale = Vector2( 4.39999, 2 )
+
+[node name="Spike2" parent="Spikes" index="101" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1244.88, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike3" parent="Spikes" index="102" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1285.63, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike4" parent="Spikes" index="103" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1324.81, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike5" parent="Spikes" index="104" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1365.13, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike6" parent="Spikes" index="105" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1405.88, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike7" parent="Spikes" index="106" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1446.91, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike8" parent="Spikes" index="107" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1484.96, 815.546 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike137" parent="Spikes" index="108" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1697.95, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike138" parent="Spikes" index="109" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1738.26, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike139" parent="Spikes" index="110" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1779.01, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike140" parent="Spikes" index="111" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1818.19, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike141" parent="Spikes" index="112" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1858.51, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike142" parent="Spikes" index="113" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1899.26, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike143" parent="Spikes" index="114" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1940.29, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike144" parent="Spikes" index="115" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1978.34, -1085.75 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike102" parent="Spikes" index="116" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 747.01, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike103" parent="Spikes" index="117" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 787.327, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike104" parent="Spikes" index="118" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 828.074, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike105" parent="Spikes" index="119" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 867.259, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike106" parent="Spikes" index="120" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 907.576, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike107" parent="Spikes" index="121" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 948.323, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike108" parent="Spikes" index="122" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 989.351, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike109" parent="Spikes" index="123" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1027.41, 1082.12 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike52" parent="Spikes" index="124" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 178.021, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike53" parent="Spikes" index="125" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 218.339, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike54" parent="Spikes" index="126" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 259.086, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike55" parent="Spikes" index="127" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 298.27, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike56" parent="Spikes" index="128" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 338.588, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike57" parent="Spikes" index="129" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 379.335, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike58" parent="Spikes" index="130" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 420.363, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike59" parent="Spikes" index="131" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 458.417, 554.027 )
+rotation = -1.57079
+scale = Vector2( 2, 2 )
+
+[node name="Spike60" parent="Spikes" index="132" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 605.855, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike61" parent="Spikes" index="133" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 646.172, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike62" parent="Spikes" index="134" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 686.919, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike63" parent="Spikes" index="135" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 726.104, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike68" parent="Spikes" index="136" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 453.292, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike69" parent="Spikes" index="137" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 493.609, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike70" parent="Spikes" index="138" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 534.356, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike71" parent="Spikes" index="139" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 573.541, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike64" parent="Spikes" index="140" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 766.421, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike65" parent="Spikes" index="141" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 807.168, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike66" parent="Spikes" index="142" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 848.196, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="Spike67" parent="Spikes" index="143" instance=ExtResource( 3 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 886.251, -1088.85 )
+rotation = -4.71238
+scale = Vector2( 2, 2 )
+
+[node name="SpawnPoints" type="Node2D" parent="." index="3"]
+
+[node name="SpawnPoint" type="Position2D" parent="SpawnPoints" index="0" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1870.12, -190.338 )
+
+[node name="SpawnPoint2" type="Position2D" parent="SpawnPoints" index="1" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1824.87, -801.278 )
+
+[node name="SpawnPoint3" type="Position2D" parent="SpawnPoints" index="2" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 744.41, -657.028 )
+
+[node name="SpawnPoint4" type="Position2D" parent="SpawnPoints" index="3" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 379.543, -272.362 )
+
+[node name="SpawnPoint5" type="Position2D" parent="SpawnPoints" index="4" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 540.763, 270.696 )
+
+[node name="SpawnPoint6" type="Position2D" parent="SpawnPoints" index="5" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1100.79, 38.7652 )
+
+[node name="SpawnPoint7" type="Position2D" parent="SpawnPoints" index="6" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1345.25, 968.982 )
+
+[node name="SpawnPoint8" type="Position2D" parent="SpawnPoints" index="7" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1224.61, 457.839 )
+
+[node name="SpawnPoint9" type="Position2D" parent="SpawnPoints" index="8" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 367.413, 861.039 )
+
+[node name="SpawnPoint10" type="Position2D" parent="SpawnPoints" index="9" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1881.79, 226.079 )
+
+[node name="SpawnPoint11" type="Position2D" parent="SpawnPoints" index="10" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1859.57, 661.027 )
+
+[node name="SpawnPoint12" type="Position2D" parent="SpawnPoints" index="11" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 1234.86, -876.709 )
+
+[editable path="MapArea"]

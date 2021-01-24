@@ -198,11 +198,11 @@ func _on_CharacterSelect_characterSelected(c):
 func _on_UPNP_toggled(button_pressed):
 	if button_pressed:
 		Network.activateUPNP()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.text = Network.getUPNPAddress()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.show()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text = Network.getUPNPAddress()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.show()
 	else:
 		Network.deactivateUPNP()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.hide()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.hide()
 
 remotesync func setMode(mode:int):
 	
@@ -252,3 +252,10 @@ func _on_Map_item_selected(index):
 
 func _on_Leave_pressed():
 	Network.leaveGame()
+
+
+func _on_Copy_pressed():
+	if $Main/Options/VBoxContainer/HBoxContainer/IPStuff/UPNP.pressed:
+		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text)
+	else:
+		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/LocalIP.text)
