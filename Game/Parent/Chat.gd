@@ -4,7 +4,6 @@ export var maxMessages:int = 10
 
 var chatting:bool = false
 
-
 onready var messageBox = $VBoxContainer/Message
 onready var chatHistory = $VBoxContainer/History
 

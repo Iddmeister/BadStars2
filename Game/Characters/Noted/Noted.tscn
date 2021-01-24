@@ -59,10 +59,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StreamTexture" id=12]
+[sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/BrokenDemon.png-cc4aec4d0e72d3a412a2fd85e16f1486.stex"
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/Sprite:scale")
@@ -113,10 +113,10 @@ tracks/3/keys = {
 "values": [ 30.7029, 83.013, 83.013, 30.703 ]
 }
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=11]
 radius = 141.495
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -192,7 +192,7 @@ icon = SubResource( 7 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
 custom_styles/panel = SubResource( 8 )
-icon = SubResource( 12 )
+icon = SubResource( 9 )
 
 [node name="Death" parent="." index="6"]
 stream = ExtResource( 7 )
@@ -210,7 +210,7 @@ volume_db = -20.0
 volume_db = -20.0
 
 [node name="Animation" type="AnimationPlayer" parent="." index="12"]
-anims/Ascension = SubResource( 9 )
+anims/Ascension = SubResource( 10 )
 
 [node name="Explosion" type="Area2D" parent="." index="13"]
 collision_layer = 32
@@ -220,11 +220,11 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion" index="1"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Animation" type="AnimationPlayer" parent="Explosion" index="2"]
 playback_speed = 3.0
-anims/Boom = SubResource( 11 )
+anims/Boom = SubResource( 12 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = ExtResource( 9 )

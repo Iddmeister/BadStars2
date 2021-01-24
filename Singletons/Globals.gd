@@ -18,7 +18,7 @@ var lastPickedCharacter:String = "none"
 var inputBusy:bool = false
 
 enum {YES, NO, OPTIONAL}
-var deathCodes = {"OUT_OF_MAP":-10, "LAGGING":-9}
+var deathCodes = {"OUT_OF_MAP":-10, "LAGGING":-9, "SURRENDER":-8, "SPIKES":-7}
 
 var gameModes = {
 	
@@ -26,7 +26,7 @@ var gameModes = {
 		{
 		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
 		"teams":OPTIONAL,
-		"maps":["Box Boy", "THE OCTAGON"]
+		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky"]
 		},
 	
 }
@@ -34,6 +34,8 @@ var gameModes = {
 var maps = {
 	
 	"Box Boy":"res://Game/Maps/BoxBoy/BoxBoy.tscn",
-	"THE OCTAGON":"res://Game/Maps/THE OCTAGON/THE OCTAGON.tscn"
+	"THE OCTAGON":"res://Game/Maps/THE OCTAGON/THE OCTAGON.tscn",
+	"uwu":"res://Game/Maps/uwu/uwu.tscn",
+	"Spiky":"res://Game/Maps/Spiky/Spiky.tscn",
 	
 }

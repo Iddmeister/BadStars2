@@ -13,6 +13,7 @@ func _ready():
 	addAllPlayers()
 	Network.connect("playerJoined", self, "addNewPlayer")
 	Network.connect("playerLeft", self, "removePlayer")
+	Network.connect("gotPing", self, "gotPing")
 	
 	for mode in Globals.gameModes.keys():
 		
@@ -33,6 +34,12 @@ func _ready():
 		character = Globals.lastPickedCharacter
 	pass
 	
+func gotPing(id:int):
+	
+	$Main/Players.get_node(String(id)).setPing(Network.players[id].ping)
+	
+	pass
+	
 func updateMaps(mode:String):
 	
 	for map in Globals.gameModes[mode].maps:
@@ -49,6 +56,12 @@ func addPlayer(player:int):
 	p.setTeams($Main/Options/VBoxContainer/Teams.pressed)
 	p.setTeam(0)
 	p.connect("kick", self, "kick")
+	
+	if player == 1:
+		p.setHost(true)
+		return
+	if Network.players[player].has("ping"):
+		p.setPing(Network.players[player].ping)
 	
 	pass
 	
@@ -86,6 +99,7 @@ remote func updatePlayers(players:Dictionary):
 	
 func removePlayer(id:int):
 	$Main/Players.get_node(String(id)).queue_free()
+	playerOptions.erase(id)
 
 remotesync func readyUp(id:int, r:bool):
 	
@@ -97,7 +111,10 @@ remotesync func readyUp(id:int, r:bool):
 			for player in $Main/Players.get_children():
 				playerOptions[int(player.name)]["team"] = player.team
 				
+			var num:int = 0
 			for player in playerOptions.keys():
+				playerOptions[player].pos = num
+				num += 1
 				playerOptions[player].allies = []
 				if playerOptions[player].team == 0:
 					continue
@@ -140,11 +157,20 @@ func _on_Change_pressed():
 	$Main.hide()
 	$CharacterSelect.show()
 
+func checkAllHavePing():
+	
+	for player in Network.players.keys():
+		if not Network.players[player].has("ping"):
+			return false
+			
+	return true
+	
+	pass
 
 func _on_Ready_toggled(button_pressed):
 	
 	if is_network_master():
-		if not Network.hasPing >= Network.players.size():
+		if not checkAllHavePing():
 			$Main/Options/Self/Ready.pressed = false
 			return
 			
@@ -172,11 +198,11 @@ func _on_CharacterSelect_characterSelected(c):
 func _on_UPNP_toggled(button_pressed):
 	if button_pressed:
 		Network.activateUPNP()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.text = Network.getUPNPAddress()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.show()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text = Network.getUPNPAddress()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.show()
 	else:
 		Network.deactivateUPNP()
-		$Main/Options/VBoxContainer/IPStuff/GlobalIP.hide()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.hide()
 
 remotesync func setMode(mode:int):
 	
@@ -226,3 +252,10 @@ func _on_Map_item_selected(index):
 
 func _on_Leave_pressed():
 	Network.leaveGame()
+
+
+func _on_Copy_pressed():
+	if $Main/Options/VBoxContainer/HBoxContainer/IPStuff/UPNP.pressed:
+		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text)
+	else:
+		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/LocalIP.text)

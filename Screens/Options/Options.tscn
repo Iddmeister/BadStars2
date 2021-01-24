@@ -108,14 +108,14 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Controls/Ability1"]
-margin_left = 53.0
-margin_right = 176.0
+margin_left = 56.0
+margin_right = 173.0
 margin_bottom = 38.0
-text = "Ability 2"
+text = "Ability 1"
 
 [node name="Ability1" parent="ScrollContainer/VBoxContainer/Controls/Ability1" instance=ExtResource( 2 )]
-margin_left = 196.0
-margin_right = 346.0
+margin_left = 193.0
+margin_right = 343.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 150, 0 )
 focus_mode = 2

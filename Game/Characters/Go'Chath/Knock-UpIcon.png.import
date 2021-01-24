@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Square.png-379fa46459a7ec70b4397e1bd2f7910d.stex"
+path="res://.import/Knock-UpIcon.png-8a3dc6f498f95da94646341d6812ce9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Misc/Square.png"
-dest_files=[ "res://.import/Square.png-379fa46459a7ec70b4397e1bd2f7910d.stex" ]
+source_file="res://Game/Characters/Go'Chath/Knock-UpIcon.png"
+dest_files=[ "res://.import/Knock-UpIcon.png-8a3dc6f498f95da94646341d6812ce9e.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

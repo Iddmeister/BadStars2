@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Screens/Lobby/Lobby.gd" type="Script" id=2]
 [ext_resource path="res://Screens/CharacterSelect/CharacterSelect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Misc/Themes/Main.tres" type="Theme" id=4]
+[ext_resource path="res://Misc/Copy.svg" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.890196, 0.0980392, 1 )
@@ -75,26 +76,45 @@ margin_bottom = 278.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="IPStuff" type="VBoxContainer" parent="Main/Options/VBoxContainer"]
-margin_left = 338.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/Options/VBoxContainer"]
+margin_left = 278.0
 margin_right = 490.0
 margin_bottom = 82.0
 size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_constants/separation = 10
 
-[node name="LocalIP" type="Label" parent="Main/Options/VBoxContainer/IPStuff"]
+[node name="Copy" type="Button" parent="Main/Options/VBoxContainer/HBoxContainer"]
+margin_left = -1.0
+margin_top = 15.0
+margin_right = 49.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource( 5 )
+expand_icon = true
+
+[node name="IPStuff" type="VBoxContainer" parent="Main/Options/VBoxContainer/HBoxContainer"]
+margin_left = 60.0
+margin_right = 212.0
+margin_bottom = 82.0
+size_flags_horizontal = 8
+
+[node name="LocalIP" type="Label" parent="Main/Options/VBoxContainer/HBoxContainer/IPStuff"]
 margin_right = 152.0
 margin_bottom = 38.0
 text = "192.168.0.1"
 align = 2
 
-[node name="GlobalIP" type="Label" parent="Main/Options/VBoxContainer/IPStuff"]
+[node name="GlobalIP" type="Label" parent="Main/Options/VBoxContainer/HBoxContainer/IPStuff"]
 visible = false
 margin_top = 18.0
 margin_right = 490.0
 margin_bottom = 32.0
 align = 2
 
-[node name="UPNP" type="Button" parent="Main/Options/VBoxContainer/IPStuff"]
+[node name="UPNP" type="Button" parent="Main/Options/VBoxContainer/HBoxContainer/IPStuff"]
 margin_top = 42.0
 margin_right = 152.0
 margin_bottom = 82.0
@@ -195,7 +215,8 @@ text = "Leave"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="toggled" from="Main/Options/VBoxContainer/IPStuff/UPNP" to="." method="_on_UPNP_toggled"]
+[connection signal="pressed" from="Main/Options/VBoxContainer/HBoxContainer/Copy" to="." method="_on_Copy_pressed"]
+[connection signal="toggled" from="Main/Options/VBoxContainer/HBoxContainer/IPStuff/UPNP" to="." method="_on_UPNP_toggled"]
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Mode" to="." method="_on_Mode_item_selected"]
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Map" to="." method="_on_Map_item_selected"]
 [connection signal="toggled" from="Main/Options/VBoxContainer/Teams" to="." method="_on_Teams_toggled"]

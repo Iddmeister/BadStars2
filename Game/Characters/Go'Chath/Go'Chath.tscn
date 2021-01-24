@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Go'Chath/silence.tscn" type="PackedScene" id=2]
@@ -11,6 +11,11 @@
 [ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Spawn_Sound.wav" type="AudioStream" id=9]
 [ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Win_Sound.wav" type="AudioStream" id=10]
 [ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Attack_Sound.wav" type="AudioStream" id=11]
+[ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Kill_2.wav" type="AudioStream" id=12]
+[ext_resource path="res://Game/Characters/Go'Chath/GrowParticles.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Game/Characters/Go'Chath/Knock-Up.png" type="Texture" id=14]
+[ext_resource path="res://Game/Characters/Go'Chath/Knock-UpIcon.png" type="Texture" id=15]
+[ext_resource path="res://Game/Characters/Go'Chath/GrowIcon.png" type="Texture" id=16]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -46,26 +51,26 @@ expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 233.997
-
-[sub_resource type="CircleShape2D" id=6]
-radius = 301.458
+radius = 74.1364
 
 [node name="Go\'Chath" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 maxHealth = 600
-maxMoveSpeed = 100.0
 attack2AmmoCost = 3
 reloadRate = 3.0
-ability1Cooldown = 5.0
-ability2Cooldown = 12.0
+ability1Cooldown = 7.0
+ability2Cooldown = 5.0
 killLines = PoolStringArray( "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_1.wav", "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_2.wav", "res://Game/Characters/Go\'Chath/Go\'Chath_Kill_3.wav" )
 BasicAttack = ExtResource( 6 )
 Silence = ExtResource( 2 )
+KnockUp = ExtResource( 7 )
 knockUpParticles = ExtResource( 7 )
+GrowParticles = ExtResource( 13 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
-position = Vector2( -1.88776, 88.7242 )
+visible = false
+position = Vector2( -0.707108, 27.6147 )
+scale = Vector2( 0.3, 0.3 )
 polygon = PoolVector2Array( -2.69865, -305.48, 7.54669, -305.48, 8.21487, -295.235, 18.5716, -295.123, 18.7943, -285.101, 28.8169, -284.989, 29.3737, -275.078, 39.7304, -274.967, 39.9531, -264.387, 49.8644, -264.387, 50.3098, -254.365, 60.3324, -254.365, 60.5552, -243.785, 101.314, -243.563, 101.982, -233.54, 121.248, -233.095, 121.136, -243.785, 131.533, -243.785, 131.645, -273.185, 121.399, -273.185, 121.399, -283.43, 110.931, -283.43, 111.154, -295.235, 121.065, -295.346, 121.177, -305.591, 131.867, -305.48, 131.756, -315.948, 141.779, -315.837, 142.015, -326.352, 152.679, -326.134, 152.679, -337.218, 164.605, -337.218, 164.605, -326.555, 175.549, -326.414, 174.988, -316.593, 185.23, -316.032, 185.511, -305.789, 195.332, -305.789, 195.753, -295.687, 205.715, -295.406, 205.855, -283.48, 196.034, -283.34, 195.893, -273.238, 185.37, -273.378, 184.949, -242.079, 174.988, -242.079, 174.988, -191.007, 164.324, -190.025, 163.903, -181.045, 185.23, -180.765, 184.949, -171.224, 195.332, -170.803, 195.192, -160.841, 205.294, -160.841, 205.682, -118.007, 195.871, -117.858, 195.573, -107.155, 185.614, -107.007, 185.762, -98.2363, 195.573, -97.939, 195.871, -56.1681, 185.465, -56.0195, 185.168, -45.3166, 163.465, -45.7626, 163.019, -55.7222, 142.356, -56.4654, 142.356, -66.425, 131.802, -66.5737, 131.802, -76.3847, 122.734, -76.3847, 123.032, -66.5737, 112.329, -66.1277, 112.18, -55.8708, 102.221, -56.0195, 101.626, -45.6139, 81.7068, -44.8892, 81.2608, -36.4161, 111.883, -36.5647, 111.883, -25.8619, 122.883, -25.8619, 122.883, -15.0103, 133.289, -14.8617, 133.289, 7.43594, 59.5578, 6.84133, 59.2605, -3.86153, 50.0442, -4.01018, 49.5982, 5.65212, 28.9357, 6.24673, 28.4898, -25.5646, 38.7467, -25.7132, 39.044, -36.1188, 49.0036, -35.8215, 49.4496, -46.227, 59.4092, -46.5243, 59.5578, -67.1868, 69.8147, -67.1868, 69.8147, -75.9572, 59.5578, -76.4032, 59.7065, -86.3628, 39.9359, -86.3628, 39.9359, -76.5518, 29.0844, -76.4032, 28.9357, -66.2949, 19.2734, -66.5922, 18.5302, -55.8893, -13.5784, -55.8893, -12.9838, -65.9976, -23.2407, -65.9976, -23.8353, -75.9572, -34.5382, -76.1059, -34.2409, -86.0655, -54.1878, -86.3628, -54.0392, -76.2545, -64.5934, -76.1059, -64.4447, -66.8895, -54.0392, -67.1868, -53.7419, -46.3757, -43.4849, -46.3757, -43.3363, -36.5647, -33.674, -36.1188, -33.0794, -26.6051, -22.9711, -26.1592, -22.9711, 7.58459, -44.3768, 7.28728, -44.8228, -3.71288, -53.7419, -3.86153, -53.5932, 6.69268, -127.621, 6.84133, -127.621, -14.713, -117.81, -15.0103, -117.067, -25.8619, -106.959, -25.7132, -106.662, -36.2674, -76.4854, -35.8215, -76.0395, -45.1865, -96.702, -45.1865, -96.702, -55.592, -106.216, -55.8893, -106.364, -65.7003, -117.513, -65.9976, -117.364, -75.8085, -126.432, -75.8085, -126.432, -65.8489, -136.986, -65.9976, -136.689, -55.592, -158.095, -55.7407, -158.095, -45.0378, -180.244, -45.3351, -179.946, -55.4434, -190.352, -55.4434, -189.757, -97.5116, -180.244, -97.9575, -179.798, -107.323, -189.757, -107.768, -190.203, -117.56, -200.163, -117.708, -199.717, -160.668, -190.352, -160.817, -190.203, -170.628, -179.798, -170.628, -179.649, -181.331, -158.987, -180.736, -158.987, -190.399, -169.987, -190.547, -169.541, -239.751, -169.392, -242.358, -179.946, -242.358, -179.798, -273.277, -190.203, -273.426, -189.757, -283.386, -200.014, -283.534, -199.866, -295.278, -190.501, -295.129, -190.055, -305.683, -179.946, -305.683, -179.798, -315.94, -169.69, -315.94, -169.392, -326.048, -158.838, -325.9, -158.691, -337.156, -148.015, -336.969, -147.64, -326.481, -136.778, -326.106, -136.778, -316.367, -126.664, -316.18, -126.29, -305.505, -115.989, -305.505, -116.176, -295.578, -105.501, -295.391, -105.688, -283.966, -115.989, -283.405, -115.989, -273.666, -126.664, -273.666, -126.664, -244.449, -116.551, -243.887, -116.176, -233.773, -96.5108, -233.024, -95.9489, -243.699, -55.3073, -243.325, -55.12, -254.375, -45.0065, -254.188, -44.8192, -264.301, -33.7692, -264.301, -34.7056, -274.415, -24.4047, -274.227, -23.0937, -284.903, -12.7929, -284.716, -13.1674, -295.391, -3.05386, -295.578 )
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -76,15 +81,17 @@ material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 use_parent_material = true
-position = Vector2( 2.06165, -75.3868 )
-scale = Vector2( 0.430569, 0.429621 )
+position = Vector2( 0.0928955, -22.354 )
+scale = Vector2( 0.129, 0.129 )
 texture = ExtResource( 5 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
 custom_styles/panel = SubResource( 3 )
+icon = ExtResource( 16 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
 custom_styles/panel = SubResource( 4 )
+icon = ExtResource( 15 )
 
 [node name="Tag" parent="." index="6"]
 position = Vector2( 0, 38 )
@@ -102,15 +109,20 @@ stream = ExtResource( 10 )
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KnockUpArea" index="0"]
-position = Vector2( 304.365, 0 )
+position = Vector2( 120, 0 )
 shape = SubResource( 5 )
 
-[node name="EatArea" type="Area2D" parent="." index="15"]
-collision_layer = 32
+[node name="Tell" type="Sprite" parent="KnockUpArea" index="1"]
+visible = false
+modulate = Color( 0, 0.984314, 0.0313726, 1 )
+position = Vector2( 112.354, 20.196 )
+scale = Vector2( 0.25, 0.3 )
+texture = ExtResource( 14 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea" index="0"]
-position = Vector2( 0, -64.4272 )
-shape = SubResource( 6 )
-
-[node name="Attack" type="AudioStreamPlayer2D" parent="." index="16"]
+[node name="Attack" type="AudioStreamPlayer2D" parent="." index="15"]
 stream = ExtResource( 11 )
+
+[node name="Grow" type="AudioStreamPlayer2D" parent="." index="16"]
+stream = ExtResource( 12 )
+[connection signal="body_entered" from="KnockUpArea" to="." method="_on_KnockUpArea_body_entered"]
+[connection signal="body_exited" from="KnockUpArea" to="." method="_on_KnockUpArea_body_exited"]

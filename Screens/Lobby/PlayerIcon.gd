@@ -34,6 +34,18 @@ func setTeams(d:bool):
 			
 	else:
 		$VBoxContainer/Team.hide()
+		
+func setHost(d:bool):
+	
+	if d:
+		$VBoxContainer/Ping.text = "Host"
+		$VBoxContainer/Ping.visible = true
+	else:
+		$VBoxContainer/Ping.visible = false
+		
+func setPing(ping:float):
+	$VBoxContainer/Ping.text = String(ping)+"ms"
+	$VBoxContainer/Ping.visible = true
 
 func setReady(r:bool):
 	ready = r

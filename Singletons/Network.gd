@@ -19,6 +19,7 @@ var players:Dictionary = {}
 signal playerJoined(id)
 signal playerLeft()
 signal recievedPlayerInfo()
+signal gotPing(id)
 
 signal pong()
 
@@ -27,8 +28,6 @@ var upnpActive = false
 
 var clock:float = 0
 var inGame:bool = false
-
-var hasPing:int = 1
 
 remotesync func setClock(time:float):
 	
@@ -73,15 +72,17 @@ func _process(delta):
 		clock += delta
 	
 	pass
+	
+var pings:int = 100
 
 func getAveragePing(id:int):
 	
 	var total:int
 	
-	for i in range(30):
+	for i in range(pings):
 		total += yield(measurePing(id), "completed")
 		
-	return ceil(float(total)/10)
+	return ceil(float(total)/pings)
 
 func hostGame():
 	
@@ -115,9 +116,16 @@ remotesync func addPlayer(id:int, i:Dictionary):
 	emit_signal("playerJoined", id)
 	
 	if is_network_master():
-		players[id].ping = yield(getAveragePing(id), "completed")
-		hasPing += 1
-		rpc_id(id, "setClock", clock+((float(players[id].ping)/2)/1000))
+		players[id].ping = yield(getAveragePing(id), "completed")/2
+		rpc_id(id, "setClock", clock+((float(players[id].ping))/1000))
+		rpc("gotPing", id, players[id].ping)
+	
+	pass
+	
+remotesync func gotPing(id:int, ping:float):
+	
+	players[id].ping = ping
+	emit_signal("gotPing", id)
 	
 	pass
 	
@@ -178,7 +186,6 @@ func cleanup():
 	info.character = "none"
 	inGame = true
 	clock = 0
-	hasPing = 1
 	
 	pass
 	

@@ -6,8 +6,11 @@ export var KnockUp:PackedScene
 export var numOfBullets:int = 4
 export var bulletSpacing:float = 100
 export var knockUpTime:float = 2
-export var eatHealth:int = 25
+export var growAmount:float = 0.5
 export var knockUpParticles:PackedScene
+export var GrowParticles:PackedScene
+
+var knockUpBodies = []
 
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType:int=0):
 	
@@ -52,21 +55,45 @@ func attack1():
 	
 func attack2():
 	
-	rpc("eat")
+	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 1)
 	
 	
 func ability1():
 	
-	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 1)
+	rpc("grow")
 	
+	
+	
+remotesync func grow():
+	
+	var g = GrowParticles.instance()
+	Manager.loose.add_child(g)
+	g.global_position = global_position
+	g.scale = scale
+	g.start()
+	
+	canMove += 1
+	$Grow.play()
+	yield(get_tree().create_timer(1), "timeout")
+	scale += Vector2(growAmount, growAmount)
+	moveSpeed = max(moveSpeed-20, 100)
+	canMove -= 1
+	
+	pass
 	
 func ability2():
+
 	rpc("knockUpArea", getAimDirection())
-	pass
 	
 remotesync func knockUpArea(dir:float):
 
 	$KnockUpArea.global_rotation = dir
+	
+	$KnockUpArea/Tell.visible = true
+	
+	yield(get_tree().create_timer(1), "timeout")
+	
+	$KnockUpArea/Tell.visible = false
 	
 	var p = knockUpParticles.instance()
 	Manager.loose.add_child(p)
@@ -74,21 +101,11 @@ remotesync func knockUpArea(dir:float):
 	p.start()
 	
 	if is_network_master():
-		yield(get_tree(), "physics_frame")
-		for body in $KnockUpArea.get_overlapping_bodies():
+		for body in knockUpBodies:
 			if not body.is_in_group("Ally"+String(get_network_master())):
 				body.rpc("knockUp", knockUpTime)
 	pass
 	
-remotesync func eat():
-	
-	if is_network_master():
-		for body in $EatArea.get_overlapping_bodies():
-			if not body.is_in_group("Ally"+String(get_network_master())):
-				if body.health <= eatHealth:
-					body.rpc("hit", 100000, get_network_master())
-	
-	pass
 	
 
 var flipped:bool = false
@@ -116,3 +133,11 @@ func puppetAnimations(delta:float):
 			flipped = false
 	
 	pass
+
+
+func _on_KnockUpArea_body_entered(body):
+	knockUpBodies.append(body)
+
+
+func _on_KnockUpArea_body_exited(body):
+	knockUpBodies.erase(body)
