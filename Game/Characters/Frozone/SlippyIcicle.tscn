@@ -9,7 +9,7 @@ points = PoolVector2Array( -32, -12, -32, 12, 35, 0 )
 [node name="SlippyIcicle" instance=ExtResource( 1 )]
 maxDistance = 800.0
 effects = [ {
-"time": 2.0,
+"time": 1.2,
 "type": "slippery"
 } ]
 collideWithEnemies = true

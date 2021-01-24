@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Go'Chath/silence.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Game/Characters/Go'Chath/Go'Chath_Kill_2.wav" type="AudioStream" id=12]
 [ext_resource path="res://Game/Characters/Go'Chath/GrowParticles.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Game/Characters/Go'Chath/Knock-Up.png" type="Texture" id=14]
+[ext_resource path="res://Game/Characters/Go'Chath/Knock-UpIcon.png" type="Texture" id=15]
+[ext_resource path="res://Game/Characters/Go'Chath/GrowIcon.png" type="Texture" id=16]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -54,7 +56,6 @@ radius = 74.1364
 [node name="Go\'Chath" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 maxHealth = 600
-maxMoveSpeed = 200.0
 attack2AmmoCost = 3
 reloadRate = 3.0
 ability1Cooldown = 7.0
@@ -86,9 +87,11 @@ texture = ExtResource( 5 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
 custom_styles/panel = SubResource( 3 )
+icon = ExtResource( 16 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
 custom_styles/panel = SubResource( 4 )
+icon = ExtResource( 15 )
 
 [node name="Tag" parent="." index="6"]
 position = Vector2( 0, 38 )
