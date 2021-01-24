@@ -22,7 +22,7 @@ func _ready():
 	updateMaps(gameMode.get_item_text(gameMode.selected))
 	
 	if not is_network_master():
-		$Main/Options/VBoxContainer/IPStuff.hide()
+		$Main/Options/VBoxContainer/HBoxContainer/IPStuff.hide()
 		gameMode.disabled = true
 		$Main/Options/VBoxContainer/Teams.disabled = true
 		gameMap.disabled = true

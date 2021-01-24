@@ -85,10 +85,9 @@ size_flags_vertical = 8
 custom_constants/separation = 10
 
 [node name="Copy" type="Button" parent="Main/Options/VBoxContainer/HBoxContainer"]
-margin_left = -1.0
-margin_top = 15.0
-margin_right = 49.0
-margin_bottom = 65.0
+margin_top = 16.0
+margin_right = 50.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
