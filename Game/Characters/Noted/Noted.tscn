@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Characters/Noted/Noted.gd" type="Script" id=2]
@@ -30,7 +30,11 @@ _data = [ Vector2( 0.0114943, 0.490909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 
 offsets = PoolRealArray( 0, 0.165563, 0.317881, 0.476821, 0.675497, 0.986755, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 0.976074, 0.792751, 0.156324, 1, 0.62653, 1, 0.136719, 1, 0.0859375, 0.504585, 1, 1, 0.807617, 0, 1, 1, 0.929412, 0.631373, 1, 0, 1, 1, 1, 0 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+load_path = "res://.import/Spot.png-e37e7964466f78f777706a23a458610a.stex"
+
+[sub_resource type="StyleBoxFlat" id=7]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -43,10 +47,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=8]
 load_path = "res://.import/BrokenHalo.png-32311a6f202bc7eee81f20705d7cc9e4.stex"
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -59,10 +63,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StreamTexture" id=9]
+[sub_resource type="StreamTexture" id=10]
 load_path = "res://.import/BrokenDemon.png-cc4aec4d0e72d3a412a2fd85e16f1486.stex"
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/Sprite:scale")
@@ -83,7 +87,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.99, 1 ),
+"times": PoolRealArray( 0.02, 0.4, 0.99, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.94902, 0.839216, 0.164706, 0.54902 ), Color( 0.94902, 0.839216, 0.164706, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -113,10 +117,10 @@ tracks/3/keys = {
 "values": [ 30.7029, 83.013, 83.013, 30.703 ]
 }
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=12]
 radius = 141.495
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -151,6 +155,7 @@ shape = SubResource( 1 )
 material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
+modulate = Color( 0.995975, 0.987307, 0.934056, 0.964396 )
 use_parent_material = true
 position = Vector2( 0.464829, -0.619041 )
 scale = Vector2( 0.111662, 0.119404 )
@@ -176,9 +181,22 @@ orbit_velocity_curve = SubResource( 4 )
 scale_amount = 2.0
 color_ramp = SubResource( 5 )
 
+[node name="Holy" type="Light2D" parent="Graphics" index="2"]
+position = Vector2( 1.95213, -1.18248 )
+scale = Vector2( 1.2955, 1.2955 )
+texture = SubResource( 6 )
+color = Color( 1, 0.921569, 0.054902, 0.45098 )
+energy = 7.92
+
 [node name="Main" parent="UI" index="0"]
 margin_left = 11.2599
 margin_right = -8.74011
+
+[node name="CenterContainer" parent="UI/Main" index="0"]
+anchor_left = 0.000249004
+anchor_top = 0.000431034
+anchor_right = 1.00025
+anchor_bottom = 0.000431034
 
 [node name="CenterContainer2" parent="UI/Main" index="1"]
 margin_left = 2.51984
@@ -187,12 +205,12 @@ margin_right = 2.51984
 margin_bottom = 16.7401
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 6 )
-icon = SubResource( 7 )
+custom_styles/panel = SubResource( 7 )
+icon = SubResource( 8 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 8 )
-icon = SubResource( 9 )
+custom_styles/panel = SubResource( 9 )
+icon = SubResource( 10 )
 
 [node name="Death" parent="." index="6"]
 stream = ExtResource( 7 )
@@ -210,7 +228,7 @@ volume_db = -20.0
 volume_db = -20.0
 
 [node name="Animation" type="AnimationPlayer" parent="." index="12"]
-anims/Ascension = SubResource( 10 )
+anims/Ascension = SubResource( 11 )
 
 [node name="Explosion" type="Area2D" parent="." index="13"]
 collision_layer = 32
@@ -220,11 +238,12 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion" index="1"]
-shape = SubResource( 11 )
+position = Vector2( 0.629959, 0 )
+shape = SubResource( 12 )
 
 [node name="Animation" type="AnimationPlayer" parent="Explosion" index="2"]
 playback_speed = 3.0
-anims/Boom = SubResource( 12 )
+anims/Boom = SubResource( 13 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = ExtResource( 9 )

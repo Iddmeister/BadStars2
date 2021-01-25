@@ -58,6 +58,11 @@ var characters:Dictionary = {
 		  "ability1":"Ascension",
 		  "ability2":"???",
 		}, 
+		"skins":
+			{
+				"Holy":"res://Game/Characters/Noted/holy.jpg",
+			
+			}
 	 },
 	
 	"Frozone":

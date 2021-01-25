@@ -28,7 +28,7 @@ var gameModes = {
 		{
 		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
 		"teams":OPTIONAL,
-		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky"]
+		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell"]
 		},
 	
 }
@@ -39,5 +39,6 @@ var maps = {
 	"THE OCTAGON":"res://Game/Maps/THE OCTAGON/THE OCTAGON.tscn",
 	"uwu":"res://Game/Maps/uwu/uwu.tscn",
 	"Spiky":"res://Game/Maps/Spiky/Spiky.tscn",
+	"hell":"res://Game/Maps/hell/hell.tscn",
 	
 }

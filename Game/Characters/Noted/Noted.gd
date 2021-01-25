@@ -4,6 +4,14 @@ export var Bullet:PackedScene
 export var attack1NumBullets:int = 3
 export var shootDelay:float = 0.12
 
+func setupSkin():
+	
+	match skin:
+		"Holy":
+			
+			$Graphics/Sprite.scale = Vector2(0.15, 0.15)
+			$Graphics/Holy.visible = true
+
 func attack1():
 	usingAttack1 = true
 	var dir = getAimDirection()
