@@ -69,6 +69,10 @@ func playerDamaged(player:int, hitter:int):
 	
 func playerDied(player:int, killer:int):
 	
+	if player == get_tree().get_network_unique_id():
+		$UI/MarginContainer/Surrender.text = "Leave Game"
+		died = true
+	
 	if $Players.has_node(String(killer)):
 		$Players.get_node(String(killer)).kill()
 	

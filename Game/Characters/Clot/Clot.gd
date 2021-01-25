@@ -60,6 +60,7 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	
 	var b:Projectile = bullet.instance()
 	Manager.loose.add_child(b)
+	b.global_position = global_position
 	b.initialize(id, pos, dir, time)
 	if bulletType == 2 and get_tree().is_network_server():
 		b.connect("collided", self, "lifeSteal", [b.damage])

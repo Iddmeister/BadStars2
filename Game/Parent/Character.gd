@@ -66,6 +66,7 @@ onready var camera:Camera2D = $Space/Camera
 var timeSinceUpdate:float = 0
 var masterPos:Vector2
 var syncSpeed:float = 0.5
+var setUpdate:bool = false
 
 export var killLines:PoolStringArray = []
 var killStreams:Array
@@ -181,7 +182,7 @@ func movement(delta:float):
 		
 	move_and_slide(moveVelocity+knockVelocity+addedVelocity)
 	
-	rpc_unreliable("updateState", global_position)
+	rpc_unreliable("updateState", global_position, Network.clock, setUpdate)
 
 func updateEffects(delta:float):
 	
@@ -235,8 +236,18 @@ func syncState(delta:float):
 		emit_signal("lagging")
 	pass
 	
-puppet func updateState(pos:Vector2):
+var lastUpdate:float = 0
+	
+puppet func updateState(pos:Vector2, time:float, set:bool=false):
+	
+	if time < lastUpdate:
+		return
+		
+	lastUpdate = time
+	
 	masterPos = pos
+	if set:
+		global_position = pos
 	timeSinceUpdate = 0
 	pass
 	
@@ -295,7 +306,7 @@ func win():
 func spawnGhost():
 	
 	var g = Ghost.instance()
-	get_parent().add_child(g)
+	get_parent().get_parent().get_node("Ghosts").add_child(g)
 	g.setPos(global_position)
 	g.initialze(get_network_master())
 	

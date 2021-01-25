@@ -22,7 +22,7 @@ func _ready():
 	updateMaps(gameMode.get_item_text(gameMode.selected))
 	
 	if not is_network_master():
-		$Main/Options/VBoxContainer/HBoxContainer/IPStuff.hide()
+		$Main/Options/VBoxContainer/HBoxContainer.hide()
 		gameMode.disabled = true
 		$Main/Options/VBoxContainer/Teams.disabled = true
 		gameMap.disabled = true
@@ -123,17 +123,20 @@ remotesync func readyUp(id:int, r:bool):
 						continue
 					if playerOptions[player].team == playerOptions[player2].team:
 						playerOptions[player].allies.append(player2)
+						
+			var spawnSeed = int(rand_range(0, 100))
 			
-			rpc("startGame", playerOptions, gameMode.get_item_text(gameMode.selected), gameMap.get_item_text(gameMap.selected))
+			rpc("startGame", playerOptions, gameMode.get_item_text(gameMode.selected), gameMap.get_item_text(gameMap.selected), spawnSeed)
 	
 	pass
 	
-remotesync func startGame(playerData:Dictionary, mode:String, map:String):
+remotesync func startGame(playerData:Dictionary, mode:String, map:String, spawnSeed:int):
 	
 	Globals.currentGameInfo["players"] = playerData
 	Globals.currentGameInfo["map"] = map
 	Globals.currentGameInfo["map"] = map
 	Globals.currentGameInfo["mode"] = mode
+	Globals.currentGameInfo["spawnSeed"] = spawnSeed
 	Manager.changeScene(Globals.gameModes[mode].scene)
 	
 	pass

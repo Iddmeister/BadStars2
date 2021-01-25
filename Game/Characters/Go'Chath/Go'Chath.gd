@@ -36,16 +36,18 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType:int
 			offset = (offset-0.5)*2
 			offset *= bulletSpacing
 
-			var spawnPos = pos+Vector2(0, offset).rotated(getAimDirection())
+			var spawnPos = pos+Vector2(0, offset).rotated(dir)
 
 			var b:Projectile = bullet.instance()
 			Manager.loose.add_child(b)
 			b.initialize(id, spawnPos, dir, time)
+			b.global_position = global_position+Vector2(0, offset).rotated(dir)
 			
 	else:
 			var b:Projectile = bullet.instance()
 			Manager.loose.add_child(b)
 			b.initialize(id, pos, dir, time)
+			b.global_position = global_position
 
 	pass
 	

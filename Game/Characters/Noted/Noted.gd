@@ -40,6 +40,7 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float):
 	var b:Projectile = Bullet.instance()
 	Manager.loose.add_child(b)
 	b.initialize(id, pos, dir, time)
+	b.global_position = global_position
 		
 	#$Shoot.play()
 	

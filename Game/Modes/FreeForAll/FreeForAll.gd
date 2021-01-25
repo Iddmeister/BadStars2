@@ -8,7 +8,7 @@ func _ready():
 	
 	var data = Globals.currentGameInfo.players
 	
-	spawnPlayers(data, get_tree().get_nodes_in_group("SpawnPoint"), int(rand_range(0, 100)))
+	spawnPlayers(data, get_tree().get_nodes_in_group("SpawnPoint"), Globals.currentGameInfo.spawnSeed)
 	
 	rpc("playerLoaded", get_tree().get_network_unique_id())
 	
