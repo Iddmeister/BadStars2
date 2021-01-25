@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Screens/Lobby/Lobby.gd" type="Script" id=2]
@@ -12,10 +12,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -166,16 +162,20 @@ rect_min_size = Vector2( 150, 150 )
 expand = true
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Main/Options/Self/Character"]
+[node name="Name" type="OptionButton" parent="Main/Options/Self/Character"]
 margin_left = 170.0
-margin_top = 68.0
-margin_right = 248.0
-margin_bottom = 106.0
-custom_fonts/font = SubResource( 2 )
+margin_top = 67.0
+margin_right = 270.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 100, 40 )
+size_flags_horizontal = 5
+size_flags_vertical = 4
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
 text = "None"
 
 [node name="Change" type="Button" parent="Main/Options/Self/Character"]
-margin_left = 268.0
+margin_left = 290.0
 margin_top = 62.0
 margin_right = 490.0
 margin_bottom = 112.0
@@ -219,6 +219,7 @@ __meta__ = {
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Mode" to="." method="_on_Mode_item_selected"]
 [connection signal="item_selected" from="Main/Options/VBoxContainer/Map" to="." method="_on_Map_item_selected"]
 [connection signal="toggled" from="Main/Options/VBoxContainer/Teams" to="." method="_on_Teams_toggled"]
+[connection signal="item_selected" from="Main/Options/Self/Character/Name" to="." method="_on_Name_item_selected"]
 [connection signal="pressed" from="Main/Options/Self/Character/Change" to="." method="_on_Change_pressed"]
 [connection signal="toggled" from="Main/Options/Self/Ready" to="." method="_on_Ready_toggled"]
 [connection signal="characterSelected" from="CharacterSelect" to="." method="_on_CharacterSelect_characterSelected"]

@@ -196,6 +196,31 @@ func _on_CharacterSelect_characterSelected(c):
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
 	Globals.lastPickedCharacter = character
+	setupSkins(character)
+	
+func setupSkins(c:String):
+	
+	var n:OptionButton = $Main/Options/Self/Character/Name
+	
+	if not CharacterInfo.characters[c].has("skins"):
+		n.disabled = true
+		n.clear()
+		n.text = c
+	else:
+		n.disabled = false
+		n.add_item(c, 0)
+		for skin in CharacterInfo.characters[c].skins.keys():
+			n.add_item(skin, n.get_item_count())
+	
+	pass
+	
+master func changedSkin(id:int, skin:String):
+	
+	if skin == "default":
+		playerOptions[id].erase("skin")
+	else:
+		playerOptions[id].skin = skin
+
 
 
 func _on_UPNP_toggled(button_pressed):
@@ -262,3 +287,14 @@ func _on_Copy_pressed():
 		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text)
 	else:
 		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/LocalIP.text)
+
+
+func _on_Name_item_selected(index):
+	
+	if $Main/Options/Self/Character/Name.get_item_text(index) == character:
+			rpc("changedSkin", get_tree().get_network_unique_id(), "default")
+			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
+			return
+	
+	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[$Main/Options/Self/Character/Name.get_item_text(index)])
+	rpc("changedSkin", get_tree().get_network_unique_id(), $Main/Options/Self/Character/Name.get_item_text(index))

@@ -73,7 +73,12 @@ var killStreams:Array
 
 signal lagging()
 
+var skin:String = "default"
+
 func _ready():
+	
+	if not skin == "default":
+		setupSkin()
 	
 	for line in range(killLines.size()):
 		killStreams.append(load(killLines[line]))
@@ -84,6 +89,10 @@ func _ready():
 		b.name = String(a)
 		ammoBoxes.add_child(b)
 	updateHealth()
+	
+	
+func setupSkin():
+	pass
 
 func initialize(id:int, allies:Array=[]):
 	

@@ -41,6 +41,8 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
+		if players[player].has("skin"):
+			character.skin = players[player].skin
 		var spawnedWithAlly = false
 		for ally in players[player].allies:
 			if spawned.has(ally):

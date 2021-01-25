@@ -65,7 +65,7 @@ func attack2():
 	camera.followType = camera.STATIC
 	
 func ability1():
-	rpc("throwCarpet", global_position+Vector2(200, 0).rotated(getAimDirection()), getAimDirection(), Network.clock)
+	rpc("throwCarpet", global_position+Vector2(250, 0).rotated(getAimDirection()), getAimDirection(), Network.clock)
 	pass
 	
 remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
@@ -74,6 +74,7 @@ remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
 	var m:Projectile = MagicCarpet.instance()
 	Manager.loose.add_child(m)
 	m.initialize(get_network_master(), startPos, dir, time)
+	m.global_position = startPos
 	
 	pass
 	
