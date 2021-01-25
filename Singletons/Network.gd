@@ -32,7 +32,6 @@ var inGame:bool = false
 remotesync func setClock(time:float):
 	
 	clock = time
-	print(clock)
 	
 	pass
 	
@@ -117,9 +116,17 @@ remotesync func addPlayer(id:int, i:Dictionary):
 	
 	if is_network_master():
 		players[id].ping = yield(getAveragePing(id), "completed")/2
-		rpc_id(id, "setClock", clock+((float(players[id].ping))/1000))
+		yield(syncClock(id), "completed")
 		rpc("gotPing", id, players[id].ping)
 	
+	pass
+	
+func syncClock(id:int):
+	rpc_id(id, "setClock", clock+((float(players[id].ping))/1000))
+	yield(get_tree().create_timer(0.2), "timeout")
+	rpc_id(id, "setClock", clock+((float(players[id].ping))/1000))
+	yield(get_tree().create_timer(0.2), "timeout")
+	rpc_id(id, "setClock", clock+((float(players[id].ping))/1000))
 	pass
 	
 remotesync func gotPing(id:int, ping:float):

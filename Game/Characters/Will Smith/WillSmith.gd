@@ -5,8 +5,18 @@ export var numOfBalls:int = 3
 export var angle:float = 30
 export var MagicCarpet:PackedScene
 export var Dust:PackedScene
-export var lampHeals:int = 50
 export var lampTime:float = 3
+export var maxTeleportRange:float = 500
+
+func _draw():
+	if not is_network_master():
+		return
+	if ammo >= 2:
+		draw_arc(Vector2(0, 0), maxTeleportRange, 0, deg2rad(360), 100, Color(1, 1, 1 ,0.5), 1)
+		
+func updates(delta:float):
+	if is_network_master():
+		update()
 
 func attack1():
 	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock)
@@ -20,6 +30,7 @@ remotesync func shoot(id:int, startPos:Vector2, dir:float, time:float):
 		var ball:Projectile = Ball.instance()
 		Manager.loose.add_child(ball)
 		ball.initialize(id, startPos, newAngle, time)
+		ball.global_position = global_position
 	
 	pass
 	
@@ -36,17 +47,25 @@ remotesync func teleport(pos:Vector2, lastPos:Vector2):
 	Manager.loose.add_child(d2)
 	d2.global_position = pos
 	d2.start()
+	
+	if get_tree().is_network_server():
+		rpc("teleported")
+	
+	pass
+	
+master func telported():
+	setUpdate = false
 	pass
 	
 func attack2():
-	rpc("teleport", get_global_mouse_position(), global_position)
-	pass
+	setUpdate = true
+	rpc("teleport", to_global((get_global_mouse_position()-global_position).clamped(maxTeleportRange)), global_position)
 	camera.followType = camera.SMOOTH
 	yield(camera, "caughtUp")
 	camera.followType = camera.STATIC
 	
 func ability1():
-	rpc("throwCarpet", global_position+Vector2(200, 0).rotated(getAimDirection()), getAimDirection(), Network.clock)
+	rpc("throwCarpet", global_position+Vector2(250, 0).rotated(getAimDirection()), getAimDirection(), Network.clock)
 	pass
 	
 remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
@@ -55,12 +74,12 @@ remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
 	var m:Projectile = MagicCarpet.instance()
 	Manager.loose.add_child(m)
 	m.initialize(get_network_master(), startPos, dir, time)
+	m.global_position = startPos
 	
 	pass
 	
 func ability2():
 	rpc("lampMode", true)
-	rpc("heal", lampHeals)
 	yield(get_tree().create_timer(lampTime), "timeout")
 	rpc("lampMode", false)
 	pass
@@ -75,8 +94,10 @@ remotesync func lampMode(d:bool):
 	
 	if d:
 		canMove += 1
+		invincible += 1
 	else:
 		canMove -= 1
+		invincible -= 1
 	$LampCollision.disabled = not d
 	$Graphics/Lamp.visible = d
 	$Graphics/Sprite.visible = not d

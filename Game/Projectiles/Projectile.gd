@@ -29,7 +29,6 @@ func initialize(id:int, start:Vector2, dir:float, _startTime:float):
 	masterID = id
 	startPos = start
 	startTime = _startTime
-	global_position = start
 	global_rotation = dir
 	masterPos = calcMasterPos()
 	started = true

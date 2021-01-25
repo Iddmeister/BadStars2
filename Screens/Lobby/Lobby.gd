@@ -22,7 +22,7 @@ func _ready():
 	updateMaps(gameMode.get_item_text(gameMode.selected))
 	
 	if not is_network_master():
-		$Main/Options/VBoxContainer/HBoxContainer/IPStuff.hide()
+		$Main/Options/VBoxContainer/HBoxContainer.hide()
 		gameMode.disabled = true
 		$Main/Options/VBoxContainer/Teams.disabled = true
 		gameMap.disabled = true
@@ -123,17 +123,20 @@ remotesync func readyUp(id:int, r:bool):
 						continue
 					if playerOptions[player].team == playerOptions[player2].team:
 						playerOptions[player].allies.append(player2)
+						
+			var spawnSeed = int(rand_range(0, 100))
 			
-			rpc("startGame", playerOptions, gameMode.get_item_text(gameMode.selected), gameMap.get_item_text(gameMap.selected))
+			rpc("startGame", playerOptions, gameMode.get_item_text(gameMode.selected), gameMap.get_item_text(gameMap.selected), spawnSeed)
 	
 	pass
 	
-remotesync func startGame(playerData:Dictionary, mode:String, map:String):
+remotesync func startGame(playerData:Dictionary, mode:String, map:String, spawnSeed:int):
 	
 	Globals.currentGameInfo["players"] = playerData
 	Globals.currentGameInfo["map"] = map
 	Globals.currentGameInfo["map"] = map
 	Globals.currentGameInfo["mode"] = mode
+	Globals.currentGameInfo["spawnSeed"] = spawnSeed
 	Manager.changeScene(Globals.gameModes[mode].scene)
 	
 	pass
@@ -193,6 +196,31 @@ func _on_CharacterSelect_characterSelected(c):
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
 	Globals.lastPickedCharacter = character
+	setupSkins(character)
+	
+func setupSkins(c:String):
+	
+	var n:OptionButton = $Main/Options/Self/Character/Name
+	
+	if not CharacterInfo.characters[c].has("skins"):
+		n.disabled = true
+		n.clear()
+		n.text = c
+	else:
+		n.disabled = false
+		n.add_item(c, 0)
+		for skin in CharacterInfo.characters[c].skins.keys():
+			n.add_item(skin, n.get_item_count())
+	
+	pass
+	
+master func changedSkin(id:int, skin:String):
+	
+	if skin == "default":
+		playerOptions[id].erase("skin")
+	else:
+		playerOptions[id].skin = skin
+
 
 
 func _on_UPNP_toggled(button_pressed):
@@ -259,3 +287,14 @@ func _on_Copy_pressed():
 		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/GlobalIP.text)
 	else:
 		OS.set_clipboard($Main/Options/VBoxContainer/HBoxContainer/IPStuff/LocalIP.text)
+
+
+func _on_Name_item_selected(index):
+	
+	if $Main/Options/Self/Character/Name.get_item_text(index) == character:
+			rpc("changedSkin", get_tree().get_network_unique_id(), "default")
+			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
+			return
+	
+	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[$Main/Options/Self/Character/Name.get_item_text(index)])
+	rpc("changedSkin", get_tree().get_network_unique_id(), $Main/Options/Self/Character/Name.get_item_text(index))

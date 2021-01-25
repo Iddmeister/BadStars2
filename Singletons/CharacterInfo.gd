@@ -1,8 +1,14 @@
 extends Node
 
-## Each Character should have a name as the key, the path to their scene,
-## the path to their icon and an overall description and a description
-## of each ability
+## Each Character should have a name as the key, the path to their scene and
+## the path to their icon
+
+## They should also have an info dictionary with and overall description and
+## a description of each ability
+
+## Skins are optional and is a dictionary of skin names as the key and
+## a path to the skin icon. Skins should be implemented in each character scene
+## individually
 
 var characters:Dictionary = {
 	
@@ -18,6 +24,11 @@ var characters:Dictionary = {
 					"attack2":"BIG BULLET",
 					"ability1":"Shoots bullets in 3 directions",
 					"ability2":"Shoots a Big Laser",
+				},
+			"skins":
+				{
+					"Blood Clot":"res://Game/Characters/Clot/RedBloodCell.png",
+				
 				}
 		},
 		
@@ -28,10 +39,10 @@ var characters:Dictionary = {
 			"info":
 				{
 					"description":"Is Will Smiff",
-					"attack1":"Jahrrrrrrrr",
-					"attack2":"Jahrrrrrrrrrrrrrrrrrr",
-					"ability1":"Jahrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-					"ability2":"JAHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+					"attack1":"Will Smith's Balls",
+					"attack2":"Poof",
+					"ability1":"Yarrrrrrrrrrrrrrrrrrrrrrr",
+					"ability2":"YARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
 				}
 		},
 	

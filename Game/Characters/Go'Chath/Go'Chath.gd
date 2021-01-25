@@ -7,6 +7,7 @@ export var numOfBullets:int = 4
 export var bulletSpacing:float = 100
 export var knockUpTime:float = 2
 export var growAmount:float = 0.5
+export var healthIncrease:int = 50
 export var knockUpParticles:PackedScene
 export var GrowParticles:PackedScene
 
@@ -36,16 +37,18 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType:int
 			offset = (offset-0.5)*2
 			offset *= bulletSpacing
 
-			var spawnPos = pos+Vector2(0, offset).rotated(getAimDirection())
+			var spawnPos = pos+Vector2(0, offset).rotated(dir)
 
 			var b:Projectile = bullet.instance()
 			Manager.loose.add_child(b)
 			b.initialize(id, spawnPos, dir, time)
+			b.global_position = global_position+Vector2(0, offset).rotated(dir)
 			
 	else:
 			var b:Projectile = bullet.instance()
 			Manager.loose.add_child(b)
 			b.initialize(id, pos, dir, time)
+			b.global_position = global_position
 
 	pass
 	
@@ -77,6 +80,10 @@ remotesync func grow():
 	yield(get_tree().create_timer(1), "timeout")
 	scale += Vector2(growAmount, growAmount)
 	moveSpeed = max(moveSpeed-20, 100)
+	var increase = float(health)/maxHealth
+	maxHealth += healthIncrease
+	health = int(maxHealth*increase)
+	updateHealth()
 	canMove -= 1
 	
 	pass

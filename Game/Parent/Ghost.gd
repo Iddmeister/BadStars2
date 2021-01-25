@@ -9,6 +9,8 @@ var syncing:bool = false
 func initialze(id:int):
 	set_network_master(id)
 	
+	name = "Ghost"+String(id)
+	
 	if is_network_master():
 		$Camera.current = true
 		yield(get_tree().create_timer(1), "timeout")

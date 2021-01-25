@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Squelch.wav-cb9d5f144cf9821e01c261c103dae67b.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Clot/Squelch.wav"
+dest_files=[ "res://.import/Squelch.wav-cb9d5f144cf9821e01c261c103dae67b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

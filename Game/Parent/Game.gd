@@ -41,6 +41,8 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
+		if players[player].has("skin"):
+			character.skin = players[player].skin
 		var spawnedWithAlly = false
 		for ally in players[player].allies:
 			if spawned.has(ally):
@@ -68,6 +70,10 @@ func playerDamaged(player:int, hitter:int):
 	pass
 	
 func playerDied(player:int, killer:int):
+	
+	if player == get_tree().get_network_unique_id():
+		$UI/MarginContainer/Surrender.text = "Leave Game"
+		died = true
 	
 	if $Players.has_node(String(killer)):
 		$Players.get_node(String(killer)).kill()
