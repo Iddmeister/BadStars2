@@ -177,17 +177,19 @@ func movement(delta:float):
 	
 	if Globals.inputBusy or canMove > 0:
 		dir = Vector2(0, 0)
+		
+	var speed:float = max(moveSpeed, 0)
 	
 	if slippery > 0:
 		
 		if moveVelocity.length() <= 0:
-			moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
+			moveVelocity = moveVelocity.linear_interpolate(dir*speed, acceleration*delta*60)
 		else:
-			moveVelocity = moveVelocity.linear_interpolate(moveVelocity.normalized()*moveSpeed, acceleration*delta*60)
+			moveVelocity = moveVelocity.linear_interpolate(moveVelocity.normalized()*speed, acceleration*delta*60)
 		
 	else:
 		knockVelocity = knockVelocity.linear_interpolate(Vector2(0, 0), deceleration*delta*60)
-		moveVelocity = moveVelocity.linear_interpolate(dir*moveSpeed, acceleration*delta*60)
+		moveVelocity = moveVelocity.linear_interpolate(dir*speed, acceleration*delta*60)
 		
 	move_and_slide(moveVelocity+knockVelocity+addedVelocity)
 	
@@ -381,16 +383,27 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo(attack2AmmoCost)
 		
-	if Input.is_action_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0:
-		ability1()
+	if Input.is_action_just_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0:
 		ability1Icon.use()
 		ability1Charge = ability1Cooldown
+		ability1()
+	elif Input.is_action_just_released("ability1"):
+		ability1Released()
 		
-	if Input.is_action_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0:
-		ability2()
+		
+	if Input.is_action_just_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0:
 		ability2Icon.use()
 		ability2Charge = ability2Cooldown
+		ability2()
+	elif Input.is_action_just_released("ability2"):
+		ability2Released()
 	
+	pass
+	
+func ability1Released():
+	pass
+	
+func ability2Released():
 	pass
 	
 var usingAttack1:bool = false
@@ -445,6 +458,22 @@ remotesync func reloadAmmo(amount:int=1):
 		ammo += 1
 		ammoBoxes.get_child(currentAmmoBox).get_node("Animation").play("Ready")
 		currentAmmoBox += 1
+		
+		
+master func setAbility1Cooldown(amount:float):
+	
+	ability1Charge = amount
+	ability1Icon.setProgress(ability1Charge, ability1Cooldown)
+	if ability1Charge <= 0:
+		emit_signal("ability1Charged")
+	
+master func setAbility2Cooldown(amount:float):
+	
+	ability2Charge = amount
+	ability2Icon.setProgress(ability2Charge, ability2Cooldown)
+	if ability2Charge <= 0:
+		emit_signal("ability2Charged")
+	
 
 func updateCooldowns(delta:float):
 	

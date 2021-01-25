@@ -29,9 +29,12 @@ func _ready():
 		
 	if not Globals.lastPickedCharacter == "none":
 		$Main/Options/Self/Character/Name.text = Globals.lastPickedCharacter
-		$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[Globals.lastPickedCharacter].icon)
 		rpc("setCharacter", get_tree().get_network_unique_id(), Globals.lastPickedCharacter)
 		character = Globals.lastPickedCharacter
+		if not Globals.lastPickedSkin == "default":
+			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[Globals.lastPickedSkin])
+		else:
+			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[Globals.lastPickedCharacter].icon)
 	pass
 	
 func gotPing(id:int):
@@ -196,6 +199,7 @@ func _on_CharacterSelect_characterSelected(c):
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
 	Globals.lastPickedCharacter = character
+	Globals.lastPickedSkin = "default"
 	setupSkins(character)
 	
 func setupSkins(c:String):
@@ -294,7 +298,9 @@ func _on_Name_item_selected(index):
 	if $Main/Options/Self/Character/Name.get_item_text(index) == character:
 			rpc("changedSkin", get_tree().get_network_unique_id(), "default")
 			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
+			Globals.lastPickedSkin = "default"
 			return
 	
 	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[$Main/Options/Self/Character/Name.get_item_text(index)])
+	Globals.lastPickedSkin =$Main/Options/Self/Character/Name.get_item_text(index)
 	rpc("changedSkin", get_tree().get_network_unique_id(), $Main/Options/Self/Character/Name.get_item_text(index))

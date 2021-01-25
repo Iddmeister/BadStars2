@@ -87,4 +87,18 @@ var characters:Dictionary = {
 		  "ability2":"BONK",
 		}, 
 	 },
+	
+	"Barrel":
+	{
+		"icon":"res://Game/Characters/Barrel/Barrel.png",
+		"scene":"res://Game/Characters/Barrel/Barrel.tscn",
+		"info":
+			{
+			  "description":"Is a Barrel\nDoes damage on Collision",
+			  "attack1":"none",
+			  "attack2":"none",
+			  "ability1":"BONK\nRecharges on hit",
+			  "ability2":"Woooooosh\nAllies are speed and enemies are slow",
+			}
+	}
 }

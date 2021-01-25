@@ -5,6 +5,7 @@ extends Node
 var effects:Dictionary = {
 	
 	"speed":preload("res://Game/Effects/Speed/Speed.tscn"),
+	"slow":preload("res://Game/Effects/Slow/Slow.tscn"),
 	"silence":preload("res://Game/Effects/Silence/Silence.tscn"),
 	"slippery":preload("res://Game/Effects/Slippery/Slippery.tscn"),
 	"freeze":preload("res://Game/Effects/Freeze/Freeze.tscn"),
@@ -14,6 +15,7 @@ var version:String = "0.1.1"
 
 var currentGameInfo = {}
 var lastPickedCharacter:String = "none"
+var lastPickedSkin:String = "default"
 
 var inputBusy:bool = false
 

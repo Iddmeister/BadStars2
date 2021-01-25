@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/BarrelWin.wav-5b57780a74fb8c6ba4fa905eeeafb67d.sample"
+
+[deps]
+
+source_file="res://Game/Characters/Barrel/BarrelWin.wav"
+dest_files=[ "res://.import/BarrelWin.wav-5b57780a74fb8c6ba4fa905eeeafb67d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
