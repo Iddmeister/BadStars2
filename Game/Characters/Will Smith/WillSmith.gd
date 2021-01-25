@@ -5,7 +5,6 @@ export var numOfBalls:int = 3
 export var angle:float = 30
 export var MagicCarpet:PackedScene
 export var Dust:PackedScene
-export var lampHeals:int = 50
 export var lampTime:float = 3
 export var maxTeleportRange:float = 500
 
@@ -80,7 +79,6 @@ remotesync func throwCarpet(startPos:Vector2, dir:float, time:float):
 	
 func ability2():
 	rpc("lampMode", true)
-	rpc("heal", lampHeals)
 	yield(get_tree().create_timer(lampTime), "timeout")
 	rpc("lampMode", false)
 	pass
@@ -95,8 +93,10 @@ remotesync func lampMode(d:bool):
 	
 	if d:
 		canMove += 1
+		invincible += 1
 	else:
 		canMove -= 1
+		invincible -= 1
 	$LampCollision.disabled = not d
 	$Graphics/Lamp.visible = d
 	$Graphics/Sprite.visible = not d

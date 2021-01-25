@@ -55,7 +55,7 @@ radius = 74.1364
 
 [node name="Go\'Chath" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-maxHealth = 600
+maxHealth = 500
 attack2AmmoCost = 3
 reloadRate = 3.0
 ability1Cooldown = 7.0

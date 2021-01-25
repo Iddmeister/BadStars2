@@ -7,6 +7,7 @@ export var numOfBullets:int = 4
 export var bulletSpacing:float = 100
 export var knockUpTime:float = 2
 export var growAmount:float = 0.5
+export var healthIncrease:int = 50
 export var knockUpParticles:PackedScene
 export var GrowParticles:PackedScene
 
@@ -79,6 +80,10 @@ remotesync func grow():
 	yield(get_tree().create_timer(1), "timeout")
 	scale += Vector2(growAmount, growAmount)
 	moveSpeed = max(moveSpeed-20, 100)
+	var increase = float(health)/maxHealth
+	maxHealth += healthIncrease
+	health = int(maxHealth*increase)
+	updateHealth()
 	canMove -= 1
 	
 	pass

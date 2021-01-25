@@ -28,10 +28,10 @@ var characters:Dictionary = {
 			"info":
 				{
 					"description":"Is Will Smiff",
-					"attack1":"Jahrrrrrrrr",
-					"attack2":"Jahrrrrrrrrrrrrrrrrrr",
-					"ability1":"Jahrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-					"ability2":"JAHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+					"attack1":"Will Smith's Balls",
+					"attack2":"Poof",
+					"ability1":"Yarrrrrrrrrrrrrrrrrrrrrrr",
+					"ability2":"YARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
 				}
 		},
 	
