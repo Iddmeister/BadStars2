@@ -182,6 +182,7 @@ scale_amount = 2.0
 color_ramp = SubResource( 5 )
 
 [node name="Holy" type="Light2D" parent="Graphics" index="2"]
+visible = false
 position = Vector2( 1.95213, -1.18248 )
 scale = Vector2( 1.2955, 1.2955 )
 texture = SubResource( 6 )
@@ -234,6 +235,7 @@ anims/Ascension = SubResource( 11 )
 collision_layer = 32
 
 [node name="Sprite" type="Sprite" parent="Explosion" index="0"]
+position = Vector2( 1.5874, 0 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 4 )
 
