@@ -105,5 +105,19 @@ var characters:Dictionary = {
 			  "ability1":"BONK\nRecharges on hit",
 			  "ability2":"Woooooosh\nAllies are speed and enemies are slow",
 			}
+	},
+	
+	"Bob The Builder":
+	{
+		"icon":"res://Game/Characters/BobTheBuilder/Bob.png",
+		"scene":"res://Game/Characters/BobTheBuilder/Bob.tscn",
+		"info":
+			{
+			  "description":"Can He Fix It?",
+			  "attack1":"none",
+			  "attack2":"none",
+			  "ability1":"none",
+			  "ability2":"none",
+			}
 	}
 }
