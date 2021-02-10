@@ -114,10 +114,10 @@ var characters:Dictionary = {
 		"info":
 			{
 			  "description":"Can He Fix It?",
-			  "attack1":"none",
-			  "attack2":"none",
-			  "ability1":"none",
-			  "ability2":"none",
+			  "attack1":"Place a Block",
+			  "attack2":"Remove a Block",
+			  "ability1":"Place Spikes on the Ground",
+			  "ability2":"Throw hammer, enemies knocked back when hit",
 			}
 	}
 }

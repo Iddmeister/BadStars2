@@ -9,12 +9,13 @@ var bodies = []
 func _ready():
 	if is_network_master():
 		$Damage.start()
-		$Exist.start()
 	pass
 
 func _on_SpikeFloor_body_entered(body):
 	if not body.is_in_group("Ally"+String(masterID)):
 		bodies.append(body)
+		if is_network_master():
+			$Exist.start()
 
 
 func _on_SpikeFloor_body_exited(body):

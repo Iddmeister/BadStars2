@@ -78,7 +78,7 @@ remotesync func endGame(winnerIDs:Array):
 	if winnerIDs.empty():
 		chat.addMessage(-1, "Everyone is Dead. Great Job", Color(0, 1, 0, 1))
 		if is_network_master():
-			yield(get_tree().create_timer(2), "timeout")
+			yield(get_tree().create_timer(3.5), "timeout")
 			rpc("returnToLobby")
 			return
 	

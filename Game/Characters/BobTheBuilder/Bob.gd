@@ -2,12 +2,12 @@ extends Character
 
 export var Block:PackedScene = preload("res://Game/Characters/BobTheBuilder/Block.tscn")
 export var SpikeFloor:PackedScene = preload("res://Game/Characters/BobTheBuilder/SpikeFloor.tscn")
-
-export var hammerDamage:int = 35
+export var Hammer = preload("res://Game/Characters/BobTheBuilder/Hammer.tscn")
 
 var flipped = false
 
-var bodies = []
+var blocks = {}
+
 
 func attack1():
 	
@@ -16,35 +16,26 @@ func attack1():
 	pass
 	
 func attack2():
-	
-	rpc("hammer", getAimDirection())
-	
+	rpc("removeBlock", get_global_mouse_position())
 	pass
 	
 func ability1():
 	rpc("placeSpike", get_global_mouse_position())
 	
-remotesync func hammer(dir:float):
+func ability2():
+	rpc("throwHammer", get_network_master(), global_position, getAimDirection(), Network.clock)
 	
-	$Hammer.global_rotation = dir
-	$Hammer/Animation.play("Swing")
+remotesync func throwHammer(id:int, pos:Vector2, dir:float, time:float):
 	
-	if is_network_master():
 	
-		yield(get_tree(), "physics_frame")
-	
-		for body in bodies:
-			
-			if body.has_method("remove"):
-				body.rpc("remove")
-				return
-			if body.has_method("hit"):
-				if not body.is_in_group("Ally"+String(get_network_master())):
-					body.rpc("hit", hammerDamage, get_network_master())
-					return
+	var h:Projectile = Hammer.instance()
+	Manager.loose.add_child(h)
+	h.global_position = global_position
+	h.initialize(id, pos, dir, time)
+		
+	$Throw.play()
 	
 	pass
-	
 	
 remotesync func placeSpike(pos:Vector2):
 	
@@ -52,12 +43,32 @@ remotesync func placeSpike(pos:Vector2):
 	b.masterID = get_network_master()
 	Manager.loose.add_child(b)
 	b.global_position = Vector2(round(pos.x/80)*80,round(pos.y/80)*80)
+	$Build.play()
 	
 remotesync func placeBlock(pos:Vector2):
+	
+	if blocks.has(Vector2(round(pos.x/80)*80,round(pos.y/80)*80)):
+		return
 	
 	var b = Block.instance()
 	Manager.loose.add_child(b)
 	b.global_position = Vector2(round(pos.x/80)*80,round(pos.y/80)*80)
+	b.add_to_group("Ally"+String(get_network_master()))
+	blocks[Vector2(round(pos.x/80)*80,round(pos.y/80)*80)] = b
+	
+	$Build.play()
+	
+	pass
+	
+remotesync func removeBlock(pos:Vector2):
+	
+	if not blocks.has(Vector2(round(pos.x/80)*80,round(pos.y/80)*80)):
+		return
+	var b = blocks[Vector2(round(pos.x/80)*80,round(pos.y/80)*80)]
+	b.queue_free()
+	blocks.erase(Vector2(round(pos.x/80)*80,round(pos.y/80)*80))
+	
+	$Build.play()
 	
 	pass
 
@@ -86,9 +97,3 @@ func puppetAnimations(delta:float):
 	pass
 
 
-func _on_Hammer_body_entered(body):
-	bodies.append(body)
-
-
-func _on_Hammer_body_exited(body):
-	bodies.erase(body)

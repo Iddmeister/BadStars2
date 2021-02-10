@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-export var maxHealth:int = 100
+export var maxHealth:int = 60
 onready var health:int = maxHealth
 
 remotesync func hit(damage:int, id:int):

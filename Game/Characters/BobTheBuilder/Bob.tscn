@@ -4,8 +4,10 @@
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=2]
 [ext_resource path="res://Game/Characters/BobTheBuilder/Bob.png" type="Texture" id=3]
 [ext_resource path="res://Game/Characters/BobTheBuilder/Bob.gd" type="Script" id=4]
-[ext_resource path="res://Game/Characters/BobTheBuilder/Hammer.png" type="Texture" id=5]
-[ext_resource path="res://Misc/Square.png" type="Texture" id=6]
+[ext_resource path="res://Game/Characters/BobTheBuilder/Build.wav" type="AudioStream" id=5]
+[ext_resource path="res://Game/Characters/BobTheBuilder/Throw.wav" type="AudioStream" id=6]
+[ext_resource path="res://Game/Characters/BobTheBuilder/Death.wav" type="AudioStream" id=7]
+[ext_resource path="res://Game/Characters/BobTheBuilder/Song.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.8516
@@ -42,67 +44,13 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 67.4974, 31.9514 )
-
-[sub_resource type="Animation" id=6]
-resource_name = "Swing"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Hammer:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Hammer:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 33.6088, 2.63955 ), Vector2( 3.05135, -12.0439 ), Vector2( 56.6261, 1.84585 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hammer:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, -59.9999, 74.9999 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Tell:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
 [node name="Bob" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-maxHealth = 400
+maxHealth = 250
 maxMoveSpeed = 300.0
 ability1Cooldown = 5.0
-ability2Cooldown = 5.0
+ability2Cooldown = 2.5
+killLines = PoolStringArray( "res://Game/Characters/BobTheBuilder/Kill.wav", "res://Game/Characters/BobTheBuilder/Kill2.wav", "res://Game/Characters/BobTheBuilder/Kill3.wav" )
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -124,31 +72,19 @@ custom_styles/panel = SubResource( 4 )
 [node name="Tag" parent="." index="5"]
 position = Vector2( 0, 60 )
 
-[node name="Hammer" type="Area2D" parent="." index="13"]
-collision_layer = 32
-collision_mask = 3
+[node name="Death" parent="." index="6"]
+stream = ExtResource( 7 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hammer" index="0"]
-position = Vector2( 60, 0 )
-shape = SubResource( 5 )
+[node name="Spawn" parent="." index="7"]
+stream = ExtResource( 8 )
 
-[node name="Hammer" type="Sprite" parent="Hammer" index="1"]
-visible = false
-position = Vector2( 56.6261, 1.84585 )
-rotation = 1.309
-scale = Vector2( 1, 2 )
-texture = ExtResource( 5 )
+[node name="Win" parent="." index="8"]
+stream = ExtResource( 8 )
 
-[node name="Tell" type="Sprite" parent="Hammer" index="2"]
-visible = false
-modulate = Color( 1, 0, 0, 0.623529 )
-show_behind_parent = true
-position = Vector2( 63.7458, 0 )
-scale = Vector2( 4, 1.9 )
-texture = ExtResource( 6 )
+[node name="Throw" type="AudioStreamPlayer2D" parent="." index="13"]
+stream = ExtResource( 6 )
+volume_db = 5.0
 
-[node name="Animation" type="AnimationPlayer" parent="Hammer" index="3"]
-playback_speed = 3.0
-anims/Swing = SubResource( 6 )
-[connection signal="body_entered" from="Hammer" to="." method="_on_Hammer_body_entered"]
-[connection signal="body_exited" from="Hammer" to="." method="_on_Hammer_body_exited"]
+[node name="Build" type="AudioStreamPlayer2D" parent="." index="14"]
+stream = ExtResource( 5 )
+volume_db = 10.0
