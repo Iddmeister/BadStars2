@@ -136,3 +136,19 @@ func _on_Surrender_pressed():
 		died = true
 	else:
 		Network.leaveGame()
+		
+		
+	
+func commands(text:String):
+	
+	var player = $Players.get_node(String(get_tree().get_network_unique_id()))
+	
+	match text:
+		
+		"noclip":
+			player.get_node("CollisionShape2D").disabled = not player.get_node("CollisionShape2D").disabled
+		
+		"reset":
+			player.rpc("setAbility1Cooldown", 0)
+			player.rpc("setAbility2Cooldown", 0)
+			

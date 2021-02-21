@@ -95,4 +95,3 @@ margin_bottom = 319.0
 custom_fonts/font = SubResource( 2 )
 text = "Beep Boop"
 [connection signal="pressed" from="UI/MarginContainer/Surrender" to="." method="_on_Surrender_pressed"]
-[connection signal="text_entered" from="UI/Chat/VBoxContainer/Message" to="UI/Chat" method="_on_Message_text_entered"]

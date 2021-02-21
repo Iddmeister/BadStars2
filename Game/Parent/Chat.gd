@@ -20,6 +20,9 @@ func _process(delta):
 		
 		if not messageBox.text.empty():
 			
+			if Globals.devMode:
+				get_parent().get_parent().commands(messageBox.text)
+			
 			if messageBox.text.begins_with("/team"):
 				
 				for player in Globals.currentGameInfo.players.keys():
@@ -57,9 +60,6 @@ remotesync func addMessage(id:int, message:String, colour:Color=Color(1, 1, 1 ,1
 	chatHistory.add_child(l)
 	
 	pass
-	
 
 
 
-func _on_Message_text_entered(new_text):
-	pass # Replace with function body.

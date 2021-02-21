@@ -1,5 +1,35 @@
 extends Control
 
+var maxBuffer:float = 2
+var buffer:float = 0
+var sequence = ["Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A"]
+var index:int = 0
+
+func _input(event):
+	
+	if event is InputEventKey and event.is_pressed():
+		
+		var key = OS.get_scancode_string(event.scancode)
+		if key == sequence[index]:
+			index += 1
+			buffer = 0
+			
+			if index == sequence.size():
+				devMode()
+				index = 0
+				
+func devMode():
+	$Dev.show()
+	Globals.devMode = true
+
+func _process(delta):
+	
+	buffer += delta
+	
+	if buffer >= maxBuffer:
+		buffer = 0
+		index = 0
+
 
 func _ready():
 	$Play/CenterContainer/VBoxContainer/Name.text = Network.info.name

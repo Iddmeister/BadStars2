@@ -7,7 +7,7 @@ onready var health = maxHealth
 export var maxMoveSpeed:float = 200
 onready var moveSpeed = maxMoveSpeed
 export var acceleration:float = 0.5
-export var deceleration:float = 0.05
+export var deceleration:float = 0.1
 
 export var maxAmmo:int = 3
 onready var ammo:int = maxAmmo
