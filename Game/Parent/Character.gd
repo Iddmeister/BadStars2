@@ -456,6 +456,7 @@ remotesync func reloadAmmo(amount:int=1):
 	for i in range(amount):
 		
 		ammo += 1
+		ammoBoxes.get_child(currentAmmoBox).value = 1
 		ammoBoxes.get_child(currentAmmoBox).get_node("Animation").play("Ready")
 		currentAmmoBox += 1
 		

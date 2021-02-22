@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Shmelly/Shmelly.png" type="Texture" id=2]
+[ext_resource path="res://Misc/greyscale.shader" type="Shader" id=3]
+[ext_resource path="res://Game/Characters/Shmelly/ShmellyGun.png" type="Texture" id=4]
+[ext_resource path="res://Game/Characters/Shmelly/Shmelly.gd" type="Script" id=5]
+[ext_resource path="res://Game/Characters/Shmelly/ShmellyBullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Characters/Shmelly/PoisonBullet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Characters/Shmelly/ShitZone.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 24.6812
+height = 47.5003
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/enabled = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Shmelly" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+maxHealth = 200
+maxMoveSpeed = 500.0
+maxAmmo = 4
+attack2AmmoCost = 2
+reloadRate = 1.5
+ability1Cooldown = 3.0
+ability2Cooldown = 10.0
+NormBullet = ExtResource( 6 )
+PoisonBullet = ExtResource( 7 )
+ShitZone = ExtResource( 8 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 5.46583 )
+shape = SubResource( 4 )
+
+[node name="Graphics" parent="." index="1"]
+material = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Graphics" index="0"]
+use_parent_material = true
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="Pivot" type="Node2D" parent="Graphics" index="1"]
+position = Vector2( 0, 17.8583 )
+
+[node name="Gun" type="Sprite" parent="Graphics/Pivot" index="0"]
+use_parent_material = true
+position = Vector2( 35.088, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Muzzle" type="Position2D" parent="Graphics/Pivot/Gun" index="0"]
+position = Vector2( 14.592, -1.96431 )
+
+[node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
+custom_styles/panel = SubResource( 3 )
+
+[node name="Tag" parent="." index="5"]
+position = Vector2( 0, 48 )

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Parent/Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Effects/Diarrhea/Diarrhea.gd" type="Script" id=2]
+[ext_resource path="res://Misc/Fonts/LEMONMILK-Medium.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="Diarrhea" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="." index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -85.0
+margin_top = -21.5
+margin_right = 85.0
+margin_bottom = 21.5
+custom_fonts/font = SubResource( 1 )
+text = "Diarrhea"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}

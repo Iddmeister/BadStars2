@@ -42,7 +42,10 @@ func collided(body:PhysicsBody2D):
 				for effect in effects:
 					
 					if effect.has("info"):
-					
+						
+						if effect.info.has("damageID"):
+							effect.info.masterID = masterID
+							
 						body.rpc("addEffect", Manager.generateUniqueID(), effect.type, effect.time, effect.info)
 					
 					else:

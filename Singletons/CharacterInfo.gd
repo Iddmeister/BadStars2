@@ -32,6 +32,20 @@ var characters:Dictionary = {
 				}
 		},
 		
+	"Shmelly":
+		{
+			"icon":"res://Game/Characters/Shmelly/Shmelly.png", 
+			"scene":"res://Game/Characters/Shmelly/Shmelly.tscn", 
+			"info":
+				{
+					"description":"Shmells",
+					"attack1":"Shotgun",
+					"attack2":"Poison Bullet",
+					"ability1":"Reloads all ammo, breaking her fingers and taking damage in the process",
+					"ability2":"Places a zone causing enemies to catch Diarrhea and shit violently. The shit heals Shmelly",
+				},
+		},
+		
 	"Will Smith":
 		{
 			"icon":"res://Game/Characters/Will Smith/WillSmith.png",

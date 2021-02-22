@@ -9,6 +9,8 @@ var effects:Dictionary = {
 	"silence":preload("res://Game/Effects/Silence/Silence.tscn"),
 	"slippery":preload("res://Game/Effects/Slippery/Slippery.tscn"),
 	"freeze":preload("res://Game/Effects/Freeze/Freeze.tscn"),
+	"poison":preload("res://Game/Effects/Poison/Poison.tscn"),
+	"diarrhea":preload("res://Game/Effects/Diarrhea/Diarrhea.tscn"),
 	
 }
 var version:String = "0.1.1"
