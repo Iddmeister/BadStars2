@@ -31,7 +31,7 @@ var gameModes = {
 		{
 		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
 		"teams":OPTIONAL,
-		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell"]
+		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell", "Training Zone"]
 		},
 	
 }
@@ -43,5 +43,6 @@ var maps = {
 	"uwu":"res://Game/Maps/uwu/uwu.tscn",
 	"Spiky":"res://Game/Maps/Spiky/Spiky.tscn",
 	"hell":"res://Game/Maps/hell/hell.tscn",
+	"Training Zone":"res://Game/Maps/TrainingZone/TrainingZone.tscn",
 	
 }

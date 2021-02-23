@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Game
 
+var Dummy = preload("res://Game/Objects/Dummy/Dummy.tscn")
+
 var killMessages = {
 	
 	"fast":["liquidated", "annihilated", "eradicated", "slaughtered"],
@@ -41,6 +43,7 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 		
 		var character:Character = load(CharacterInfo.characters[players[player].character].scene).instance()
 		character.name = String(player)
+		character.allAllies = players[player].allies
 		if players[player].has("skin"):
 			character.skin = players[player].skin
 		var spawnedWithAlly = false
@@ -145,10 +148,50 @@ func commands(text:String):
 	
 	match text:
 		
+		"hit20":
+			player.rpc("hit", 20, player.get_network_master())
+			
+		"hit10":
+			player.rpc("hit", 10, player.get_network_master())
+			
+		"hit50":
+			player.rpc("hit", 50, player.get_network_master())
+		
+		"kill":
+			player.rpc("hit", 100000, -8)
+		
+		"heal":
+			player.rpc("heal", 100000)
+		
+		"invincible":
+			player.devInvincible = not player.devInvincible
+		
 		"noclip":
+			player.devInvincible = not player.devInvincible
 			player.get_node("CollisionShape2D").disabled = not player.get_node("CollisionShape2D").disabled
 		
 		"reset":
 			player.rpc("setAbility1Cooldown", 0)
 			player.rpc("setAbility2Cooldown", 0)
+			player.rpc("reloadAmmo", player.maxAmmo-player.ammo)
 			
+		"place_dummy":
+			rpc("placeDummy", get_global_mouse_position())
+		"place_ally_dummy":
+			rpc("placeDummy", get_global_mouse_position(), true)
+			
+remotesync func placeDummy(pos:Vector2, allied:bool=false):
+	
+	var d = Dummy.instance()
+	Manager.loose.add_child(d)
+	d.global_position = pos
+	var allies:Array = []
+	if allied:
+		allies.append(get_tree().get_network_unique_id())
+		
+		for ally in $Players.get_node(String(get_tree().get_network_unique_id())).allAllies:
+			allies.append(ally)
+		
+	d.create(allies)
+	
+	pass

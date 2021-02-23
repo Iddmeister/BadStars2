@@ -26,7 +26,7 @@ tracks/0/keys = {
 damage = 65
 knockBack = 1000.0
 collideWithEnemies = true
-speed = 350.0
+speed = 500.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
