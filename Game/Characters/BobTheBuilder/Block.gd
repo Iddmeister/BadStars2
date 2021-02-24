@@ -1,7 +1,9 @@
 extends StaticBody2D
 
-export var maxHealth:int = 60
+export var maxHealth:int = 50
 onready var health:int = maxHealth
+
+signal destroyed(pos)
 
 remotesync func hit(damage:int, id:int):
 	
@@ -20,6 +22,7 @@ remotesync func remove():
 	
 func destroy():
 	
+	emit_signal("destroyed", global_position)
 	queue_free()
 	
 	pass

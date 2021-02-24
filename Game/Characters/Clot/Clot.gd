@@ -59,6 +59,8 @@ remotesync func shootLaser(dir:float):
 	$Laser/Line.visible = true
 	if is_network_master():
 		for body in $Laser.get_overlapping_bodies():
+			if not body.has_method("hit"):
+				continue
 			if not body.is_in_group("Ally"+String(get_network_master())):
 				body.rpc("hit", laserDamage, get_network_master())
 	yield(get_tree().create_timer(0.3), "timeout")

@@ -23,8 +23,8 @@ tracks/0/keys = {
 }
 
 [node name="Hammer" instance=ExtResource( 1 )]
-damage = 65
-knockBack = 1000.0
+damage = 20
+knockBack = 3000.0
 collideWithEnemies = true
 speed = 500.0
 

@@ -46,8 +46,9 @@ expand_margin_bottom = 2.0
 
 [node name="Bob" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-maxHealth = 250
+maxHealth = 180
 maxMoveSpeed = 300.0
+reloadRate = 1.25
 ability1Cooldown = 5.0
 ability2Cooldown = 2.5
 killLines = PoolStringArray( "res://Game/Characters/BobTheBuilder/Kill.wav", "res://Game/Characters/BobTheBuilder/Kill2.wav", "res://Game/Characters/BobTheBuilder/Kill3.wav" )

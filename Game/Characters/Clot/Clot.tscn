@@ -84,6 +84,8 @@ killLines = PoolStringArray( "res://Game/Characters/Clot/ClotKill1.wav", "res://
 NormBullet = ExtResource( 3 )
 BigBullet = ExtResource( 5 )
 LifeSteal = ExtResource( 6 )
+laserWindup = 0.6
+laserDamage = 100
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -128,6 +130,7 @@ stream = ExtResource( 9 )
 
 [node name="Laser" type="Area2D" parent="." index="10"]
 collision_layer = 32
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" index="0"]
 position = Vector2( 312, 0 )
