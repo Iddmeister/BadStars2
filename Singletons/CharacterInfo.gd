@@ -32,6 +32,20 @@ var characters:Dictionary = {
 				}
 		},
 		
+	"Shmelly":
+		{
+			"icon":"res://Game/Characters/Shmelly/Shmelly.png", 
+			"scene":"res://Game/Characters/Shmelly/Shmelly.tscn", 
+			"info":
+				{
+					"description":"Shmells",
+					"attack1":"Shotgun",
+					"attack2":"Poison Bullet",
+					"ability1":"Reloads all ammo, breaking her fingers and taking damage in the process",
+					"ability2":"Places a zone causing enemies to catch Diarrhea and shit violently. The shit heals Shmelly",
+				},
+		},
+		
 	"Will Smith":
 		{
 			"icon":"res://Game/Characters/Will Smith/WillSmith.png",
@@ -104,6 +118,20 @@ var characters:Dictionary = {
 			  "attack2":"none",
 			  "ability1":"BONK\nRecharges on hit",
 			  "ability2":"Woooooosh\nAllies are speed and enemies are slow",
+			}
+	},
+	
+	"Bob The Builder":
+	{
+		"icon":"res://Game/Characters/BobTheBuilder/Bob.png",
+		"scene":"res://Game/Characters/BobTheBuilder/Bob.tscn",
+		"info":
+			{
+			  "description":"Can He Fix It?",
+			  "attack1":"Place a Block",
+			  "attack2":"Remove a Block",
+			  "ability1":"Place Spikes on the Ground",
+			  "ability2":"Throw hammer, enemies knocked back when hit",
 			}
 	}
 }

@@ -195,6 +195,15 @@ margin_top = 281.0
 margin_right = 552.0
 margin_bottom = 319.0
 text = "Loser"
+
+[node name="Dev" type="Label" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -338.0
+margin_bottom = 38.0
+rect_rotation = -0.0953034
+text = "Developer Mode Active"
 [connection signal="pressed" from="Main/VBoxContainer/Title/x" to="." method="_on_x_pressed"]
 [connection signal="button_down" from="Main/VBoxContainer/Title/Y" to="." method="_on_Y_button_down"]
 [connection signal="pressed" from="Main/VBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]

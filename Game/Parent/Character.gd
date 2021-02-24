@@ -7,7 +7,7 @@ onready var health = maxHealth
 export var maxMoveSpeed:float = 200
 onready var moveSpeed = maxMoveSpeed
 export var acceleration:float = 0.5
-export var deceleration:float = 0.2
+export var deceleration:float = 0.1
 
 export var maxAmmo:int = 3
 onready var ammo:int = maxAmmo
@@ -37,6 +37,8 @@ var knockedUp:float = false
 var team:int = 0
 
 var Ghost = preload("res://Game/Parent/Ghost.tscn")
+
+var devInvincible:bool = false
 
 signal died(id, killer)
 signal hit(id, hitter)
@@ -70,6 +72,8 @@ var setUpdate:bool = false
 
 export var killLines:PoolStringArray = []
 var killStreams:Array
+
+var allAllies:Array = []
 
 signal lagging()
 
@@ -269,6 +273,9 @@ puppet func setPos(pos:Vector2):
 	
 remotesync func hit(damage:int, id:int):
 	
+	if devInvincible:
+		return
+	
 	if invincible > 0:
 		return
 		
@@ -334,14 +341,14 @@ remotesync func knockUp(time:float):
 		return
 	knockedUp = true
 	canMove += 1
-	$KnockTween.interpolate_property($Graphics, "scale", null, scale+Vector2(2, 1.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(2, 2), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 0, 180, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	yield($KnockTween, "tween_completed")
-	$KnockTween.interpolate_property($Graphics, "scale", null, scale-Vector2(2, 1.5), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
+	$KnockTween.interpolate_property($Graphics, "scale", null, Vector2(1, 1), time/2, Tween.TRANS_SINE, Tween.EASE_IN, 0)
 	$KnockTween.start()
-	$KnockTween.interpolate_property($Graphics, "rotation_degrees", 180, 360, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
+	$KnockTween.interpolate_property($Graphics, "rotation_degrees", null, 361, time/2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$KnockTween.start()
 	yield($KnockTween, "tween_completed")
 	rotation_degrees = 0
@@ -456,6 +463,7 @@ remotesync func reloadAmmo(amount:int=1):
 	for i in range(amount):
 		
 		ammo += 1
+		ammoBoxes.get_child(currentAmmoBox).value = 1
 		ammoBoxes.get_child(currentAmmoBox).get_node("Animation").play("Ready")
 		currentAmmoBox += 1
 		

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Song.wav-a216e70c0452e5bab74bf7b20f3e4001.sample"
+
+[deps]
+
+source_file="res://Game/Characters/BobTheBuilder/Song.wav"
+dest_files=[ "res://.import/Song.wav-a216e70c0452e5bab74bf7b20f3e4001.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

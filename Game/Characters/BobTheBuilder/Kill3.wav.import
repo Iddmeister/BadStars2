@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Kill3.wav-089d4c6c2f55e62f2a54db75573c97a5.sample"
+
+[deps]
+
+source_file="res://Game/Characters/BobTheBuilder/Kill3.wav"
+dest_files=[ "res://.import/Kill3.wav-089d4c6c2f55e62f2a54db75573c97a5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

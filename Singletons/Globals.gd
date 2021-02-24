@@ -9,6 +9,8 @@ var effects:Dictionary = {
 	"silence":preload("res://Game/Effects/Silence/Silence.tscn"),
 	"slippery":preload("res://Game/Effects/Slippery/Slippery.tscn"),
 	"freeze":preload("res://Game/Effects/Freeze/Freeze.tscn"),
+	"poison":preload("res://Game/Effects/Poison/Poison.tscn"),
+	"diarrhea":preload("res://Game/Effects/Diarrhea/Diarrhea.tscn"),
 	
 }
 var version:String = "0.1.1"
@@ -16,6 +18,7 @@ var version:String = "0.1.1"
 var currentGameInfo = {}
 var lastPickedCharacter:String = "none"
 var lastPickedSkin:String = "default"
+var devMode:bool = false
 
 var inputBusy:bool = false
 
@@ -28,7 +31,7 @@ var gameModes = {
 		{
 		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
 		"teams":OPTIONAL,
-		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell"]
+		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell", "Training Zone"]
 		},
 	
 }
@@ -40,5 +43,6 @@ var maps = {
 	"uwu":"res://Game/Maps/uwu/uwu.tscn",
 	"Spiky":"res://Game/Maps/Spiky/Spiky.tscn",
 	"hell":"res://Game/Maps/hell/hell.tscn",
+	"Training Zone":"res://Game/Maps/TrainingZone/TrainingZone.tscn",
 	
 }

@@ -50,6 +50,7 @@ func ability2():
 	
 remotesync func shootLaser(dir:float):
 	$LaserShoot.play()
+	$Laser.visible = true
 	$Laser.global_rotation = dir
 	$Laser/Tell.visible = true
 	canMove += 1
