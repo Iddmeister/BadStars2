@@ -11,6 +11,7 @@ func setupSkin():
 			
 			$Graphics/Sprite.scale = Vector2(0.15, 0.15)
 			$Graphics/Holy.visible = true
+			$Explosion/Sprite.modulate = "7aff00"
 
 func attack1():
 	usingAttack1 = true
