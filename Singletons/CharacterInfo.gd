@@ -133,5 +133,29 @@ var characters:Dictionary = {
 			  "ability1":"Place Spikes on the Ground",
 			  "ability2":"Throw hammer, enemies knocked back when hit",
 			}
+	},
+	
+	"Ninja Turtle":
+	{
+		"icon":"res://Game/Characters/Ninja Turtle/NinjaTurtles.jpg",
+		"scene":"res://Game/Characters/Ninja Turtle/Ninja Turtle.tscn",
+		"info":
+			{
+			  "description":"Teenage Mutant Ninja Turtles",
+			  "attack1":"?",
+			  "attack2":"?",
+			  "ability1":"?",
+			  "ability2":"?",
+			},
+			
+		"default":"Leonardo",
+			
+		"skins":
+			{
+				"Leonardo":"res://Game/Characters/Ninja Turtle/Leonardo.png",
+				"Raphael":"res://Game/Characters/Ninja Turtle/Raphael.png",
+				"Michelangelo":"res://Game/Characters/Ninja Turtle/Michelangelo.png",
+				"Donatello":"res://Game/Characters/Ninja Turtle/Donatello.png",
+			}
 	}
 }

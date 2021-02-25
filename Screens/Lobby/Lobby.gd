@@ -31,10 +31,15 @@ func _ready():
 		$Main/Options/Self/Character/Name.text = Globals.lastPickedCharacter
 		rpc("setCharacter", get_tree().get_network_unique_id(), Globals.lastPickedCharacter)
 		character = Globals.lastPickedCharacter
-		if not Globals.lastPickedSkin == "default":
+		setupSkins(character)
+		
+		if CharacterInfo.characters[character].has("default") or not Globals.lastPickedSkin == "default":
+			rpc("changedSkin", get_tree().get_network_unique_id(), Globals.lastPickedSkin)
+			$Main/Options/Self/Character/Name.selected = CharacterInfo.characters[character].skins.keys().find(Globals.lastPickedSkin)
 			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[Globals.lastPickedSkin])
 		else:
-			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[Globals.lastPickedCharacter].icon)
+			$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
+		
 	pass
 	
 func gotPing(id:int):
@@ -196,15 +201,22 @@ func _on_CharacterSelect_characterSelected(c):
 	$CharacterSelect.hide()
 	character = c
 	$Main/Options/Self/Character/Name.text = character
-	$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
+	
 	rpc("setCharacter", get_tree().get_network_unique_id(), character)
 	Globals.lastPickedCharacter = character
-	Globals.lastPickedSkin = "default"
+	if CharacterInfo.characters[character].has("default"):
+		Globals.lastPickedSkin = CharacterInfo.characters[character].default
+		$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].skins[Globals.lastPickedSkin])
+		rpc("changedSkin", get_tree().get_network_unique_id(), Globals.lastPickedSkin)
+	else:
+		Globals.lastPickedSkin = "default"
+		$Main/Options/Self/Character/Icon.texture = load(CharacterInfo.characters[character].icon)
 	setupSkins(character)
 	
 func setupSkins(c:String):
 	
 	var n:OptionButton = $Main/Options/Self/Character/Name
+	n.clear()
 	
 	if not CharacterInfo.characters[c].has("skins"):
 		n.disabled = true
@@ -212,7 +224,8 @@ func setupSkins(c:String):
 		n.text = c
 	else:
 		n.disabled = false
-		n.add_item(c, 0)
+		if not CharacterInfo.characters[character].has("default"):
+			n.add_item(c, 0)
 		for skin in CharacterInfo.characters[c].skins.keys():
 			n.add_item(skin, n.get_item_count())
 	
