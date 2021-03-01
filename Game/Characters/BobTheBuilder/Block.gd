@@ -5,14 +5,14 @@ onready var health:int = maxHealth
 
 signal destroyed(pos)
 
-remotesync func hit(damage:int, id:int):
+master func hit(damage:int, id:int):
 	
 	health = int(max(0, health-damage))
 	
 	$Sprite.modulate = Color(1, float(health)/maxHealth,float(health)/maxHealth, 1) 
 	
 	if health <= 0:
-		destroy()
+		rpc("destroy")
 	
 	pass
 	
@@ -20,7 +20,7 @@ remotesync func remove():
 	destroy()
 	pass
 	
-func destroy():
+remotesync func destroy():
 	
 	emit_signal("destroyed", global_position)
 	queue_free()
