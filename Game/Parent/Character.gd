@@ -75,6 +75,7 @@ export var killLines:PoolStringArray = []
 var killStreams:Array
 
 var allAllies:Array = []
+var spawnPos:Vector2
 
 signal lagging()
 
@@ -129,6 +130,7 @@ func initialize(id:int, allies:Array=[]):
 func loaded():
 	loaded = true
 	$Spawn.play()
+	spawnPos = global_position
 
 func _process(delta):
 	if loaded:
@@ -538,4 +540,15 @@ remotesync func enableAttacks(d:bool):
 	else:
 		canUseAttack1 += 1
 		canUseAttack2 += 1
+	pass
+
+remotesync func reset(pos:Vector2=spawnPos):
+	
+	heal(100000)
+	global_position = pos
+	masterPos = pos
+	reloadAmmo(maxAmmo-ammo)
+	setAbility1Cooldown(0)
+	setAbility2Cooldown(0)
+	
 	pass

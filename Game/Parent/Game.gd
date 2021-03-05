@@ -65,6 +65,7 @@ func spawnPlayers(players:Dictionary, points:Array, s:int):
 		
 	pass
 	
+	
 func playerDamaged(player:int, hitter:int):
 	
 	if not killWatch.has(player):

@@ -65,6 +65,20 @@ func updateTeam():
 	rpc("setTeam", team)
 	
 	pass
+	
+func setTeamRange(amount:int):
+	
+	$VBoxContainer/Team.clear()
+	
+	if amount  == -1:
+		$VBoxContainer/Team.add_item("-", 0)
+		for i in range(1, 11):
+			$VBoxContainer/Team.add_item(String(i), i)
+	else:
+		for i in range(1, amount+1):
+			$VBoxContainer/Team.add_item(String(i), i)
+	
+	pass
 
 func _on_Kick_pressed():
 	emit_signal("kick", self)
