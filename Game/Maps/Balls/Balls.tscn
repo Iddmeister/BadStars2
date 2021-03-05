@@ -10,6 +10,10 @@ extents = Vector2( 16, 16 )
 
 [node name="Balls" instance=ExtResource( 1 )]
 
+[node name="CollisionPolygon2D" parent="MapArea" index="0"]
+visible = false
+polygon = PoolVector2Array( 0, -632, 1288, -632, 1280, 632, 0, 632 )
+
 [node name="Terrain" type="Node2D" parent="." index="1"]
 
 [node name="Wall" type="StaticBody2D" parent="Terrain" index="0"]
@@ -27,9 +31,9 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Wall3" type="StaticBody2D" parent="Terrain" index="1"]
-position = Vector2( 634.284, -624.284 )
+position = Vector2( 650, -640 )
 rotation = 1.57079
-scale = Vector2( 1, 40 )
+scale = Vector2( 1, 41 )
 collision_layer = 2
 collision_mask = 0
 __meta__ = {
@@ -43,7 +47,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Wall4" type="StaticBody2D" parent="Terrain" index="2"]
-position = Vector2( 633.993, 625.746 )
+position = Vector2( 650, 640 )
 rotation = 1.57079
 scale = Vector2( 1, 40 )
 collision_layer = 2
@@ -59,7 +63,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Wall2" type="StaticBody2D" parent="Terrain" index="3"]
-position = Vector2( 1281.35, 0 )
+position = Vector2( 1297.35, 0 )
 scale = Vector2( 1, 40 )
 collision_layer = 2
 collision_mask = 0
@@ -74,25 +78,23 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Ball" parent="." index="2" instance=ExtResource( 4 )]
-position = Vector2( 656.423, 58.0841 )
+position = Vector2( 650, 0 )
 
-[node name="SpawnPositions" type="Node2D" parent="." index="3"]
+[node name="Goal1" parent="." index="3" instance=ExtResource( 5 )]
+position = Vector2( 650, -580 )
 
-[node name="Team1" type="Position2D" parent="SpawnPositions" index="0" groups=[
-"SpawnPoint",
-]]
-position = Vector2( 748.355, 534.539 )
-
-[node name="Team2" type="Position2D" parent="SpawnPositions" index="1" groups=[
-"SpawnPoint",
-]]
-position = Vector2( 726.997, -421.206 )
-
-[node name="Goal1" parent="." index="4" instance=ExtResource( 5 )]
-position = Vector2( 636.171, -577.651 )
-
-[node name="Goal2" parent="." index="5" instance=ExtResource( 5 )]
-position = Vector2( 612, 552 )
+[node name="Goal2" parent="." index="4" instance=ExtResource( 5 )]
+position = Vector2( 650, 580 )
 team = 2
+
+[node name="Team1Spawn" type="Position2D" parent="." index="5" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 650, 430 )
+
+[node name="Team2Spawn" type="Position2D" parent="." index="6" groups=[
+"SpawnPoint",
+]]
+position = Vector2( 650, -430 )
 
 [editable path="MapArea"]

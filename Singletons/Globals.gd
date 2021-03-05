@@ -38,6 +38,7 @@ var gameModes = {
 			"scene":"res://Game/Modes/BadBall/BadBall.tscn",
 			"teams":YES,
 			"maps":["Balls"],
+			"teamRange":2
 		}
 	
 }

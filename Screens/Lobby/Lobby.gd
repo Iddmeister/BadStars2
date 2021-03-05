@@ -272,6 +272,11 @@ remotesync func setMode(mode:int):
 	if not is_network_master():
 		$Main/Options/VBoxContainer/Teams.disabled = true
 		
+	if Globals.gameModes[gameMode.get_item_text(mode)].has("teamRange"):
+		get_tree().call_group("PlayerIcon", "setTeamRange", Globals.gameModes[gameMode.get_item_text(mode)].teamRange)
+	else:
+		get_tree().call_group("PlayerIcon", "setTeamRange", -1)
+		
 	updateMaps(gameMode.get_item_text(gameMode.selected))
 	
 	pass

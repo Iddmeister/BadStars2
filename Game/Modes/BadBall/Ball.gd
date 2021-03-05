@@ -21,10 +21,7 @@ func _physics_process(delta):
 		
 		if collision:
 			
-			if collision.collider.is_in_group("Player"):
-				rpc("kick", (global_position-collision.collider.global_position).angle())
-			else:
-				velocity = move_and_slide(velocity)
+			velocity = velocity.bounce(collision.normal)*0.7
 				
 		rpc("updateState", global_position)
 		
@@ -48,4 +45,8 @@ remotesync func setState(pos:Vector2):
 	
 	
 remotesync func reset():
-	global_position = spawnPos
+	setState(spawnPos)
+
+
+func _on_KickArea_body_entered(body):
+	rpc("kick", (global_position-body.global_position).angle())
