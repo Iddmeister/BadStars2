@@ -11,6 +11,19 @@ var speedBodies = []
 
 var speeding:bool = false
 
+func setupSkin():
+	
+	match skin:
+		
+		"Udyr":
+			
+			$Graphics/Sprite.texture = load("res://Game/Characters/Barrel/Udyr.png")
+			$Graphics/Sprite.scale = Vector2(0.15, 0.15)
+			$Hit.pitch_scale = 3
+			$Death.pitch_scale = 3
+
+
+
 func _draw():
 	
 	if speeding:
