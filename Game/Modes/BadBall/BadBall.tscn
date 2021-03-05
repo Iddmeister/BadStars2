@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Parent/Game.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Modes/BadBall/BadBall.gd" type="Script" id=2]
+[ext_resource path="res://Misc/Fonts/Neufreit-ExtraBold.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="BadBall" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI" index="0"]
+anchor_right = 1.0
+margin_right = -866.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer" index="0"]
+margin_left = 51.0
+margin_right = 107.0
+margin_bottom = 80.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/VBoxContainer" index="0"]
+margin_right = 56.0
+margin_bottom = 38.0
+custom_constants/separation = 20
+
+[node name="Team1" type="Label" parent="UI/CenterContainer/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 18.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0.811765, 1, 1 )
+text = "0"
+
+[node name="Team2" type="Label" parent="UI/CenterContainer/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 38.0
+margin_right = 56.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "0"
+
+[node name="TimeText" type="Label" parent="UI/CenterContainer/VBoxContainer" index="1"]
+margin_top = 42.0
+margin_right = 56.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 1 )
+text = "60"
+align = 1
+
+[node name="Time" type="Timer" parent="." index="4"]
+wait_time = 60.0
+one_shot = true
+
+[node name="Second" type="Timer" parent="." index="5"]
+
+[node name="Respawn" type="Timer" parent="." index="6"]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="Time" to="." method="_on_Time_timeout"]
+[connection signal="timeout" from="Second" to="." method="_on_Second_timeout"]
+[connection signal="timeout" from="Respawn" to="." method="_on_Respawn_timeout"]

@@ -160,3 +160,4 @@ middleMouse={
 2d_physics/layer_4="Melee"
 2d_physics/layer_5="Pickups"
 2d_physics/layer_6="Monitors"
+2d_physics/layer_7="Ball"

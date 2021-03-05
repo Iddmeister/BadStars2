@@ -50,6 +50,8 @@ func gotPing(id:int):
 	
 func updateMaps(mode:String):
 	
+	gameMap.clear()
+	
 	for map in Globals.gameModes[mode].maps:
 		gameMap.add_item(map, gameMap.get_item_count())
 	
@@ -269,6 +271,8 @@ remotesync func setMode(mode:int):
 			
 	if not is_network_master():
 		$Main/Options/VBoxContainer/Teams.disabled = true
+		
+	updateMaps(gameMode.get_item_text(gameMode.selected))
 	
 	pass
 	

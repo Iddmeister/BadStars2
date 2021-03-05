@@ -33,6 +33,12 @@ var gameModes = {
 		"teams":OPTIONAL,
 		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell", "Training Zone"]
 		},
+	"Bad Ball":
+		{
+			"scene":"res://Game/Modes/BadBall/BadBall.tscn",
+			"teams":YES,
+			"maps":["Balls"],
+		}
 	
 }
 
@@ -44,5 +50,6 @@ var maps = {
 	"Spiky":"res://Game/Maps/Spiky/Spiky.tscn",
 	"hell":"res://Game/Maps/hell/hell.tscn",
 	"Training Zone":"res://Game/Maps/TrainingZone/TrainingZone.tscn",
+	"Balls":"res://Game/Maps/Balls/Balls.tscn",
 	
 }
