@@ -20,6 +20,7 @@ func setupSkin():
 			$Graphics/Sprite.texture = load("res://Game/Characters/Barrel/Udyr.png")
 			$Graphics/Sprite.scale = Vector2(0.15, 0.15)
 			$Bear.scale = Vector2(0.076, 0.119)
+			$Bear.visible = false
 			var Hitu = preload("res://Game/Characters/Barrel/bonk2.wav")
 			var Deathu = preload("res://Game/Characters/Barrel/death.wav")
 			var Spawnu = preload("res://Game/Characters/Barrel/spawn_sound.wav")

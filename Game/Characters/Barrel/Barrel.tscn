@@ -103,7 +103,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0.1, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -171,7 +171,8 @@ anims/Spin = SubResource( 7 )
 
 [node name="Bear" type="Sprite" parent="." index="17"]
 visible = false
-position = Vector2( 0, -128.953 )
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -200 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = SubResource( 9 )
 
