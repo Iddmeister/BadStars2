@@ -492,7 +492,10 @@ master func setAbility2Cooldown(amount:float):
 	if ability2Charge <= 0:
 		emit_signal("ability2Charged")
 	
-
+master func setGraphics():
+	$Graphics/Sprite.texture = load("res://Game/Characters/noted/Gnome.png")
+	$Graphics/Sprite.scale = Vector2(0.15, 0.15)
+	
 func updateCooldowns(delta:float):
 	
 	if not currentAmmoBox >= maxAmmo:

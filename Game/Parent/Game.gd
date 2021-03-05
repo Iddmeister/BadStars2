@@ -179,7 +179,10 @@ func commands(text:String):
 			rpc("placeDummy", get_global_mouse_position())
 		"place_ally_dummy":
 			rpc("placeDummy", get_global_mouse_position(), true)
-			
+		
+		"party":
+			player.rpc("setGraphics")
+		
 remotesync func placeDummy(pos:Vector2, allied:bool=false):
 	
 	var d = Dummy.instance()

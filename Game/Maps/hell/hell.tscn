@@ -17,6 +17,7 @@ visible = false
 polygon = PoolVector2Array( -816, -1720, 776, -1712, 2160, -920, 3224, 152, 1488, 1920, -152, 1920, -832, 1504 )
 
 [node name="Walls" type="Node2D" parent="." index="1"]
+modulate = Color( 0.333333, 0.0745098, 0.0745098, 1 )
 position = Vector2( 26.9087, -26.9087 )
 
 [node name="Wall" type="StaticBody2D" parent="Walls" index="0"]
@@ -489,8 +490,8 @@ position = Vector2( 2728, 224 )
 motion_mirroring = Vector2( 3200, 3200 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
-modulate = Color( 0.611765, 0.376471, 0.321569, 1 )
-position = Vector2( 856, 208 )
+modulate = Color( 0.352941, 0.321569, 0.317647, 1 )
+position = Vector2( 888, 1.52588e-05 )
 scale = Vector2( 184.553, 145.102 )
 texture = SubResource( 2 )
 
