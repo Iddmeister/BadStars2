@@ -19,13 +19,16 @@ func setupSkin():
 			
 			$Graphics/Sprite.texture = load("res://Game/Characters/Barrel/Udyr.png")
 			$Graphics/Sprite.scale = Vector2(0.15, 0.15)
+			$Bear.scale = Vector2(0.076, 0.119)
 			var Hitu = preload("res://Game/Characters/Barrel/bonk2.wav")
 			var Deathu = preload("res://Game/Characters/Barrel/death.wav")
 			var Spawnu = preload("res://Game/Characters/Barrel/spawn_sound.wav")
 			var Winu = preload("res://Game/Characters/Barrel/Victory_sound.wav")
+			var killu = preload("res://Game/Characters/Barrel/kill_3.wav")
 			$Hit.stream = Hitu
 			$Death.stream = Deathu
 			$Spawn.stream = Spawnu
+			$Kill.stream = killu
 			$Win.stream = Winu
 			$AnimationPlayer.play("Spin")
 			$Bear.visible = true
@@ -53,9 +56,7 @@ func ability1():
 func ability2():
 	
 	rpc("speedArea")
-	$AnimationPlayer.play("Uga")
-	yield(get_tree().create_timer(1), "timeout")
-	$AnimationPlayer.play("Spin")
+	$AnimationPlayer2.play("Uga")
 	
 remotesync func speedArea():
 	

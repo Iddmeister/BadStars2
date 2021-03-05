@@ -67,6 +67,9 @@ tracks/0/keys = {
 "values": [ 0.0, 25.0, -45.0 ]
 }
 
+[sub_resource type="StreamTexture" id=9]
+load_path = "res://.import/uga.png-d6f6c9cb6e554fb1aa9ea3beb2875a73.stex"
+
 [sub_resource type="Animation" id=8]
 resource_name = "Uga"
 tracks/0/type = "value"
@@ -93,9 +96,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="StreamTexture" id=9]
-load_path = "res://.import/uga.png-d6f6c9cb6e554fb1aa9ea3beb2875a73.stex"
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bear:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Barrel" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -156,14 +168,15 @@ shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="16"]
 anims/Spin = SubResource( 7 )
-anims/Uga = SubResource( 8 )
 
 [node name="Bear" type="Sprite" parent="." index="17"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -200 )
-scale = Vector2( 0.0758554, 0.119473 )
+position = Vector2( 0, -128.953 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = SubResource( 9 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="18"]
+anims/Uga = SubResource( 8 )
 [connection signal="body_entered" from="Damage" to="." method="_on_Damage_body_entered"]
 [connection signal="body_entered" from="Speed" to="." method="_on_Speed_body_entered"]
 [connection signal="body_exited" from="Speed" to="." method="_on_Speed_body_exited"]
