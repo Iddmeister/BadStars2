@@ -31,7 +31,7 @@ var gameModes = {
 		{
 		"scene":"res://Game/Modes/FreeForAll/FreeForAll.tscn",
 		"teams":OPTIONAL,
-		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell", "Training Zone"]
+		"maps":["Box Boy", "THE OCTAGON", "uwu", "Spiky", "hell", "Training Zone", "Swamp"]
 		},
 	"Bad Ball":
 		{
@@ -52,5 +52,6 @@ var maps = {
 	"hell":"res://Game/Maps/hell/hell.tscn",
 	"Training Zone":"res://Game/Maps/TrainingZone/TrainingZone.tscn",
 	"Balls":"res://Game/Maps/Balls/Balls.tscn",
+	"Swamp": "res://Game/Maps/Swamp/Swamp.tscn",
 	
 }

@@ -26,6 +26,13 @@ func setupSkin():
 			$Spawn.stream = squelch
 			$Win.stream = squelch
 			killLines = PoolStringArray(["res://Game/Characters/Clot/Squelch.wav"])
+			
+		"Cloddmeister":
+			
+			$Graphics/Sprite.texture = load("res://Game/Characters/Clot/Cloddmeister.png")
+			$Spawn.pitch_scale = 1.5
+			$Win.pitch_scale = 1.5
+			$Death.pitch_scale = 1.5
 	pass
 
 func attack1():

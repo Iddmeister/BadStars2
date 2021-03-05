@@ -28,6 +28,7 @@ var characters:Dictionary = {
 			"skins":
 				{
 					"Blood Clot":"res://Game/Characters/Clot/RedBloodCell.png",
+					"Cloddmeister":"res://Game/Characters/Clot/Cloddmeister.png",
 				
 				}
 		},
@@ -118,7 +119,12 @@ var characters:Dictionary = {
 			  "attack2":"none",
 			  "ability1":"BONK\nRecharges on hit",
 			  "ability2":"Woooooosh\nAllies are speed and enemies are slow",
-			}
+			},
+			"skins":
+				{
+					"Udyr":"res://Game/Characters/Barrel/Udyr.png",
+				
+				}
 	},
 	
 	"Bob The Builder":

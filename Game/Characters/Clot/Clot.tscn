@@ -108,6 +108,10 @@ use_parent_material = true
 scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
+[node name="Main" parent="UI" index="0"]
+anchor_left = -0.00130355
+anchor_right = 0.998696
+
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
 custom_styles/panel = SubResource( 6 )
 icon = ExtResource( 12 )
