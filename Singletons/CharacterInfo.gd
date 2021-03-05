@@ -28,6 +28,7 @@ var characters:Dictionary = {
 			"skins":
 				{
 					"Blood Clot":"res://Game/Characters/Clot/RedBloodCell.png",
+					"Cloddmeister":"res://Game/Characters/Clot/Cloddmeister.png",
 				
 				}
 		},
