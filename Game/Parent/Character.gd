@@ -32,6 +32,7 @@ var dead:bool = false
 var canMove:int = 0
 var invincible:int = 0
 var slippery:int = 0
+var invisible:int = 0
 var knockedUp:float = false
 
 var team:int = 0
@@ -200,6 +201,15 @@ func movement(delta:float):
 	rpc_unreliable("updateState", global_position, Network.clock, setUpdate)
 
 func updateEffects(delta:float):
+	
+	if invisible > 0:
+		if not is_in_group("Ally"+String(get_tree().get_network_unique_id())):
+			visible = false
+		else:
+			modulate.a = 0.5
+	else:
+		modulate.a = 1
+		visible = true
 	
 	for id in activeEffects.keys():
 		

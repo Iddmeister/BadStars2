@@ -1,20 +1,22 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=1]
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Characters/Ninja Turtle/Ninja Turtle.gd" type="Script" id=3]
 [ext_resource path="res://Game/Characters/Ninja Turtle/Donatello.png" type="Texture" id=4]
+[ext_resource path="res://Game/Characters/Ninja Turtle/Skateboard.png" type="Texture" id=5]
+[ext_resource path="res://Game/Characters/Ninja Turtle/SmokeBomb.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 24.5096
 height = 21.0089
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/enabled = false
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 void fragment() {
@@ -29,10 +31,10 @@ void fragment() {
 	
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=5]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -45,7 +47,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -58,26 +60,55 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[node name="Ninja Turtle" instance=ExtResource( 2 )]
+[sub_resource type="CircleShape2D" id=7]
+radius = 190.887
+
+[node name="Ninja Turtle" groups=[
+"Turtle",
+] instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+ability1Cooldown = 10.0
+ability2Cooldown = 10.0
+smokeBombRange = 170.0
+SmokeBomb = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="Graphics" parent="." index="1"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
-material = SubResource( 5 )
+material = SubResource( 4 )
 position = Vector2( -1.3691, -2.97099 )
 scale = Vector2( 0.28, 0.28 )
 texture = ExtResource( 4 )
 
+[node name="Skateboard" type="Sprite" parent="Graphics" index="1"]
+visible = false
+position = Vector2( 0, 34.829 )
+scale = Vector2( 0.2, 0.2 )
+z_index = -1
+texture = ExtResource( 5 )
+
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 5 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="Tag" parent="." index="5"]
 position = Vector2( 0, 44.485 )
+
+[node name="SkateArea" type="Area2D" parent="." index="13"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkateArea" index="0"]
+shape = SubResource( 7 )
+
+[node name="SkateTime" type="Timer" parent="." index="14"]
+wait_time = 5.0
+one_shot = true
+[connection signal="body_entered" from="SkateArea" to="." method="_on_SkateArea_body_entered"]
+[connection signal="body_exited" from="SkateArea" to="." method="_on_SkateArea_body_exited"]
+[connection signal="timeout" from="SkateTime" to="." method="_on_SkateTime_timeout"]
