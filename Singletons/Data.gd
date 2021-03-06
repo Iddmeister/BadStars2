@@ -11,6 +11,7 @@ var data = {
 			"attack2":{"type":"mouse", "button_index":2},
 			"ability1":{"type":"key", "scancode":81},
 			"ability2":{"type":"key", "scancode":69},
+			"cursorMove":{},
 		
 		}
 	
@@ -27,18 +28,27 @@ func _ready():
 	
 func updateControls():
 	
-	InputMap.action_erase_events("attack1")
-	InputMap.action_add_event("attack1", getInputEventFromDict(data.controls.attack1))
+	
+	for control in data.controls.keys():
+		if not data.controls[control].empty():
+			InputMap.action_erase_events(control)
+			InputMap.action_add_event(control, getInputEventFromDict(data.controls[control]))
+		
 
-	InputMap.action_erase_events("attack2")
-	InputMap.action_add_event("attack2", getInputEventFromDict(data.controls.attack2))
-
-	InputMap.action_erase_events("ability1")
-	InputMap.action_add_event("ability1", getInputEventFromDict(data.controls.ability1))
-
-	InputMap.action_erase_events("ability2")
-	InputMap.action_add_event("ability2", getInputEventFromDict(data.controls.ability2))
-
+#	InputMap.action_erase_events("attack1")
+#	InputMap.action_add_event("attack1", getInputEventFromDict(data.controls.attack1))
+#
+#	InputMap.action_erase_events("attack2")
+#	InputMap.action_add_event("attack2", getInputEventFromDict(data.controls.attack2))
+#
+#	InputMap.action_erase_events("ability1")
+#	InputMap.action_add_event("ability1", getInputEventFromDict(data.controls.ability1))
+#
+#	InputMap.action_erase_events("ability2")
+#	InputMap.action_add_event("ability2", getInputEventFromDict(data.controls.ability2))
+#
+	
+	
 func saveData():
 	
 	var file = ConfigFile.new()

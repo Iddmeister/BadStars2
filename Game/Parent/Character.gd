@@ -96,6 +96,12 @@ func _ready():
 		ammoBoxes.add_child(b)
 	updateHealth()
 	
+func playerDisconnected(id:int):
+	
+	if id == get_network_master():
+		hit(100000, -9)
+	
+	pass
 	
 func setupSkin():
 	pass
@@ -160,6 +166,9 @@ func _physics_process(delta):
 				
 
 func getMoveDirection() -> Vector2:
+	
+	if Input.is_action_pressed("cursorMove"):
+		return Vector2(1, 0).rotated(getAimDirection())
 	
 	var dir = Vector2(0, 0)
 	
@@ -494,8 +503,8 @@ master func setAbility2Cooldown(amount:float):
 	if ability2Charge <= 0:
 		emit_signal("ability2Charged")
 	
-master func setGraphics():
-	$Graphics/Sprite.texture = load("res://Game/Characters/noted/Gnome.png")
+remotesync func setGraphics():
+	$Graphics/Sprite.texture = load("res://Game/Characters/Noted/Gnome.png")
 	$Graphics/Sprite.scale = Vector2(0.15, 0.15)
 	
 func updateCooldowns(delta:float):

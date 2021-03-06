@@ -15,6 +15,8 @@ var info = {
 
 
 var players:Dictionary = {}
+var pingQueue:Array = []
+var pinging:bool = false
 
 signal playerJoined(id)
 signal playerLeft()
@@ -66,6 +68,10 @@ func _ready():
 
 func _process(delta):
 	
+	if not pinging and not pingQueue.empty():
+		yield(getAveragePing(pingQueue[0]), "completed")
+		pingQueue.remove(0)
+	
 	if inGame:
 	
 		clock += delta
@@ -76,12 +82,17 @@ var pings:int = 100
 
 func getAveragePing(id:int):
 	
+	pinging = true
+	
 	var total:int
 	
 	for i in range(pings):
 		total += yield(measurePing(id), "completed")
-		
-	return ceil(float(total)/pings)
+	
+	players[id].ping = ceil((float(total)/pings)/2)
+	yield(syncClock(id), "completed")
+	rpc("gotPing", id, players[id].ping)
+	pinging = false
 
 func hostGame():
 	
@@ -115,9 +126,7 @@ remotesync func addPlayer(id:int, i:Dictionary):
 	emit_signal("playerJoined", id)
 	
 	if is_network_master():
-		players[id].ping = yield(getAveragePing(id), "completed")/2
-		yield(syncClock(id), "completed")
-		rpc("gotPing", id, players[id].ping)
+		pingQueue.append(id)
 	
 	pass
 	
