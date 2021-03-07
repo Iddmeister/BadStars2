@@ -10,6 +10,13 @@ height = 87.6362
 [node name="Sai" instance=ExtResource( 1 )]
 maxDistance = 600.0
 damage = 35
+effects = [ {
+"info": {
+"slow": 100.0
+},
+"time": 0.7,
+"type": "slow"
+} ]
 collideWithEnemies = true
 speed = 450.0
 
