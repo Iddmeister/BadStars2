@@ -165,10 +165,10 @@ func commands(text:String):
 			player.rpc("heal", 100000)
 		
 		"invincible":
-			player.devInvincible = not player.devInvincible
+			player.rset("devInvincible",  not player.devInvincible)
 		
 		"noclip":
-			player.devInvincible = not player.devInvincible
+			player.rset("devInvincible",  not player.devInvincible)
 			player.get_node("CollisionShape2D").disabled = not player.get_node("CollisionShape2D").disabled
 		
 		"reset":
@@ -180,7 +180,6 @@ func commands(text:String):
 			rpc("placeDummy", get_global_mouse_position())
 		"place_ally_dummy":
 			rpc("placeDummy", get_global_mouse_position(), true)
-		
 		"party":
 			player.rpc("setGraphics")
 		

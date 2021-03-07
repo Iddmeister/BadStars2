@@ -33,6 +33,8 @@ func _process(delta):
 
 func _ready():
 	$Play/CenterContainer/VBoxContainer/Name.text = Network.info.name
+	if Globals.devMode:
+		$Dev.show()
 	pass
 
 

@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://Game/Parent/Game.gd"
 }, {
 "base": "Area2D",
+"class": "Melee",
+"language": "GDScript",
+"path": "res://Game/Melee/Melee.gd"
+}, {
+"base": "Area2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Game/Projectiles/Projectile.gd"
@@ -54,6 +59,7 @@ _global_script_class_icons={
 "Drake": "",
 "Effect": "",
 "Game": "",
+"Melee": "",
 "Projectile": "",
 "SimpleProjectile": "",
 "StraightProjectile": "",

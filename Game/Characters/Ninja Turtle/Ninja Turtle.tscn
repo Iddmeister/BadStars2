@@ -1,11 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Misc/greyscale.shader" type="Shader" id=1]
 [ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Characters/Ninja Turtle/Ninja Turtle.gd" type="Script" id=3]
-[ext_resource path="res://Game/Characters/Ninja Turtle/Donatello.png" type="Texture" id=4]
+[ext_resource path="res://Game/Characters/Ninja Turtle/Leonardo.png" type="Texture" id=4]
 [ext_resource path="res://Game/Characters/Ninja Turtle/Skateboard.png" type="Texture" id=5]
 [ext_resource path="res://Game/Characters/Ninja Turtle/SmokeBomb.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Melee/Melee.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Characters/Ninja Turtle/Sword.png" type="Texture" id=8]
+[ext_resource path="res://Game/Characters/Ninja Turtle/Leonardo.gd" type="Script" id=9]
+[ext_resource path="res://Misc/Circle.png" type="Texture" id=10]
+[ext_resource path="res://Game/Characters/Ninja Turtle/Raphael.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.5096
@@ -33,6 +38,65 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 62.9511, 23.4695 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Slash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22.9449, 11.7162 ), Vector2( 35.6728, -14.8003 ), Vector2( 29.7866, -8.49362 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 297.006, 416.502, 478.046 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "startDamage"
+}, {
+"args": [  ],
+"method": "endDamage"
+} ]
+}
 
 [sub_resource type="StyleBoxFlat" id=5]
 resource_local_to_scene = true
@@ -69,6 +133,7 @@ radius = 190.887
 script = ExtResource( 3 )
 ability1Cooldown = 10.0
 ability2Cooldown = 10.0
+skateSpeed = 300.0
 smokeBombRange = 170.0
 SmokeBomb = ExtResource( 6 )
 
@@ -80,8 +145,8 @@ material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 material = SubResource( 4 )
-position = Vector2( -1.3691, -2.97099 )
-scale = Vector2( 0.28, 0.28 )
+position = Vector2( -12.3957, -1.12563 )
+scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 4 )
 
 [node name="Skateboard" type="Sprite" parent="Graphics" index="1"]
@@ -90,6 +155,43 @@ position = Vector2( 0, 34.829 )
 scale = Vector2( 0.2, 0.2 )
 z_index = -1
 texture = ExtResource( 5 )
+
+[node name="Attacks" type="Node2D" parent="Graphics" index="2"]
+
+[node name="Leonardo" type="Node2D" parent="Graphics/Attacks" index="0"]
+script = ExtResource( 9 )
+
+[node name="Slash" parent="Graphics/Attacks/Leonardo" index="0" instance=ExtResource( 7 )]
+characterPath = NodePath("../../../..")
+damage = 45
+collideWithEnemies = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Attacks/Leonardo/Slash" index="0"]
+position = Vector2( 50, 0 )
+shape = SubResource( 8 )
+
+[node name="Animation" type="AnimationPlayer" parent="Graphics/Attacks/Leonardo/Slash" index="1"]
+playback_speed = 3.0
+anims/Slash = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Graphics/Attacks/Leonardo/Slash" index="2"]
+visible = false
+position = Vector2( 29.7866, -8.49362 )
+rotation = 8.34348
+scale = Vector2( 2, 1 )
+texture = ExtResource( 8 )
+offset = Vector2( 10.24, 0.66592 )
+
+[node name="DamageReduction" type="Timer" parent="Graphics/Attacks/Leonardo/Slash" index="3"]
+one_shot = true
+
+[node name="Shield" type="Sprite" parent="Graphics/Attacks/Leonardo" index="1"]
+visible = false
+modulate = Color( 0, 0.996078, 1, 0.0862745 )
+texture = ExtResource( 10 )
+
+[node name="Raphael" type="Node2D" parent="Graphics/Attacks" index="1"]
+script = ExtResource( 11 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
 custom_styles/panel = SubResource( 5 )
@@ -109,6 +211,7 @@ shape = SubResource( 7 )
 [node name="SkateTime" type="Timer" parent="." index="14"]
 wait_time = 5.0
 one_shot = true
+[connection signal="timeout" from="Graphics/Attacks/Leonardo/Slash/DamageReduction" to="Graphics/Attacks/Leonardo" method="_on_DamageReduction_timeout"]
 [connection signal="body_entered" from="SkateArea" to="." method="_on_SkateArea_body_entered"]
 [connection signal="body_exited" from="SkateArea" to="." method="_on_SkateArea_body_exited"]
 [connection signal="timeout" from="SkateTime" to="." method="_on_SkateTime_timeout"]
