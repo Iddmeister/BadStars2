@@ -8,6 +8,16 @@ export var angle:float = 30
 export var maxShitZoneRange:float = 400
 export var reloadDamage:int = 30
 
+func setupSkin():
+	
+	match skin:
+		
+		"Shmelly Prestige Edition":
+			
+			$Graphics/Sprite.texture = load("res://Game/Characters/Shmelly/ShmellyPrestige.png")
+			$Graphics/Pivot/Gun.texture = load("res://Game/Characters/Shmelly/ShmellyGunPrestige.png")
+			$Graphics/Sprite.texture = load("res://Game/Characters/Shmelly/ShmellyPrestige.png")
+
 func attack1():
 	$Graphics/Pivot.global_rotation = getAimDirection()
 	rpc("shoot", get_network_master(), $Graphics/Pivot.global_position, getAimDirection(), Network.clock, 0)
@@ -65,3 +75,4 @@ remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):
 	#$Shoot.play()
 	
 	pass
+	

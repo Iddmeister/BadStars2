@@ -45,6 +45,10 @@ var characters:Dictionary = {
 					"ability1":"Reloads all ammo, breaking her fingers and taking damage in the process",
 					"ability2":"Places a zone causing enemies to catch Diarrhea and shit violently. The shit heals Shmelly",
 				},
+			"skins":
+				{
+					"Shmelly Prestige Edition":"res://Game/Characters/Shmelly/ShmellyPrestige.png",
+				}
 		},
 		
 	"Will Smith":
@@ -92,6 +96,10 @@ var characters:Dictionary = {
 		  "ability1":"Shits out ice",
 		  "ability2":"Ice Wall",
 		}, 
+		"skins":
+				{
+					"Pool Party Frozone":"res://Game/Characters/Frozone/FrozonePool.png",
+				}
 	},
 		
 	"Go'Chath":

@@ -10,7 +10,6 @@ func _on_ShitZone_body_entered(body):
 		randomize()
 		body.rpc("addEffect", Manager.generateUniqueID(), "diarrhea", diarrheaBuildUp, {"s":int(rand_range(0, 100)), "masterID":masterID})
 
-
 func _on_Exist_timeout():
 	queue_free()
 	

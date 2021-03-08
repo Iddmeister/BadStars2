@@ -8,6 +8,14 @@ export var speedIncrease:float = 300
 export var IceWall:PackedScene
 var timePassed:float = 0
 
+func setupSkin():
+	
+	match skin:
+		
+		"Pool Party Frozone":
+			
+			$Graphics/Sprite.texture = load("res://Game/Characters/Frozone/FrozonePool.png")
+
 func attack1():
 	rpc("shoot", get_network_master(), global_position, getAimDirection(), Network.clock, 0)
 	pass

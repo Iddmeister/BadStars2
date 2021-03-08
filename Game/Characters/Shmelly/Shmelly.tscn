@@ -9,16 +9,16 @@
 [ext_resource path="res://Game/Characters/Shmelly/PoisonBullet.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Characters/Shmelly/ShitZone.tscn" type="PackedScene" id=8]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 24.6812
 height = 47.5003
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/enabled = false
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -31,7 +31,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 resource_local_to_scene = true
 bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
 border_width_left = 2
@@ -59,10 +59,10 @@ ShitZone = ExtResource( 8 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, 5.46583 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Graphics" parent="." index="1"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Graphics" index="0"]
 use_parent_material = true
@@ -82,10 +82,10 @@ texture = ExtResource( 4 )
 position = Vector2( 14.592, -1.96431 )
 
 [node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Tag" parent="." index="5"]
 position = Vector2( 0, 48 )
