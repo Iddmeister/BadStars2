@@ -5,8 +5,15 @@ export var slowAmount:float = 100
 export var healAmount:int = 50
 var masterID:int
 
+var shitSkin:Texture
+
 var finalPos:Vector2
 var speed:float = 0.5
+
+func _ready():
+	
+	if shitSkin:
+		$Sprite.texture = shitSkin
 
 func _process(delta):
 	

@@ -8,6 +8,9 @@ export var angle:float = 30
 export var maxShitZoneRange:float = 400
 export var reloadDamage:int = 30
 
+var shitSkin:Texture
+var shitZoneSkin:Texture
+
 func setupSkin():
 	
 	match skin:
@@ -16,8 +19,9 @@ func setupSkin():
 			
 			$Graphics/Sprite.texture = load("res://Game/Characters/Shmelly/ShmellyPrestige.png")
 			$Graphics/Pivot/Gun.texture = load("res://Game/Characters/Shmelly/ShmellyGunPrestige.png")
-			$Graphics/Sprite.texture = load("res://Game/Characters/Shmelly/ShmellyPrestige.png")
-
+			shitSkin = load("res://Game/Characters/Shmelly/ShitPrestige.png")
+			shitZoneSkin = load("res://Game/Characters/Shmelly/ShmellyPoisonPrestige.png")
+			
 func attack1():
 	$Graphics/Pivot.global_rotation = getAimDirection()
 	rpc("shoot", get_network_master(), $Graphics/Pivot.global_position, getAimDirection(), Network.clock, 0)
@@ -42,6 +46,8 @@ remotesync func placeShitZone(pos:Vector2):
 	var s = ShitZone.instance()
 	s.masterID = get_network_master()
 	s.global_position = pos
+	if shitZoneSkin:
+		s.skin = shitZoneSkin
 	Manager.loose.add_child(s)
 
 remotesync func shoot(id:int, pos:Vector2, dir:float, time:float, bulletType):

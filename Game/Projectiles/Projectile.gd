@@ -9,8 +9,13 @@ var masterID:int
 var startTime:float
 var synced:bool = false
 var started:bool = false
+var skin:String
 
 signal collided(body)
+
+	
+func setupSkin():
+	pass
 
 func _physics_process(delta):
 	
@@ -26,6 +31,9 @@ func _physics_process(delta):
 			move(delta)
 
 func initialize(id:int, start:Vector2, dir:float, _startTime:float):
+	if Globals.currentGameInfo.players[id].has("skin"):
+		skin = Globals.currentGameInfo.players[id].skin
+		setupSkin()
 	masterID = id
 	startPos = start
 	startTime = _startTime

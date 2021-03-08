@@ -2,6 +2,12 @@ extends Area2D
 
 var masterID:int
 export var diarrheaBuildUp:float = 3
+var skin:Texture
+
+func _ready():
+	if skin:
+		$Sprite.texture = skin
+	
 
 func _on_ShitZone_body_entered(body):
 	if not is_network_master():

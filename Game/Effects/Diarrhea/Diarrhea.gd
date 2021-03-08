@@ -19,8 +19,12 @@ func end(info:Dictionary, player:Character):
 		
 		var shit = Shit.instance()
 		shit.name = String(masterID)+"shit"+String(i)
-		Manager.loose.add_child(shit)
 		shit.masterID = masterID
+		
+		if player.get_parent().has_node(String(masterID)):
+			shit.shitSkin = player.get_parent().get_node(String(masterID)).shitSkin
+
+		Manager.loose.add_child(shit)
 		shit.global_position = player.global_position
 		seed(s+i)
 		shit.finalPos = shit.global_position+Vector2(160, 0).rotated(deg2rad(rand_range(0, 360)))
