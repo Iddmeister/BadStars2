@@ -19,7 +19,7 @@ func updates(delta:float):
 
 func attack1():
 	
-	rpc("placeBlock", get_global_mouse_position())
+	rpc("placeBlock", get_global_mouse_position(), Manager.generateUniqueID())
 	
 	pass
 	
@@ -53,7 +53,7 @@ remotesync func placeSpike(pos:Vector2):
 	b.global_position = Vector2(round(pos.x/80)*80,round(pos.y/80)*80)
 	$Build.play()
 	
-remotesync func placeBlock(pos:Vector2):
+remotesync func placeBlock(pos:Vector2, id:String):
 	
 	pos = global_position+(pos-global_position).clamped(buildRange)
 	
@@ -61,6 +61,7 @@ remotesync func placeBlock(pos:Vector2):
 		return
 	
 	var b = Block.instance()
+	b.name = "Block"+String(get_network_master())+id 
 	Manager.loose.add_child(b)
 	b.global_position = Vector2(round(pos.x/80)*80,round(pos.y/80)*80)
 	b.add_to_group("Ally"+String(get_network_master()))

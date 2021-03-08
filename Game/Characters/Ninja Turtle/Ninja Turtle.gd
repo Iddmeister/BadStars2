@@ -11,7 +11,7 @@ var skateBodies:Array = []
 
 var skinParams ={
 	
-	"Leonardo":{"scale":Vector2(0.08, 0.08), "offset":Vector2(2.1, -13.5), "path":"res://Game/Characters/Ninja Turtle/Leonardo.png"},
+	"Leonardo":{"scale":Vector2(0.08, 0.08), "offset":Vector2(-12.4, -1.126), "path":"res://Game/Characters/Ninja Turtle/Leonardo.png"},
 	"Raphael":{"scale":Vector2(0.07, 0.07), "offset":Vector2(0, -4.46), "path":"res://Game/Characters/Ninja Turtle/Raphael.png"},
 	"Michelangelo":{"scale":Vector2(0.4, 0.4), "offset":Vector2(-0.43, 2.27), "path":"res://Game/Characters/Ninja Turtle/Michelangelo.png"},
 	"Donatello":{"scale":Vector2(0.28, 0.28), "offset":Vector2(-1.37, -2.97), "path":"res://Game/Characters/Ninja Turtle/Donatello.png"},
@@ -41,6 +41,12 @@ func updates(delta:float):
 					rpc("heal", healAmount)
 					healTime = 0
 		
+
+func attack1():
+	get_node("Graphics/Attacks/%s" % skin).attack1()
+	
+func attack2():
+	get_node("Graphics/Attacks/%s" % skin).attack2()
 
 	
 func ability1():

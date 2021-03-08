@@ -33,16 +33,19 @@ var canMove:int = 0
 var invincible:int = 0
 var slippery:int = 0
 var invisible:int = 0
+var damageReduction:float = 0
+var damageIncrease:float = 0
 var knockedUp:float = false
 
 var team:int = 0
 
 var Ghost = preload("res://Game/Parent/Ghost.tscn")
 
-var devInvincible:bool = false
+remotesync var devInvincible:bool = false
 
 signal died(id, killer)
 signal hit(id, hitter)
+signal initialized(id)
 
 signal ability1Charged()
 signal ability2Charged()
@@ -96,6 +99,12 @@ func _ready():
 		ammoBoxes.add_child(b)
 	updateHealth()
 	
+func playerDisconnected(id:int):
+	
+	if id == get_network_master():
+		hit(100000, -9)
+	
+	pass
 	
 func setupSkin():
 	pass
@@ -124,6 +133,8 @@ func initialize(id:int, allies:Array=[]):
 		$Tag/VBoxContainer/Health.modulate = Color(0.993652, 0.089273, 0.089273)
 		
 	currentCharacter = Globals.currentGameInfo.players[id].character
+	
+	emit_signal("initialized", id)
 
 		
 # warning-ignore:function_conflicts_variable
@@ -160,6 +171,9 @@ func _physics_process(delta):
 				
 
 func getMoveDirection() -> Vector2:
+	
+	if Input.is_action_pressed("cursorMove"):
+		return Vector2(1, 0).rotated(getAimDirection())
 	
 	var dir = Vector2(0, 0)
 	
@@ -305,7 +319,7 @@ remotesync func hit(damage:int, id:int):
 	pass
 	
 func damageTaken(damage:int):
-	return damage
+	return damage-int(damage*damageReduction)+int(damage*damageIncrease)
 	
 func die(id:int):
 	dead = true
@@ -494,8 +508,8 @@ master func setAbility2Cooldown(amount:float):
 	if ability2Charge <= 0:
 		emit_signal("ability2Charged")
 	
-master func setGraphics():
-	$Graphics/Sprite.texture = load("res://Game/Characters/noted/Gnome.png")
+remotesync func setGraphics():
+	$Graphics/Sprite.texture = load("res://Game/Characters/Noted/Gnome.png")
 	$Graphics/Sprite.scale = Vector2(0.15, 0.15)
 	
 func updateCooldowns(delta:float):

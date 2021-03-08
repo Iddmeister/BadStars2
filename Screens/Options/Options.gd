@@ -4,6 +4,8 @@ onready var attack1 = $ScrollContainer/VBoxContainer/Controls/Attack1/Attack1
 onready var attack2 = $ScrollContainer/VBoxContainer/Controls/Attack2/Attack2
 onready var ability1 = $ScrollContainer/VBoxContainer/Controls/Ability1/Ability1
 onready var ability2 = $ScrollContainer/VBoxContainer/Controls/Ability2/Ability2
+onready var cursorMove = $ScrollContainer/VBoxContainer/Controls/CursorMove/CursorMove
+
 
 func _ready():
 	updateInputs()
@@ -14,7 +16,10 @@ func updateInputs():
 	attack2.text = getEventAsText(InputMap.get_action_list("attack2")[0])
 	ability1.text = getEventAsText(InputMap.get_action_list("ability1")[0])
 	ability2.text = getEventAsText(InputMap.get_action_list("ability2")[0])
-
+	if not InputMap.get_action_list("cursorMove").empty():
+		cursorMove.text = getEventAsText(InputMap.get_action_list("cursorMove")[0])
+	else:
+		cursorMove.text = "-"
 
 func _on_Back_pressed():
 	Manager.changeScene("res://Screens/Menu/Menu.tscn")
@@ -85,3 +90,9 @@ func _on_Ability2_assignedInput(input):
 	Data.saveData()
 	Data.updateControls()
 
+
+
+func _on_CursorMove_assignedInput(input):
+	Data.data.controls.cursorMove = getEventAsDict(input)
+	Data.saveData()
+	Data.updateControls()
