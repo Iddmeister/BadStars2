@@ -7,7 +7,7 @@ export var syncSpeed:float = 0.3
 func collided(body):
 	.collided(body)
 	if is_network_master():
-		body.rpc("setAddedVelocity", Vector2(speed, 0).rotated(global_rotation))
+		body.rpc("setAddedVelocity", Vector2(speed, 0).rotated(global_rotation), "carpet")
 	if body.is_network_master():
 		$Blowing.play()
 
@@ -45,6 +45,6 @@ func puppetMove(delta:float):
 
 func _on_MagicCarpet_body_exited(body):
 	if is_network_master():
-		body.rpc("setAddedVelocity", Vector2(0, 0))
+		body.rpc("resetAddedVelocity", "carpet")
 	if body.is_network_master():
 		$Blowing.stop()

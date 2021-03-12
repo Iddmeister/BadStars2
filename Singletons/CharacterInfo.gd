@@ -155,15 +155,15 @@ var characters:Dictionary = {
 		"scene":"res://Game/Characters/Ninja Turtle/Ninja Turtle.tscn",
 		"info":
 			{
-			  "description":"Teenage Mutant Ninja Turtles",
+			  "description":"Teenage Mutant Ninja Turtles\nAll Turtles have different Attacks",
 			  "attack1":"?",
 			  "attack2":"?",
-			  "ability1":"?",
-			  "ability2":"?",
+			  "ability1":"Skateboard\nHeal whilst near other skateboarding turtles",
+			  "ability2":"Smoke Bomb",
 			},
-			
+
 		"default":"Leonardo",
-			
+
 		"skins":
 			{
 				"Leonardo":"res://Game/Characters/Ninja Turtle/Leonardo.png",

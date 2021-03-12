@@ -26,6 +26,8 @@ func playerDied(player:int, killer:int):
 	var allDead:bool = true
 		
 	for player in get_tree().get_nodes_in_group("Player"):
+		if player.is_in_group("Dummy"):
+			continue
 		if not player.dead:
 			allDead = false
 			break

@@ -11,6 +11,7 @@ var effects:Dictionary = {
 	"freeze":preload("res://Game/Effects/Freeze/Freeze.tscn"),
 	"poison":preload("res://Game/Effects/Poison/Poison.tscn"),
 	"diarrhea":preload("res://Game/Effects/Diarrhea/Diarrhea.tscn"),
+	"stun":preload("res://Game/Effects/Stunned/Stunned.tscn"),
 	
 }
 var version:String = "0.1.1"

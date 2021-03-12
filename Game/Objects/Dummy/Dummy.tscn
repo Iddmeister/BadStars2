@@ -44,7 +44,9 @@ expand_margin_bottom = 2.0
 size = 24
 font_data = ExtResource( 5 )
 
-[node name="Dummy" instance=ExtResource( 3 )]
+[node name="Dummy" groups=[
+"Dummy",
+] instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="0"]

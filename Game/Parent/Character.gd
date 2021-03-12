@@ -383,8 +383,15 @@ remotesync func knockUp(time:float):
 	
 	pass
 	
-master func setAddedVelocity(vel:Vector2):
+var addedVelocityID:String = ""
+	
+master func setAddedVelocity(vel:Vector2, id:String=""):
 	addedVelocity = vel
+	addedVelocityID = id
+	
+master func resetAddedVelocity(id:String=""):
+	if id == addedVelocityID:
+		addedVelocity = Vector2(0, 0)
 	
 remotesync func heal(amount:int, id:int=-1):
 	

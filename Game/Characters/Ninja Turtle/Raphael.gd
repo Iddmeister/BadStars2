@@ -5,6 +5,16 @@ export var Sai:PackedScene = preload("res://Game/Characters/Ninja Turtle/Sai.tsc
 onready var player = get_parent().get_parent().get_parent()
 
 func attack1():
+	player.usingAttack1 = true
+	rpc("stab", player.getAimDirection())
+	yield($Stab/Animation, "animation_finished")
+	player.usingAttack1 = false
+	
+remotesync func stab(dir:float):
+	
+	$Stab.global_rotation = dir
+	$Stab/Animation.play("Stab")
+	
 	pass
 	
 func attack2():
