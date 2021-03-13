@@ -407,7 +407,7 @@ func updateHealth():
 	
 func actions(delta:float):
 	
-	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1 and canUseAttack1 <= 0:
+	if Input.is_action_just_pressed("attack1") and ammo > 0 and not usingAttack1 and canUseAttack1 <= 0 and hasAttack1:
 		
 		attack1()
 		if not currentAmmoBox >= maxAmmo:
@@ -415,7 +415,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo()
 		
-	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2 and canUseAttack2 <= 0:
+	if Input.is_action_just_pressed("attack2") and ammo >= attack2AmmoCost and not usingAttack2 and canUseAttack2 <= 0 and hasAttack2:
 		
 		attack2()
 		if not currentAmmoBox >= maxAmmo:
@@ -423,7 +423,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo(attack2AmmoCost)
 		
-	if Input.is_action_just_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0:
+	if Input.is_action_just_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0 and hasAbility1:
 		ability1Icon.use()
 		ability1Charge = ability1Cooldown
 		ability1()
@@ -431,7 +431,7 @@ func actions(delta:float):
 		ability1Released()
 		
 		
-	if Input.is_action_just_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0:
+	if Input.is_action_just_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0 and hasAbility2:
 		ability2Icon.use()
 		ability2Charge = ability2Cooldown
 		ability2()
@@ -448,6 +448,10 @@ func ability2Released():
 	
 var usingAttack1:bool = false
 var usingAttack2:bool = false
+export var hasAttack1:bool = true
+export var hasAttack2:bool = true
+export var hasAbility1:bool = true
+export var hasAbility2:bool = true
 
 var canUseAttack1:int = 0
 var canUseAttack2:int = 0
@@ -485,6 +489,7 @@ remotesync func useAmmo(amount:int=1):
 		ammo -= 1
 		ammoBoxes.get_child(currentAmmoBox-1).value = 0
 		currentAmmoBox -= 1
+		ammoBoxes.get_child(currentAmmoBox).value = currentReloadTime/reloadRate
 	
 	pass
 	
@@ -522,14 +527,16 @@ remotesync func setGraphics():
 func updateCooldowns(delta:float):
 	
 	if not currentAmmoBox >= maxAmmo:
-	
-		currentReloadTime = min(reloadRate, currentReloadTime+delta)
 		
-		ammoBoxes.get_child(currentAmmoBox).value = currentReloadTime/reloadRate
-		
-		if currentReloadTime >= reloadRate:
-			currentReloadTime = 0
-			reloadAmmo()
+		if not usingAttack1 and not usingAttack2:
+			
+			currentReloadTime = min(reloadRate, currentReloadTime+delta)
+			
+			ammoBoxes.get_child(currentAmmoBox).value = currentReloadTime/reloadRate
+			
+			if currentReloadTime >= reloadRate:
+				currentReloadTime = 0
+				reloadAmmo()
 	
 	if not ability1Charge <= 0:
 		ability1Charge = max(0, ability1Charge-delta)

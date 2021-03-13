@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Misc/greyscale.shader" type="Shader" id=2]
+[ext_resource path="res://Game/Characters/Karl Marx/KarlMarx.png" type="Texture" id=3]
+[ext_resource path="res://Game/Characters/Karl Marx/Karl Marx.gd" type="Script" id=4]
+[ext_resource path="res://Game/Characters/Karl Marx/Sickle.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/enabled = false
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=4]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Karl Marx" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+maxHealth = 60
+maxMoveSpeed = 450.0
+maxAmmo = 1
+reloadRate = 0.1
+ability1Cooldown = 9.0
+ability2Cooldown = 12.0
+hasAttack2 = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Graphics" parent="." index="1"]
+material = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Graphics" index="0"]
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="Sickle" parent="Space" index="1" instance=ExtResource( 5 )]
+visible = false
+damage = 40
+
+[node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
+custom_styles/panel = SubResource( 3 )
+
+[node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
+custom_styles/panel = SubResource( 4 )
+
+[node name="Tag" parent="." index="5"]
+position = Vector2( 0, 38 )

@@ -171,5 +171,19 @@ var characters:Dictionary = {
 				"Michelangelo":"res://Game/Characters/Ninja Turtle/Michelangelo.png",
 				"Donatello":"res://Game/Characters/Ninja Turtle/Donatello.png",
 			}
-	}
+	},
+	
+	"Karl Marx":
+	{
+		"icon":"res://Game/Characters/Karl Marx/KarlMarx.png",
+		"scene":"res://Game/Characters/Karl Marx/Karl Marx.tscn",
+		"info":
+			{
+			  "description":"Communism",
+			  "attack1":"Throw Boomerang Sickle",
+			  "attack2":"none",
+			  "ability1":"Tax the entire country and reduce everyone's health by 20%",
+			  "ability2":"Gift the entire country and heal everyone 20% of their max health",
+			}
+	},
 }
