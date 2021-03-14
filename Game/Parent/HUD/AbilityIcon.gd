@@ -23,6 +23,14 @@ func setProgress(time:float, maxTime:float):
 	
 	pass
 	
+func canUse(can:bool):
+	if can and $TextureProgress.value >= 1:
+		$Animation.play("Ready")
+	elif $TextureProgress.value < 1:
+		$Animation.play("Use")
+	else:
+		$Animation.play("Disabled")
+	
 func use():
 	$Animation.play("Use")
 	pass

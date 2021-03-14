@@ -26,6 +26,9 @@ func _ready():
 	
 func goalScored(team:int):
 	
+	if not is_network_master():
+		return
+	
 	match team:
 		
 		1:

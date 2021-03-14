@@ -54,6 +54,7 @@ func ability1():
 	rpc("skate", true)
 	$SkateTime.start()
 	healTime = 0
+	usingAbility1 = true
 	
 	pass
 	
@@ -89,6 +90,7 @@ remotesync func camouflage(do:bool):
 
 func _on_SkateTime_timeout():
 	rpc("skate", false)
+	usingAbility1 = false
 
 
 func _on_SkateArea_body_entered(body):

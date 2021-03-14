@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Projectiles/StraightProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/Salmon/WildCard.jpg" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 13, 7, 491, 688 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 33.659, 23.8724 )
+
+[node name="WildCard" instance=ExtResource( 1 )]
+maxDistance = 1000.0
+effects = [ {
+"time": 10.0,
+"type": "wild"
+} ]
+collideWithEnemies = true
+speed = 700.0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+rotation = 1.57079
+scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

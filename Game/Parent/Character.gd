@@ -423,7 +423,7 @@ func actions(delta:float):
 			ammoBoxes.get_child(currentAmmoBox-1).value = currentReloadTime/reloadRate
 		useAmmo(attack2AmmoCost)
 		
-	if Input.is_action_just_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0 and hasAbility1:
+	if Input.is_action_just_pressed("ability1") and ability1Charge <= 0 and canUseAbility1 <= 0 and hasAbility1 and not usingAbility1:
 		ability1Icon.use()
 		ability1Charge = ability1Cooldown
 		ability1()
@@ -431,7 +431,7 @@ func actions(delta:float):
 		ability1Released()
 		
 		
-	if Input.is_action_just_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0 and hasAbility2:
+	if Input.is_action_just_pressed("ability2") and ability2Charge <= 0 and canUseAbility2 <= 0 and hasAbility2 and not usingAbility2:
 		ability2Icon.use()
 		ability2Charge = ability2Cooldown
 		ability2()
@@ -452,6 +452,9 @@ export var hasAttack1:bool = true
 export var hasAttack2:bool = true
 export var hasAbility1:bool = true
 export var hasAbility2:bool = true
+
+var usingAbility1:bool = false
+var usingAbility2:bool = false
 
 var canUseAttack1:int = 0
 var canUseAttack2:int = 0
@@ -538,12 +541,12 @@ func updateCooldowns(delta:float):
 				currentReloadTime = 0
 				reloadAmmo()
 	
-	if not ability1Charge <= 0:
+	if not ability1Charge <= 0 and not usingAbility1:
 		ability1Charge = max(0, ability1Charge-delta)
 		ability1Icon.setProgress(ability1Charge, ability1Cooldown)
 		if ability1Charge <= 0:
 			emit_signal("ability1Charged")
-	if not ability2Charge <= 0:
+	if not ability2Charge <= 0 and not usingAbility2:
 		ability2Charge = max(0, ability2Charge-delta)
 		ability2Icon.setProgress(ability2Charge, ability2Cooldown)
 		if ability2Charge <= 0:
@@ -559,6 +562,10 @@ remotesync func enableAbilities(d:bool):
 	else:
 		canUseAbility1 += 1
 		canUseAbility2 += 1
+	
+	ability1Icon.canUse(canUseAbility1<=0)
+	ability2Icon.canUse(canUseAbility2<=0)
+	
 	pass
 	
 remotesync func enableAttacks(d:bool):

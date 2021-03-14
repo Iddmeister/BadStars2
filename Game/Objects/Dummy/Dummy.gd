@@ -6,7 +6,6 @@ func create(allies:Array=[]):
 	
 func initialize(id:int, allies:Array=[]):
 	set_network_master(id)
-	
 	if not allies.empty():
 		for ally in allies:
 			add_to_group("Ally"+String(ally))

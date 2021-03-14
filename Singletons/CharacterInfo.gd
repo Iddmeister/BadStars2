@@ -64,6 +64,20 @@ var characters:Dictionary = {
 					"ability2":"YARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
 				}
 		},
+		
+	"Salmon":
+	{
+		"icon":"res://Game/Characters/Salmon/Salmon.png",
+		"scene":"res://Game/Characters/Salmon/Salmon.tscn",
+		"info":
+			{
+			  "description":"Is a Salmon",
+			  "attack1":"High Damage Uno Card",
+			  "attack2":"Wild Card Mark",
+			  "ability1":"Teleport to any player marked by the wild card at random",
+			  "ability2":"Uno Reverse Card\nAll incoming damage is reflected on the owner",
+			}
+	},
 	
 	"Noted":
 	{

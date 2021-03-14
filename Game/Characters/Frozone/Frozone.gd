@@ -28,6 +28,7 @@ func ability1():
 	$FreezeZoneInterval.start()
 	timePassed = 0
 	moveSpeed += speedIncrease
+	usingAbility1 = true
 	pass
 	
 func ability2():
@@ -81,4 +82,5 @@ func _on_FreezeZoneInterval_timeout():
 	if timePassed >= speedTime:
 		$FreezeZoneInterval.stop()
 		moveSpeed -= speedIncrease
+		usingAbility1 = false
 		
