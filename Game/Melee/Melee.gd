@@ -19,6 +19,8 @@ var masterID:int
 
 var damaging:bool = false
 
+signal hit(body)
+
 func _ready():
 	get_node(characterPath).connect("initialized", self, "initialize")
 	
@@ -48,6 +50,8 @@ func endDamage():
 func hitBody(body):
 	
 	if (body.is_in_group("Ally"+String(masterID)) and collideWithAllies) or (collideWithEnemies and not body.is_in_group("Ally"+String(masterID))):
+		
+		emit_signal("hit", body)
 		
 		if is_network_master():
 			

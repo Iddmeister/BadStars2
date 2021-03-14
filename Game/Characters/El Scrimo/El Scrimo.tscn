@@ -1,0 +1,288 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Game/Parent/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Characters/El Scrimo/ElScrimo.png" type="Texture" id=2]
+[ext_resource path="res://Game/Characters/El Scrimo/El Scrimo.gd" type="Script" id=3]
+[ext_resource path="res://Misc/greyscale.shader" type="Shader" id=4]
+[ext_resource path="res://Game/Melee/Melee.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Characters/El Scrimo/Fist.png" type="Texture" id=6]
+[ext_resource path="res://Misc/Circle.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 66.183
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/enabled = false
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 72.8268, 34.405 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Hook"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, 51.5301 ), Vector2( 114.056, -1.38964 ), Vector2( 30.6281, -49.4439 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -21.8736, -62.0115, -128.367 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "doDamage"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Straight"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21.5, 1.5 ), Vector2( 111.64, 1.19209e-07 ), Vector2( 14.1694, -1.05946 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -14.5295, 18.3309 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "doDamage"
+} ]
+}
+
+[sub_resource type="StyleBoxFlat" id=4]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+resource_local_to_scene = true
+bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.996078, 0.705882, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 100.777
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.754601, 0.980682 ), 0.0, 0.0, 0, 0, Vector2( 0.981595, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.2
+scale_curve = SubResource( 11 )
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 422.539
+
+[sub_resource type="Animation" id=13]
+resource_name = "Scream"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 8.5, 8.5 ) ]
+}
+
+[node name="El Scrimo" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+maxHealth = 180
+maxMoveSpeed = 300.0
+reloadRate = 0.5
+ability1Cooldown = 10.0
+ability2Cooldown = 10.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )
+
+[node name="Graphics" parent="." index="1"]
+material = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Graphics" index="0"]
+use_parent_material = true
+position = Vector2( -10, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="Fist" parent="Graphics" index="1" instance=ExtResource( 5 )]
+characterPath = NodePath("../..")
+damage = 15
+collideWithEnemies = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Fist" index="0"]
+position = Vector2( 60, 0 )
+shape = SubResource( 3 )
+
+[node name="Animation" type="AnimationPlayer" parent="Graphics/Fist" index="1"]
+playback_speed = 4.0
+anims/Hook = SubResource( 7 )
+anims/Straight = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Graphics/Fist" index="2"]
+visible = false
+position = Vector2( 30.6281, -49.4439 )
+rotation = -2.24042
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 6 )
+
+[node name="Ability1" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="0"]
+custom_styles/panel = SubResource( 4 )
+
+[node name="Ability2" parent="UI/Main/CenterContainer2/VBoxContainer/Abilities/HBoxContainer" index="1"]
+custom_styles/panel = SubResource( 5 )
+
+[node name="Tag" parent="." index="5"]
+position = Vector2( 0, 96 )
+
+[node name="Combo" type="Timer" parent="." index="13"]
+one_shot = true
+
+[node name="BodySlam" type="Area2D" parent="." index="14"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodySlam" index="0"]
+shape = SubResource( 8 )
+disabled = true
+
+[node name="Trail" type="Particles2D" parent="." index="15"]
+z_index = -1
+emitting = false
+amount = 20
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
+
+[node name="Scream" type="Area2D" parent="." index="16"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scream" index="0"]
+shape = SubResource( 12 )
+
+[node name="Animation" type="AnimationPlayer" parent="Scream" index="1"]
+playback_speed = 3.0
+anims/Scream = SubResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="Scream" index="2"]
+visible = false
+modulate = Color( 1, 0, 0, 0.376471 )
+scale = Vector2( 8.5, 8.5 )
+texture = ExtResource( 7 )
+[connection signal="hit" from="Graphics/Fist" to="." method="hitBody"]
+[connection signal="timeout" from="Combo" to="." method="_on_Combo_timeout"]
+[connection signal="body_entered" from="BodySlam" to="." method="_on_BodySlam_body_entered"]

@@ -79,6 +79,20 @@ var characters:Dictionary = {
 			}
 	},
 	
+	"El Scrimo":
+	{
+		"icon":"res://Game/Characters/El Scrimo/ElScrimo.png",
+		"scene":"res://Game/Characters/El Scrimo/El Scrimo.tscn",
+		"info":
+			{
+			  "description":"REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+			  "attack1":"Sraight Punch - Heals if a hook has already been hit",
+			  "attack2":"Hook - Knocks Back and deals more damage and knockback based on amount of straights hit on target",
+			  "ability1":"Body Slam\nScrimo dashes forwards, knocking and stunning players hit",
+			  "ability2":"Scream\nSlows players in range",
+			}
+	},
+	
 	"Noted":
 	{
 	  "icon":"res://Game/Characters/Noted/Noted.png",
